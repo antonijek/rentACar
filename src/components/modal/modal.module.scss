@@ -1,0 +1,29 @@
+.__modal-container {
+  padding-bottom: 0;
+
+  .ant-modal-content {
+    padding: 0;
+  }
+
+  .ant-modal-close {
+    top: 30px;
+    right: 30px;
+  }
+
+  .ant-modal-body {
+    min-height: 40vh;
+    padding: 16px;
+  }
+
+  .ant-modal-header {
+    border-bottom: 0.5px solid;
+    padding: 30px 30px 16px;
+    margin-bottom: 0;
+  }
+
+  .ant-modal-footer {
+    margin-top: 0;
+    border-top: 0.5px solid;
+    padding: 16px 30px 30px;
+  }
+}

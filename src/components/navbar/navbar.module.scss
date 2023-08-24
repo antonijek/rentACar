@@ -2,10 +2,15 @@
   display: flex;
   place-items: center;
   justify-content: space-between;
-  background-color: rgb(172, 237, 237);
+  background-color: #002140;
   position: relative;
   padding-right: 2%;
   overflow: hidden;
+  font-family: "Inconsolata", monospace;
+  font-family: "Dancing Script", cursive;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: rgb(25, 127, 237);
+  height: 15vh;
 
   .logo {
     width: 15%;
@@ -31,33 +36,13 @@
     display: flex;
     align-items: center;
 
-    .dropdown-container {
-      position: relative;
-
-      &:hover .dropdown-menu {
-        display: block;
-      }
-
-      .dropdown-menu {
-        display: none;
-        position: absolute;
-        top: 100%;
-        right: 0;
-        background-color: #fff;
-        border: 1px solid #ccc;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        z-index: 1000;
-      }
-    }
     .logout {
-      font-size: 1rem; /* Adjust the font size as needed */
-      color: #333; /* Adjust the color as needed */
-      margin-left: 20px; /* Adjust the spacing as needed */
-      cursor: pointer; /* Show pointer cursor on hover */
-      transition: color 0.3s ease-in-out; /* Add a smooth color transition on hover */
+      margin-left: 20px;
+      cursor: pointer;
+      transition: color 0.3s ease-in-out;
 
       &:hover {
-        color: red; /* Adjust the hover color as needed */
+        color: red;
       }
     }
   }
@@ -68,10 +53,12 @@
   @keyframes move-car {
     0% {
       left: 0;
+      visibility: visible;
     }
 
     100% {
       left: 100%;
+      visibility: visible;
     }
   }
 }
@@ -83,4 +70,8 @@
   100% {
     visibility: visible;
   }
+}
+.custom-dropdown-item {
+  color: rgb(25, 127, 237);
+  font-weight: bold;
 }

@@ -1,7 +1,8 @@
 {
   "welcome": "Welcome to my app!",
   "logout": "Logout",
-  "newUser": "Add new user",
-  "newVehicle": "Add new vehicle",
-  "newReservation": "Add new reservation"
+  "newUser": "New user",
+  "newVehicle": "New vehicle",
+  "newReservation": "New reservation",
+  "dropdownTitle": "Add"
 }

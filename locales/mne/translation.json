@@ -1,7 +1,8 @@
 {
   "welcome": "Dobrodosli na moju aplikaciju!",
   "logout": "Izloguj se",
-  "newUser": "Dodaj novog korisnika",
-  "newVehicle": "Dodaj novo vozilo",
-  "newReservation": "Dodaj novu rezervaciju"
+  "newUser": "Novog korisnika",
+  "newVehicle": "Novo vozilo",
+  "newReservation": "Novu rezervaciju",
+  "dropdownTitle": "Dodaj"
 }
