@@ -1,0 +1,7 @@
+{
+  "welcome": "Welcome to my app!",
+  "logout": "Logout",
+  "newUser": "Add new user",
+  "newVehicle": "Add new vehicle",
+  "newReservation": "Add new reservation"
+}
