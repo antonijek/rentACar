@@ -4,7 +4,7 @@ import { useModal } from "../../context/ModalContext";
 
 const Clients = () => {
   const modal = useModal();
-  console.log(modal);
+
   return (
     <div>
       Clients
