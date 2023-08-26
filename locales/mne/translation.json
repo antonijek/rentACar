@@ -4,5 +4,8 @@
   "newUser": "Novog korisnika",
   "newVehicle": "Novo vozilo",
   "newReservation": "Novu rezervaciju",
-  "dropdownTitle": "Dodaj"
+  "dropdownTitle": "Dodaj",
+  "reservations": "Rezervacije",
+  "clients": "Klijenti",
+  "vehicles": "Vozila"
 }

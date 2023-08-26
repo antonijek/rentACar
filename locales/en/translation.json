@@ -4,5 +4,8 @@
   "newUser": "New user",
   "newVehicle": "New vehicle",
   "newReservation": "New reservation",
-  "dropdownTitle": "Add"
+  "dropdownTitle": "Add",
+  "reservations": "Reservations",
+  "clients": "Clients",
+  "vehicles": "Vehicles"
 }
