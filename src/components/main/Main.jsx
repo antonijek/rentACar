@@ -6,7 +6,8 @@ export const Main = ({ children }) => {
   return (
     <Layout
       style={{
-        minHeight: "80vh",
+        minHeight: "85vh",
+        backgroundColor: "var(--secondary-color)",
       }}
     >
       <Sidebar />

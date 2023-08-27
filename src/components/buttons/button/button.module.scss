@@ -1,0 +1,17 @@
+.my-button {
+  color: white;
+  padding: 1% 3%;
+  border-radius: 5px;
+  font-size: 1.2vw;
+  cursor: pointer;
+  &.green {
+    background-color: rgba(56, 133, 89, 0.668);
+  }
+  &.blue {
+    background-color: #3d96df;
+  }
+  &.red {
+    background-color: #d24f46;
+    margin-left: 5px;
+  }
+}

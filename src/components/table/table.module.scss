@@ -1,0 +1,22 @@
+.action-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.green-button {
+  background-color: rgba(56, 133, 89, 0.668);
+  color: white;
+}
+.blue-button {
+  background-color: #3d96df;
+  color: white;
+}
+.red-button {
+  background-color: #ee6157;
+  color: white;
+}
+.table {
+  padding: 1%;
+  width: 100%;
+}

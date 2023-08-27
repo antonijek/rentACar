@@ -5,6 +5,9 @@ import { I18nextProvider } from "react-i18next";
 import i18n from "../i18n";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Clients from "./pages/clients/Clients";
+import Login from "./pages/login/Login";
+import Vehicles from "./pages/vehicles/Vehicles";
+import Reservations from "./pages/reservations/Reservations";
 
 function App() {
   const router = createBrowserRouter([
@@ -13,8 +16,20 @@ function App() {
       element: <Home />,
     },
     {
+      path: "/login",
+      element: <Login />,
+    },
+    {
       path: "/clients",
       element: <Clients />,
+    },
+    {
+      path: "/vehicles",
+      element: <Vehicles />,
+    },
+    {
+      path: "/reservations",
+      element: <Reservations />,
     },
   ]);
 

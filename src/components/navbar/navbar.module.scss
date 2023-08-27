@@ -9,7 +9,7 @@
   font-family: "Inconsolata", monospace;
   font-family: "Dancing Script", cursive;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: rgb(25, 127, 237);
+  color: var(--primary-color);
   height: 15vh;
 
   .logo {
@@ -42,7 +42,7 @@
       transition: color 0.3s ease-in-out;
 
       &:hover {
-        color: red;
+        color: var(--primary-color);
       }
     }
   }
@@ -72,6 +72,6 @@
   }
 }
 .custom-dropdown-item {
-  color: rgb(25, 127, 237);
+  color: var(--primary-color);
   font-weight: bold;
 }
