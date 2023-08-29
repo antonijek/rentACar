@@ -7,10 +7,15 @@ import { useModal } from "../../context/ModalContext";
 import classes from "./login.module.scss";
 import Input from "../../components/input/Input";
 import { login } from "../../services/authServices";
-import axios from "axios";
+import { set } from "../../services/storageServices";
+import { storageKeys } from "../../config/config";
+import { useNavigate } from "react-router-dom";
+import { userData } from "../../context/UserContext";
 
 const Login = () => {
   const modal = useModal();
+  const navigate = useNavigate();
+  const { setUser, getUser } = userData();
 
   const schema = yup.object({
     email: yup
@@ -40,8 +45,9 @@ const Login = () => {
   const onSubmit = async (formData) => {
     try {
       const res = await login(formData.email, formData.password);
-
-      console.log("Login successful:", res);
+      set(storageKeys.USER, res.access_token);
+      await getUser();
+      navigate("/");
     } catch (err) {
       if (err.response) {
         modal.open(`status ${err.response.status}`, err.response.data.message);

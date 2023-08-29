@@ -1,15 +1,10 @@
 export function loginModel(data) {
   return {
-    access_token: data?.token,
-  };
-}
-export function registerModel(data) {
-  return {
-    id: data?.id,
-    firstName: data?.name,
-    lastName: data?.surname,
-    description: data?.description,
-    image: data?.image_id,
+    access_token: data?.access_token,
+    first_name: data?.first_name,
+    last_name: data?.last_name,
     email: data?.email,
+    role_id: data?.role_id,
+    refresh_token: data?.refresh_token,
   };
 }

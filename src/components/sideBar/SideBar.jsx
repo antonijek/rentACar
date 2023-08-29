@@ -2,21 +2,15 @@ import React, { useState } from "react";
 import classes from "./sidebar.module.scss";
 import { Layout, Menu } from "antd";
 import { useTranslation } from "react-i18next";
-import { TeamOutlined, CarOutlined, ScheduleOutlined } from "@ant-design/icons";
 import { Link, useLocation } from "react-router-dom";
+import { adminItems } from "../../sideBarItems/adminItems";
 
 const { Sider } = Layout;
 
-const Sidebar = () => {
+const Sidebar = ({ items }) => {
   const [collapsed, setCollapsed] = useState(false);
   const { t } = useTranslation();
   const location = useLocation();
-
-  const items = [
-    { key: "sub1", icon: <TeamOutlined />, label: "clients" },
-    { key: "sub2", icon: <CarOutlined />, label: "vehicles" },
-    { key: "sub3", icon: <ScheduleOutlined />, label: "reservations" },
-  ];
 
   const activeKey = items.find((item) =>
     location.pathname.includes(item.label.toLowerCase())

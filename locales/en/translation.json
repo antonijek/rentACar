@@ -8,6 +8,8 @@
   "reservations": "Reservations",
   "clients": "Clients",
   "vehicles": "Vehicles",
+  "firstName": "First Name",
+  "lastName": "Last Name",
   "name": "Name",
   "identification": "Identification",
   "phoneNumber": "Phone number",
@@ -34,5 +36,6 @@
   "searchByNameAndMail": "Search by name and mail",
   "addClient": "Add client",
   "addVehicle": "Add vehicle",
-  "addReservation": "Add reservation"
+  "addReservation": "Add reservation",
+  "passportNumber": "Passport Number"
 }

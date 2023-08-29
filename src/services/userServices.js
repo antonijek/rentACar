@@ -1,26 +1,55 @@
 import axios from "axios";
 
 import { requestInstance } from "../config/requestInstance";
-import { currentUserModel } from "./models/userModels";
+import {
+  currentUserModel,
+  addUserModel,
+  getAllUsersModel,
+} from "./models/userModels";
 
-const apiAllusers = "/users";
+const apicurrentUser = "/account";
+const apiAddUser = "/users";
+const apiGetAllUsers = "/customers";
+const apiUpdateUser = "/users";
 
 export const getCurrentUser = async () => {
   try {
-    const res = await requestInstance.get(apiAllusers);
-    console.log(res);
+    const res = await requestInstance.get(apicurrentUser);
     return currentUserModel(res.data);
   } catch (err) {
-    Promise.reject(err);
+    throw err;
   }
 };
-/* export const editUser = async (userData, data) => {
+
+export const getAllUsers = async () => {
   try {
-    const apiEditUser = `/users/${userData.id}`;
-    const res = await requestInstance.post(apiEditUser, data);
+    const res = await requestInstance.get(apiGetAllUsers);
     console.log(res);
-    //return currentUserModel(res.data);
+    return getAllUsersModel(res.data.data);
   } catch (err) {
-    return Promise.reject(err);
+    throw err;
   }
-}; */
+};
+
+export const addNewUser = async (clientData) => {
+  try {
+    const res = await requestInstance.post(apiAddUser, clientData);
+    console.log(res);
+    return addUserModel(res.data);
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const editUser = async (clientData, clientId) => {
+  try {
+    const res = await requestInstance.put(
+      `${apiUpdateUser}/${clientId}`,
+      clientData
+    );
+
+    return res.data;
+  } catch (err) {
+    throw err;
+  }
+};

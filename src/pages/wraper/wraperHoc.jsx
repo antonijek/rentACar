@@ -1,16 +1,32 @@
 import React, { useState } from "react";
-import Navbar from "../../components/navbar/Navbar";
-import classes from "./wraper.module.scss";
+import classes from "../../components/navbar/navbar.module.scss";
 import { Main } from "../../components/main/Main";
+import Navbar from "../../components/navbar/Navbar";
+import { generateAdminItems } from "../../dropdownItems/adminItems";
+import { generateClientItems } from "../../dropdownItems/clientItems";
+import { useTranslation } from "react-i18next";
+import { userData } from "../../context/UserContext";
 
 const wrapperHoc = (Component) => {
   return (props) => {
-    //const { user, logout } = userData();
-    //const modal = useModal();
+    const { i18n, t } = useTranslation();
+    const { user } = userData();
+
+    const changeLanguage = (lng) => {
+      i18n.changeLanguage(lng);
+      set("lan", lng);
+    };
+    const dropdownAdminItems = generateAdminItems(classes, t, changeLanguage);
+    const dropdownClientItems = generateClientItems(classes, t, changeLanguage);
 
     return (
       <div>
-        <Navbar />
+        {user?.role_id === 1 ? (
+          <Navbar items={dropdownAdminItems} changeLanguage={changeLanguage} />
+        ) : (
+          <Navbar items={dropdownClientItems} changeLanguage={changeLanguage} />
+        )}
+
         <Main>
           <Component />
         </Main>

@@ -8,6 +8,9 @@ import { useTranslation } from "react-i18next";
 import { generateClientHeaders } from "../../tableHeaders/clientHeaders";
 import ActionButtons from "../../components/ActionButtons";
 import SearchAndAdd from "../../components/searchAndAdd/SearchAndAdd";
+import AuthHoc from "../authHOC/AuthHoc";
+import ClientForm from "../../components/form/ClientForm";
+import { getAllUsers } from "../../services/userServices";
 
 export const clientsData = [
   {
@@ -41,8 +44,18 @@ const Clients = () => {
   const { t } = useTranslation();
   const modal = useModal();
 
+  const getUsers = async () => {
+    try {
+      const res = await getAllUsers();
+      console.log(res);
+      setClients(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
-    setClients(clientsData);
+    getUsers();
   }, []);
 
   const headers = generateClientHeaders(t);
@@ -53,6 +66,7 @@ const Clients = () => {
       <SearchAndAdd
         placeholder={t("searchByNameAndMail")}
         text={t("addClient")}
+        onClick={() => modal.open("Add client", <ClientForm />)}
       />
       <Table
         columns={[
@@ -69,4 +83,4 @@ const Clients = () => {
   );
 };
 
-export default wrapperHoc(Clients);
+export default AuthHoc(wrapperHoc(Clients));

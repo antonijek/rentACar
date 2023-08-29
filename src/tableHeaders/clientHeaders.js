@@ -4,23 +4,28 @@ export const generateClientHeaders = (t) => [
     dataIndex: "id",
   },
   {
-    title: t("name"),
-    dataIndex: "name",
+    title: t("firstName"),
+    dataIndex: "first_name",
   },
   {
-    title: t("identification"),
-    dataIndex: "identification",
+    title: t("lastName"),
+    dataIndex: "last_name",
   },
+
   {
     title: t("phoneNumber"),
-    dataIndex: "phoneNumber",
+    dataIndex: "phone_number",
   },
   {
     title: t("email"),
     dataIndex: "email",
   },
   {
-    title: t("notes"),
-    dataIndex: "notes",
+    title: t("passportNumber"),
+    dataIndex: "passport_number",
+  },
+  {
+    title: t("note"),
+    dataIndex: "note",
   },
 ];

@@ -8,6 +8,7 @@ import Clients from "./pages/clients/Clients";
 import Login from "./pages/login/Login";
 import Vehicles from "./pages/vehicles/Vehicles";
 import Reservations from "./pages/reservations/Reservations";
+import UserProvider from "./context/UserContext";
 
 function App() {
   const router = createBrowserRouter([
@@ -35,9 +36,11 @@ function App() {
 
   return (
     <I18nextProvider i18n={i18n}>
-      <ModalProvider>
-        <RouterProvider router={router} />
-      </ModalProvider>
+      <UserProvider>
+        <ModalProvider>
+          <RouterProvider router={router} />
+        </ModalProvider>
+      </UserProvider>
     </I18nextProvider>
   );
 }

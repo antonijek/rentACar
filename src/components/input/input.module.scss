@@ -1,1 +1,18 @@
-
+.my-input {
+  padding: 5px 10px;
+  border: 2px solid var(--primary-color);
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  width: 100%;
+  min-width: 200px;
+  box-sizing: border-box;
+  font-size: 1vw;
+  &::placeholder {
+    color: var(--secondary-color);
+    font-size: 1.2vw;
+  }
+  &:hover {
+    background-color: var(--secondary-color);
+  }
+}

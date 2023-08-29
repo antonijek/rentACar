@@ -8,6 +8,8 @@
   "reservations": "Rezervacije",
   "clients": "Klijenti",
   "vehicles": "Vozila",
+  "firstName": "Ime",
+  "lastName": "Prezime",
   "name": "Ime",
   "identification": "Broj lične karte",
   "phoneNumber": "Broj telefona",
@@ -34,5 +36,6 @@
   "searchByNameAndMail": "Pretrazi po imanu i mejlu",
   "addClient": "Dodaj klijenta",
   "addVehicle": "Dodaj vozilo",
-  "addReservation": "Dodaj rezervaciju"
+  "addReservation": "Dodaj rezervaciju",
+  "passportNumber": "Broj pasoša"
 }

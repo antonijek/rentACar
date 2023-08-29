@@ -3,14 +3,14 @@ import classes from "./searchAndAdd.module.scss";
 import SearchInput from "../searchInput/SearchInput";
 import Button from "../buttons/button/Button";
 
-const SearchAndAdd = ({ text, placeholder }) => {
+const SearchAndAdd = ({ text, placeholder, onClick }) => {
   return (
     <div className={classes["container"]}>
       <SearchInput
         placeholder={placeholder}
         className={classes["search-input"]}
       />
-      <Button text={text} />
+      <Button text={text} onClick={onClick} />
     </div>
   );
 };

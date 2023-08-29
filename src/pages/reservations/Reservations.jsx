@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { generateReservationHeaders } from "../../tableHeaders/reservationHeaders";
 import ActionButtons from "../../components/ActionButtons";
 import SearchAndAdd from "../../components/searchAndAdd/SearchAndAdd";
+import AuthHoc from "../authHOC/AuthHoc";
 
 const reservationsData = [
   {
@@ -89,4 +90,4 @@ const Reservations = () => {
   );
 };
 
-export default wrapperHoc(Reservations);
+export default AuthHoc(wrapperHoc(Reservations));

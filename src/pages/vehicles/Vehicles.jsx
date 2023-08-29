@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { generateVehicleHeaders } from "../../tableHeaders/vehicleHeaders";
 import ActionButtons from "../../components/ActionButtons";
 import SearchAndAdd from "../../components/searchAndAdd/SearchAndAdd";
+import AuthHoc from "../authHOC/AuthHoc";
 
 const vehicleData = [
   {
@@ -98,4 +99,4 @@ const Vehicles = () => {
   );
 };
 
-export default wrapperHoc(Vehicles);
+export default AuthHoc(wrapperHoc(Vehicles));

@@ -36,6 +36,7 @@ const UserProvider = ({ children }) => {
       value={{
         logout: () => logout(),
         user: user,
+        setUser: setUser,
         getUser: () => getUser(),
       }}
     >
