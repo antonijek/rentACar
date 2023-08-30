@@ -11,11 +11,12 @@ import { set } from "../../services/storageServices";
 import { storageKeys } from "../../config/config";
 import { useNavigate } from "react-router-dom";
 import { userData } from "../../context/UserContext";
+import Message from "../../components/message/Message";
 
 const Login = () => {
   const modal = useModal();
   const navigate = useNavigate();
-  const { setUser, getUser } = userData();
+  const { getUser } = userData();
 
   const schema = yup.object({
     email: yup
@@ -46,11 +47,12 @@ const Login = () => {
     try {
       const res = await login(formData.email, formData.password);
       set(storageKeys.USER, res.access_token);
+      Message({ type: "success", content: "success login!" });
       await getUser();
       navigate("/");
     } catch (err) {
       if (err.response) {
-        modal.open(`status ${err.response.status}`, err.response.data.message);
+        Message({ type: "error", content: err.response.data.message });
       }
     }
   };

@@ -2,6 +2,7 @@ import React from "react";
 import { Modal as AntdModal, Button } from "antd";
 import Spiner from "../spiner/Spiner";
 import classes from "./modal.module.scss";
+import { useTranslation } from "react-i18next";
 
 const Modal = ({
   open,
@@ -12,6 +13,7 @@ const Modal = ({
   showFooter,
   onOk,
 }) => {
+  const { t } = useTranslation();
   return (
     <AntdModal
       title={title}
@@ -22,9 +24,9 @@ const Modal = ({
       footer={
         showFooter && (
           <div>
-            <Button onClick={close}>Cancel</Button>
+            <Button onClick={close}>{t("cancel")}</Button>
             <Button type="primary" onClick={onOk}>
-              OK
+              {t("ok")}
             </Button>
           </div>
         )

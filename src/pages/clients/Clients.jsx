@@ -39,7 +39,7 @@ const Clients = () => {
         placeholder={t("searchByNameAndMail")}
         text={t("addClient")}
         onClick={() =>
-          modal.open("Add client", <ClientForm setClients={setClients} />, {
+          modal.open(t("addClient"), <ClientForm setClients={setClients} />, {
             showFooter: false,
           })
         }

@@ -37,5 +37,12 @@
   "addClient": "Add client",
   "addVehicle": "Add vehicle",
   "addReservation": "Add reservation",
-  "passportNumber": "Passport Number"
+  "passportNumber": "Passport Number",
+  "success": "Success",
+  "cancel": "Cancel",
+  "ok": "OK",
+  "successLogin": "You have successfully logged in!",
+  "successDelete": "Successfully deleted!",
+  "successEdit": "Successfully edited",
+  "doYouWantDelete": "Do you want to delete the user?"
 }

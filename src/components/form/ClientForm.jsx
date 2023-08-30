@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import InputWithController from "../input/Input";
+import Input from "../input/Input";
 import { useParams } from "react-router-dom";
 import classes from "./clientForm.module.scss";
 import style from "../input/input.module.scss";
@@ -11,6 +11,7 @@ import Select from "../select/Select";
 import { addNewUser, editUser, getAllUsers } from "../../services/userServices";
 import { getAllCountries } from "../../services/countryServices";
 import { useModal } from "../../context/ModalContext";
+import TextArea from "../TextArea";
 
 const ClientForm = ({ data, setClients }) => {
   const [countries, setCountries] = useState([]);
@@ -33,7 +34,7 @@ const ClientForm = ({ data, setClients }) => {
       .string()
       .required("Field is required!")
       .email("Invalid email format"),
-    notes: yup
+    note: yup
       .string()
       .max(100, "Field cannot be more than 100 characters long!"),
     passport_number: yup.string().required("Field is required!"),
@@ -68,7 +69,7 @@ const ClientForm = ({ data, setClients }) => {
       country_id: data?.country_id,
       phone_number: data?.phone_number || "",
       email: data?.email || "",
-      notes: data?.notes || "",
+      note: data?.note || "",
       passport_number: data?.passport_number || "",
     },
   });
@@ -81,7 +82,7 @@ const ClientForm = ({ data, setClients }) => {
       setValue("country_id", data.country_id);
       setValue("phone_number", data.phone_number);
       setValue("email", data.email);
-      setValue("notes", data.notes);
+      setValue("note", data.note);
       setValue("passport_number", data.passport_number);
     }
   }, [data]);
@@ -135,14 +136,14 @@ const ClientForm = ({ data, setClients }) => {
         onSubmit={handleSubmit(onSubmit)}
         style={{ display: "flex", flexDirection: "column", gap: "16px" }}
       >
-        <InputWithController
+        <Input
           className={style["my-input"]}
           label="First Name"
           name="first_name"
           control={control}
           error={errors?.first_name?.message}
         />
-        <InputWithController
+        <Input
           className={style["my-input"]}
           label="Last Name"
           name="last_name"
@@ -158,33 +159,33 @@ const ClientForm = ({ data, setClients }) => {
           className={style["my-input"]}
         />
 
-        <InputWithController
+        <Input
           className={style["my-input"]}
           label="Phone Number"
           name="phone_number"
           control={control}
           error={errors?.phone_number?.message}
         />
-        <InputWithController
+        <Input
           className={style["my-input"]}
           label="Email"
           name="email"
           control={control}
           error={errors?.email?.message}
         />
-        <InputWithController
-          className={style["my-input"]}
-          label="Notes"
-          name="notes"
-          control={control}
-          error={errors?.notes?.message}
-        />
-        <InputWithController
+        <Input
           className={style["my-input"]}
           label="Passport Number"
           name="passport_number"
           control={control}
           error={errors?.passport_number?.message}
+        />
+        <TextArea
+          className={style["my-input"]}
+          label="Notes"
+          name="note"
+          control={control}
+          error={errors?.note?.message}
         />
 
         <SubmitButton label="Submit" className={style["my-input"]} />

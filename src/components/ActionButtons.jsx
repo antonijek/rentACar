@@ -22,7 +22,7 @@ const ActionButtons = ({ t, data, setClients }) => {
     try {
       const res = await deleteUser(id);
       console.log(res);
-      Message({ type: "success", content: "Bravo" });
+      Message({ type: "success", content: t("successDelete") });
       const users = await getAllUsers();
       setClients(users);
       setDeleteModalVisible(false);
@@ -44,7 +44,7 @@ const ActionButtons = ({ t, data, setClients }) => {
         className={classes["blue-button"]}
         onClick={() => {
           modal.open(
-            "Edit",
+            t("edit"),
             <ClientForm data={data} setClients={setClients} />,
             { showFooter: false }
           );
@@ -59,10 +59,10 @@ const ActionButtons = ({ t, data, setClients }) => {
 
       <Modal
         open={deleteModalVisible}
-        title="Delete User"
+        title={t("delete")}
         onOk={() => handleConfirmDelete(data.id)}
         close={handleCancelDelete}
-        content="Do you want to delete the user?"
+        content={t("doYouWantDelete")}
         spiner={isOpen}
       />
     </div>

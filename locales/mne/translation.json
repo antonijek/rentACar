@@ -37,5 +37,12 @@
   "addClient": "Dodaj klijenta",
   "addVehicle": "Dodaj vozilo",
   "addReservation": "Dodaj rezervaciju",
-  "passportNumber": "Broj pasoša"
+  "passportNumber": "Broj pasoša",
+  "success": "Uspjesno",
+  "cancel": "Zatvori",
+  "ok": "U redu",
+  "successLogin": "Uspjesno ste ulogovani!",
+  "successDelete": "Uspjesno brisanje!",
+  "successEdit": "Uspjesna izmjena",
+  "doYouWantDelete": "Da li zelite da izbrisete usera?"
 }
