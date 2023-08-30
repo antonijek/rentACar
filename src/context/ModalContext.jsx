@@ -8,18 +8,22 @@ const ModalProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [modalData, setModalData] = useState();
   const [spiner, setSpiner] = useState(false);
+  const [showFooter, setShowFooter] = useState(false);
 
-  const open = (title, content) => {
+  const open = (title, content, options = {}) => {
     setModalData({ title, content });
+    setShowFooter(options.showFooter || false);
     setIsOpen(true);
   };
+
   const close = () => {
     setIsOpen(false);
   };
+
   return (
     <ModalContext.Provider
       value={{
-        open: (title, content) => open(title, content),
+        open: (title, content, options) => open(title, content, options),
         close: () => close(),
         setSpiner: setSpiner,
       }}
@@ -30,6 +34,7 @@ const ModalProvider = ({ children }) => {
         close={close}
         content={modalData?.content}
         spiner={spiner}
+        showFooter={showFooter}
       />
       {children}
     </ModalContext.Provider>

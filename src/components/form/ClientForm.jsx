@@ -8,7 +8,7 @@ import classes from "./clientForm.module.scss";
 import style from "../input/input.module.scss";
 import SubmitButton from "../buttons/submitButton/SubmitButton";
 import Select from "../select/Select";
-import { addNewUser } from "../../services/userServices";
+import { addNewUser, editUser, getAllUsers } from "../../services/userServices";
 import { getAllCountries } from "../../services/countryServices";
 import { useModal } from "../../context/ModalContext";
 
@@ -90,7 +90,22 @@ const ClientForm = ({ data, setClients }) => {
     modal.setSpiner(true);
     try {
       const res = await addNewUser(data);
-      setClients(res);
+      const users = await getAllUsers();
+      setClients(users);
+      modal.close();
+      modal.setSpiner(false);
+    } catch (err) {
+      console.log(err);
+      modal.setSpiner(false);
+    }
+  };
+
+  const edit = async (data, id) => {
+    modal.setSpiner(true);
+    try {
+      const res = await editUser(data, id);
+      const users = await getAllUsers();
+      setClients(users);
       modal.close();
       modal.setSpiner(false);
     } catch (err) {
@@ -100,7 +115,17 @@ const ClientForm = ({ data, setClients }) => {
   };
 
   const onSubmit = async (formData) => {
-    addNew(formData);
+    const payload = {};
+
+    if (data) {
+      for (const key in formData) {
+        if (formData[key] !== data[key]) {
+          payload[key] = formData[key];
+        }
+      }
+    }
+
+    data?.first_name ? edit(payload, data.id) : addNew(formData);
   };
 
   return (

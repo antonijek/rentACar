@@ -9,35 +9,8 @@ import { generateClientHeaders } from "../../tableHeaders/clientHeaders";
 import ActionButtons from "../../components/ActionButtons";
 import SearchAndAdd from "../../components/searchAndAdd/SearchAndAdd";
 import AuthHoc from "../authHOC/AuthHoc";
-import ClientForm from "../../components/form/ClientForm";
 import { getAllUsers } from "../../services/userServices";
-
-export const clientsData = [
-  {
-    id: 1,
-    name: "John Doe",
-    identification: "123456789",
-    phoneNumber: "123-456-7890",
-    email: "john@example.com",
-    notes: "Regular customer",
-  },
-  {
-    id: 2,
-    name: "Jane Smith",
-    identification: "987654321",
-    phoneNumber: "987-654-3210",
-    email: "jane@example.com",
-    notes: "VIP member",
-  },
-  {
-    id: 3,
-    name: "Michael Johnson",
-    identification: "555555555",
-    phoneNumber: "555-555-5555",
-    email: "michael@example.com",
-    notes: "First-time client",
-  },
-];
+import ClientForm from "../../components/form/ClientForm";
 
 const Clients = () => {
   const [clients, setClients] = useState([]);
@@ -47,7 +20,6 @@ const Clients = () => {
   const getUsers = async () => {
     try {
       const res = await getAllUsers();
-      console.log(res);
       setClients(res);
     } catch (err) {
       console.log(err);
@@ -66,7 +38,11 @@ const Clients = () => {
       <SearchAndAdd
         placeholder={t("searchByNameAndMail")}
         text={t("addClient")}
-        onClick={() => modal.open("Add client", <ClientForm />)}
+        onClick={() =>
+          modal.open("Add client", <ClientForm setClients={setClients} />, {
+            showFooter: false,
+          })
+        }
       />
       <Table
         columns={[
@@ -74,7 +50,9 @@ const Clients = () => {
           {
             title: t("actions"),
             dataIndex: null,
-            render: (data) => <ActionButtons t={t} />,
+            render: (data) => (
+              <ActionButtons t={t} data={data} setClients={setClients} />
+            ),
           },
         ]}
         dataSource={clients}

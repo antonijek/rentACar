@@ -11,6 +11,7 @@ const apicurrentUser = "/account";
 const apiAddUser = "/users";
 const apiGetAllUsers = "/customers";
 const apiUpdateUser = "/users";
+const apiDeleteUser = "/users";
 
 export const getCurrentUser = async () => {
   try {
@@ -48,6 +49,15 @@ export const editUser = async (clientData, clientId) => {
       clientData
     );
 
+    return res.data;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const deleteUser = async (clientId) => {
+  try {
+    const res = await requestInstance.delete(`${apiDeleteUser}/${clientId}`);
     return res.data;
   } catch (err) {
     throw err;
