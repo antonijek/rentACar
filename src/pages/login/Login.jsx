@@ -11,7 +11,7 @@ import { set } from "../../services/storageServices";
 import { storageKeys } from "../../config/config";
 import { useNavigate } from "react-router-dom";
 import { userData } from "../../context/UserContext";
-//import Message from "../../components/message/Message";
+
 import {
   showErrorsMessage,
   showSuccessMessage,
@@ -52,12 +52,11 @@ const Login = () => {
       const res = await login(formData.email, formData.password);
       console.log(res);
       set(storageKeys.USER, res.access_token);
-      showSuccessMessage("success login!", 3);
       await getUser();
       navigate("/");
     } catch (err) {
       if (err.response) {
-        showErrorsMessage(err.response.data.message, 3);
+        showErrorsMessage(err.response.data.message, 2);
       }
     }
   };
@@ -86,7 +85,7 @@ const Login = () => {
           control={control}
           error={errors?.password?.message}
           labelColor={classes["label-color"]}
-          //type="password"
+          type="password"
         />
 
         <SubmitButton label="Submit" className={classes["my-input"]} />

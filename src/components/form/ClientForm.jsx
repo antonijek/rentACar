@@ -23,19 +23,29 @@ const ClientForm = ({ data, setClients }) => {
   const modal = useModal();
   const { t } = useTranslation();
 
+  console.log(data);
+  console.log(countries);
+
   const schema = yup.object({
     first_name: yup
       .string()
       .required("Field is required!")
+      .matches(/^[A-Za-z\s]+$/, "Field cannot contain numbers")
       .min(3, "Field cannot be less than 3 characters long!")
       .max(20, "Field cannot be more than 20 characters long!"),
     last_name: yup
       .string()
       .required("Field is required!")
+      .matches(/^[A-Za-z\s]+$/, "Field cannot contain numbers")
       .min(3, "Field cannot be less than 3 characters long!")
       .max(20, "Field cannot be more than 20 characters long!"),
-    country_id: yup.string(),
-    phone_number: yup.string().required("Field is required!"),
+
+    phone_number: yup
+      .string()
+      .required("Field is required!")
+      .matches(/^[0-9]+$/, "Field must contain only numbers")
+      .min(10, "Field must be at least 10 digits long")
+      .max(15, "Field cannot be more than 15 digits long"),
     email: yup
       .string()
       .required("Field is required!")
@@ -50,8 +60,8 @@ const ClientForm = ({ data, setClients }) => {
 
   const getCountriesData = async () => {
     try {
-      const countries = await getAllCountries();
-      setCountries(countries);
+      const res = await getAllCountries();
+      setCountries(res);
     } catch (err) {
       console.log(err);
     }
@@ -70,13 +80,13 @@ const ClientForm = ({ data, setClients }) => {
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      first_name: data?.first_name || "",
-      last_name: data?.last_name || "",
-      country_id: data?.country_id,
-      phone_number: data?.phone_number || "",
-      email: data?.email || "",
-      note: data?.note || "",
-      passport_number: data?.passport_number || "",
+      first_name: "",
+      last_name: "",
+      country_id: "",
+      phone_number: "",
+      email: "",
+      note: "",
+      passport_number: "",
     },
   });
 
@@ -85,7 +95,7 @@ const ClientForm = ({ data, setClients }) => {
     if (data?.first_name) {
       setValue("first_name", data.first_name);
       setValue("last_name", data.last_name);
-      setValue("country_id", data.country_id);
+      setValue("country_id", data.country.id);
       setValue("phone_number", data.phone_number);
       setValue("email", data.email);
       setValue("note", data.note);
@@ -104,6 +114,7 @@ const ClientForm = ({ data, setClients }) => {
       modal.setSpiner(false);
     } catch (err) {
       modal.setSpiner(false);
+      showErrorsMessage(err.response.data.errors, 5);
     }
   };
 
@@ -131,9 +142,19 @@ const ClientForm = ({ data, setClients }) => {
           payload[key] = formData[key];
         }
       }
-    }
 
-    data?.first_name ? edit(payload, data.id) : addNew(formData);
+      if (payload.country_id) {
+        payload.country_id = Number(payload.country_id);
+      }
+
+      edit(payload, data.id);
+    } else {
+      if (formData.country_id) {
+        formData.country_id = Number(formData.country_id);
+      }
+
+      addNew(formData);
+    }
   };
 
   return (

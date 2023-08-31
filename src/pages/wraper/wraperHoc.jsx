@@ -6,6 +6,7 @@ import { generateAdminItems } from "../../dropdownItems/adminItems";
 import { generateClientItems } from "../../dropdownItems/clientItems";
 import { useTranslation } from "react-i18next";
 import { userData } from "../../context/UserContext";
+import { set } from "../../services/storageServices";
 
 const wrapperHoc = (Component) => {
   return (props) => {

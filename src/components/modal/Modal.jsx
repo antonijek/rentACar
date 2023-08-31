@@ -18,7 +18,7 @@ const Modal = ({
     <AntdModal
       title={title}
       className={classes["__modal-container"]}
-      visible={open}
+      open={open}
       onOk={onOk}
       onCancel={close}
       footer={

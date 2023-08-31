@@ -9,7 +9,7 @@ import { userData } from "../../context/UserContext";
 
 function Navbar({ items, changeLanguage }) {
   const { i18n, t } = useTranslation();
-  const { user, logout } = userData();
+  const { user, logoutUser } = userData();
 
   useEffect(() => {
     const preferredLanguage = get("lan");
@@ -25,7 +25,7 @@ function Navbar({ items, changeLanguage }) {
       <h3 className={classes["user-name"]}>{user?.first_name}</h3>
       <div className={classes["nav"]}>
         <DropdownTabs changeLanguage={changeLanguage} items={items} />
-        <h3 className={classes["logout"]} onClick={() => logout()}>
+        <h3 className={classes["logout"]} onClick={() => logoutUser()}>
           {t("logout")}
         </h3>
       </div>

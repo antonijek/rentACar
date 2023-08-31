@@ -3,6 +3,7 @@ import { createContext, useContext } from "react";
 import { set, get, clear, exists } from "../services/storageServices";
 import { getCurrentUser } from "../services/userServices";
 import { storageKeys } from "../config/config";
+import { logout } from "../services/authServices";
 
 const UserContext = createContext();
 
@@ -22,9 +23,14 @@ const UserProvider = ({ children }) => {
     }
   };
 
-  const logout = () => {
-    setUser(null);
-    clear();
+  const logoutUser = async () => {
+    try {
+      const res = await logout();
+      setUser(null);
+      clear();
+    } catch (err) {
+      throw err;
+    }
   };
 
   useEffect(() => {
@@ -38,6 +44,7 @@ const UserProvider = ({ children }) => {
         user: user,
         setUser: setUser,
         getUser: () => getUser(),
+        logoutUser: () => logoutUser(),
       }}
     >
       {children}

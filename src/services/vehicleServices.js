@@ -1,32 +1,18 @@
 import axios from "axios";
 
 import { requestInstance } from "../config/requestInstance";
-import {
-  currentUserModel,
-  addUserModel,
-  getAllUsersModel,
-} from "./models/userModels";
+import { addVehicleModel, getAllVehiclesModel } from "./models/vehicleModels";
 
-const apicurrentUser = "/account";
-const apiAddUser = "/users";
-const apiGetAllUsers = "/customers?search=";
-const apiUpdateUser = "/users";
-const apiDeleteUser = "/users";
+const apiAddVehisle = "/vehicles";
+const apiGetAllVehicles = "/vehicles?search=";
+const apiUpdateVehicle = "/vehicles";
+const apiDeleteVehicle = "/vehicles";
 
-export const getCurrentUser = async () => {
+export const getAllVehicles = async () => {
   try {
-    const res = await requestInstance.get(apicurrentUser);
-    return currentUserModel(res.data);
-  } catch (err) {
-    throw err;
-  }
-};
-
-export const getAllUsers = async () => {
-  try {
-    const res = await requestInstance.get(apiGetAllUsers);
-
-    return getAllUsersModel(res.data.data);
+    const res = await requestInstance.get(apiGetAllVehicles);
+    console.log(res);
+    return getAllVehiclesModel(res.data);
   } catch (err) {
     throw err;
   }

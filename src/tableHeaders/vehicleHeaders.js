@@ -5,23 +5,23 @@ export const generateVehicleHeaders = (t) => [
   },
   {
     title: t("licensePlate"),
-    dataIndex: "licensePlate",
+    dataIndex: "plate_number",
   },
   {
     title: t("yearOfManufacture"),
-    dataIndex: "yearOfManufacture",
+    dataIndex: "production_year",
   },
   {
     title: t("vehicleType"),
-    dataIndex: "vehicleType",
+    dataIndex: "type",
   },
   {
     title: t("numberOfSeats"),
-    dataIndex: "numberOfSeats",
+    dataIndex: "number_of_seats",
   },
   {
     title: t("rentalPricePerDay"),
-    dataIndex: "rentalPricePerDay",
+    dataIndex: "daily_rate",
   },
   {
     title: t("note"),
