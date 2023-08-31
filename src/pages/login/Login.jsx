@@ -11,7 +11,11 @@ import { set } from "../../services/storageServices";
 import { storageKeys } from "../../config/config";
 import { useNavigate } from "react-router-dom";
 import { userData } from "../../context/UserContext";
-import Message from "../../components/message/Message";
+//import Message from "../../components/message/Message";
+import {
+  showErrorsMessage,
+  showSuccessMessage,
+} from "../../services/models/showMessagesModels";
 
 const Login = () => {
   const modal = useModal();
@@ -46,13 +50,14 @@ const Login = () => {
   const onSubmit = async (formData) => {
     try {
       const res = await login(formData.email, formData.password);
+      console.log(res);
       set(storageKeys.USER, res.access_token);
-      Message({ type: "success", content: "success login!" });
+      showSuccessMessage("success login!", 3);
       await getUser();
       navigate("/");
     } catch (err) {
       if (err.response) {
-        Message({ type: "error", content: err.response.data.message });
+        showErrorsMessage(err.response.data.message, 3);
       }
     }
   };

@@ -4,18 +4,24 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Input from "../input/Input";
 import { useParams } from "react-router-dom";
-import classes from "./clientForm.module.scss";
-import style from "../input/input.module.scss";
 import SubmitButton from "../buttons/submitButton/SubmitButton";
 import Select from "../select/Select";
 import { addNewUser, editUser, getAllUsers } from "../../services/userServices";
 import { getAllCountries } from "../../services/countryServices";
-import { useModal } from "../../context/ModalContext";
 import TextArea from "../TextArea";
+import { useModal } from "../../context/ModalContext";
+import { useTranslation } from "react-i18next";
+import {
+  showErrorsMessage,
+  showSuccessMessage,
+} from "../../services/models/showMessagesModels";
+import classes from "./clientForm.module.scss";
+import style from "../input/input.module.scss";
 
 const ClientForm = ({ data, setClients }) => {
   const [countries, setCountries] = useState([]);
   const modal = useModal();
+  const { t } = useTranslation();
 
   const schema = yup.object({
     first_name: yup
@@ -91,12 +97,12 @@ const ClientForm = ({ data, setClients }) => {
     modal.setSpiner(true);
     try {
       const res = await addNewUser(data);
+      showSuccessMessage(t("successAdd", 3));
       const users = await getAllUsers();
       setClients(users);
       modal.close();
       modal.setSpiner(false);
     } catch (err) {
-      console.log(err);
       modal.setSpiner(false);
     }
   };
@@ -105,12 +111,13 @@ const ClientForm = ({ data, setClients }) => {
     modal.setSpiner(true);
     try {
       const res = await editUser(data, id);
+      showSuccessMessage(t("successEdit"), 3);
       const users = await getAllUsers();
       setClients(users);
       modal.close();
       modal.setSpiner(false);
     } catch (err) {
-      console.log(err);
+      showErrorsMessage(err.response.data.errors, 5);
       modal.setSpiner(false);
     }
   };
@@ -172,6 +179,7 @@ const ClientForm = ({ data, setClients }) => {
           name="email"
           control={control}
           error={errors?.email?.message}
+          disabled={data?.first_name}
         />
         <Input
           className={style["my-input"]}
@@ -179,6 +187,7 @@ const ClientForm = ({ data, setClients }) => {
           name="passport_number"
           control={control}
           error={errors?.passport_number?.message}
+          disabled={data?.first_name}
         />
         <TextArea
           className={style["my-input"]}

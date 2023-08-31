@@ -44,5 +44,6 @@
   "successLogin": "Uspjesno ste ulogovani!",
   "successDelete": "Uspjesno brisanje!",
   "successEdit": "Uspjesna izmjena",
-  "doYouWantDelete": "Da li zelite da izbrisete usera?"
+  "doYouWantDelete": "Da li zelite da izbrisete usera?",
+  "successAdd": " Klijent je uspjesno dodat!"
 }

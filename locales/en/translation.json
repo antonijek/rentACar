@@ -44,5 +44,6 @@
   "successLogin": "You have successfully logged in!",
   "successDelete": "Successfully deleted!",
   "successEdit": "Successfully edited",
-  "doYouWantDelete": "Do you want to delete the user?"
+  "doYouWantDelete": "Do you want to delete the user?",
+  "successAdd": " Client successfully added!"
 }
