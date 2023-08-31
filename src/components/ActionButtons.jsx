@@ -64,6 +64,7 @@ const ActionButtons = ({ t, data, setClients }) => {
         close={handleCancelDelete}
         content={t("doYouWantDelete")}
         spiner={isOpen}
+        //showFooter={true}
       />
     </div>
   );

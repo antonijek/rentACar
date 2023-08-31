@@ -39,11 +39,11 @@ const ClientForm = ({ data, setClients }) => {
       .matches(/^[A-Za-z\s]+$/, "Field cannot contain numbers")
       .min(3, "Field cannot be less than 3 characters long!")
       .max(20, "Field cannot be more than 20 characters long!"),
-
+    country_id: yup.string(),
     phone_number: yup
       .string()
       .required("Field is required!")
-      .matches(/^[0-9]+$/, "Field must contain only numbers")
+      .matches(/^[\d()+-]+$/, "Invalid phone number format")
       .min(10, "Field must be at least 10 digits long")
       .max(15, "Field cannot be more than 15 digits long"),
     email: yup
@@ -52,11 +52,14 @@ const ClientForm = ({ data, setClients }) => {
       .email("Invalid email format"),
     note: yup
       .string()
-      .max(100, "Field cannot be more than 100 characters long!"),
-    passport_number: yup.string().required("Field is required!"),
+      .max(100, "Field cannot be more than 100 characters long!")
+      .min(10, "Field must be at least 10 characters long"), // Minimum length for note
+    passport_number: yup
+      .string()
+      .required("Field is required!")
+      .min(6, "Field must be at least 6 characters long") // Minimum length for passport number
+      .max(20, "Field cannot be more than 20 characters long"), // Maximum length for passport number
   });
-
-  const { clientId } = useParams();
 
   const getCountriesData = async () => {
     try {
@@ -95,7 +98,7 @@ const ClientForm = ({ data, setClients }) => {
     if (data?.first_name) {
       setValue("first_name", data.first_name);
       setValue("last_name", data.last_name);
-      setValue("country_id", data.country.id);
+      setValue("country_id", data?.country?.id);
       setValue("phone_number", data.phone_number);
       setValue("email", data.email);
       setValue("note", data.note);

@@ -20,6 +20,7 @@ const Clients = () => {
   const getUsers = async () => {
     try {
       const res = await getAllUsers();
+      console.log(res);
       setClients(res);
     } catch (err) {
       console.log(err);
