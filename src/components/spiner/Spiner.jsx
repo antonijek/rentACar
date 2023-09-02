@@ -4,7 +4,7 @@ import classes from "./spiner.module.scss";
 
 const Spiner = () => (
   <div className={classes["spiner"]}>
-    <Spin />
+    <Spin size="large" />
   </div>
 );
 export default Spiner;

@@ -1,8 +1,14 @@
 import React from "react";
 
-const SubmitButton = ({ label, className = "", onClick = () => {} }) => {
+const SubmitButton = ({
+  label,
+  className = "",
+  onClick = () => {},
+  disabled = false,
+}) => {
   return (
     <button
+      disabled={disabled}
       type="submit"
       className={className}
       onClick={() => {

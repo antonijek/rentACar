@@ -11,14 +11,11 @@ import { set } from "../../services/storageServices";
 import { storageKeys } from "../../config/config";
 import { useNavigate } from "react-router-dom";
 import { userData } from "../../context/UserContext";
-
-import {
-  showErrorsMessage,
-  showSuccessMessage,
-} from "../../services/models/showMessagesModels";
+import Spiner from "../../components/spiner/Spiner";
+import { showErrorsMessage } from "../../services/models/showMessagesModels";
 
 const Login = () => {
-  const modal = useModal();
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { getUser } = userData();
 
@@ -48,16 +45,19 @@ const Login = () => {
   });
 
   const onSubmit = async (formData) => {
+    setIsLoading(true);
     try {
       const res = await login(formData.email, formData.password);
       console.log(res);
       set(storageKeys.USER, res.access_token);
       await getUser();
+      setIsLoading(false);
       navigate("/");
     } catch (err) {
       if (err.response) {
         showErrorsMessage(err.response.data.message, 2);
       }
+      setIsLoading(false);
     }
   };
 
@@ -90,6 +90,7 @@ const Login = () => {
 
         <SubmitButton label="Submit" className={classes["my-input"]} />
       </form>
+      {isLoading && <Spiner />}
     </div>
   );
 };

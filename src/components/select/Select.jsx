@@ -8,6 +8,7 @@ const Select = ({
   control,
   error,
   className,
+  disabled = false,
 }) => {
   return (
     <div>
@@ -18,7 +19,7 @@ const Select = ({
           control={control}
           defaultValue=""
           render={({ field }) => (
-            <select {...field} className={className}>
+            <select {...field} className={className} disabled={disabled}>
               <option value="" disabled>
                 Select an option
               </option>

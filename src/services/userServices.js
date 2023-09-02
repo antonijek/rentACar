@@ -22,10 +22,9 @@ export const getCurrentUser = async () => {
   }
 };
 
-export const getAllUsers = async () => {
+export const getUsers = async (query = "") => {
   try {
-    const res = await requestInstance.get(apiGetAllUsers);
-
+    const res = await requestInstance.get(`${apiGetAllUsers}${query}`);
     return getAllUsersModel(res.data.data);
   } catch (err) {
     throw err;

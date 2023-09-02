@@ -8,6 +8,7 @@ const TextArea = ({
   control,
   error,
   className,
+  disabled = false,
 }) => {
   return (
     <div>
@@ -18,6 +19,7 @@ const TextArea = ({
           control={control}
           render={({ field }) => (
             <textarea
+              disabled={disabled}
               placeholder={placeholder}
               rows="4"
               cols="50"

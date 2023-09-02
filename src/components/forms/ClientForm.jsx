@@ -6,7 +6,7 @@ import Input from "../input/Input";
 import { useParams } from "react-router-dom";
 import SubmitButton from "../buttons/submitButton/SubmitButton";
 import Select from "../select/Select";
-import { addNewUser, editUser, getAllUsers } from "../../services/userServices";
+import { addNewUser, editUser, getUsers } from "../../services/userServices";
 import { getAllCountries } from "../../services/countryServices";
 import TextArea from "../TextArea";
 import { useModal } from "../../context/ModalContext";
@@ -18,47 +18,39 @@ import {
 import classes from "./clientForm.module.scss";
 import style from "../input/input.module.scss";
 
-const ClientForm = ({ data, setClients }) => {
+const ClientForm = ({ data, setClients, disabled = "" }) => {
   const [countries, setCountries] = useState([]);
   const modal = useModal();
   const { t } = useTranslation();
 
-  console.log(data);
-  console.log(countries);
-
   const schema = yup.object({
     first_name: yup
       .string()
-      .required("Field is required!")
-      .matches(/^[A-Za-z\s]+$/, "Field cannot contain numbers")
-      .min(3, "Field cannot be less than 3 characters long!")
-      .max(20, "Field cannot be more than 20 characters long!"),
+      .required(t("firstNameRequired"))
+      .matches(/^[A-Za-z\s]+$/, t("firstNameNoNumbers"))
+      .min(3, t("firstNameMinLength"))
+      .max(20, t("firstNameMaxLength")),
     last_name: yup
       .string()
-      .required("Field is required!")
-      .matches(/^[A-Za-z\s]+$/, "Field cannot contain numbers")
-      .min(3, "Field cannot be less than 3 characters long!")
-      .max(20, "Field cannot be more than 20 characters long!"),
-    country_id: yup.string(),
+      .required(t("lastNameRequired"))
+      .matches(/^[A-Za-z\s]+$/, t("lastNameNoNumbers"))
+      .min(3, t("lastNameMinLength"))
+      .max(20, t("lastNameMaxLength")),
+    country_id: yup.string().required(t("countryIdRequired")),
     phone_number: yup
       .string()
-      .required("Field is required!")
-      .matches(/^[\d()+-]+$/, "Invalid phone number format")
-      .min(10, "Field must be at least 10 digits long")
-      .max(15, "Field cannot be more than 15 digits long"),
-    email: yup
-      .string()
-      .required("Field is required!")
-      .email("Invalid email format"),
-    note: yup
-      .string()
-      .max(100, "Field cannot be more than 100 characters long!")
-      .min(10, "Field must be at least 10 characters long"), // Minimum length for note
+      .required(t("phoneNumberRequired"))
+      .matches(/^[\d\s()+-]+$/, t("phoneNumberInvalid"))
+      .min(10, t("phoneNumberMinLength"))
+      .max(15, t("phoneNumberMaxLength")),
+    email: yup.string().required(t("emailRequired")).email(t("emailInvalid")),
+    note: yup.string().max(100, t("noteMaxLength")).min(10, t("noteMinLength")),
     passport_number: yup
       .string()
-      .required("Field is required!")
-      .min(6, "Field must be at least 6 characters long") // Minimum length for passport number
-      .max(20, "Field cannot be more than 20 characters long"), // Maximum length for passport number
+      .required(t("passportNumberRequired"))
+      .matches(/^[a-zA-Z0-9]+$/, t("passportNumberAlphanumeric"))
+      .min(6, t("passportNumberMinLength"))
+      .max(20, t("passportNumberMaxLength")),
   });
 
   const getCountriesData = async () => {
@@ -111,8 +103,9 @@ const ClientForm = ({ data, setClients }) => {
     try {
       const res = await addNewUser(data);
       showSuccessMessage(t("successAdd", 3));
-      const users = await getAllUsers();
+      const users = await getUsers();
       setClients(users);
+      reset();
       modal.close();
       modal.setSpiner(false);
     } catch (err) {
@@ -126,8 +119,9 @@ const ClientForm = ({ data, setClients }) => {
     try {
       const res = await editUser(data, id);
       showSuccessMessage(t("successEdit"), 3);
-      const users = await getAllUsers();
+      const users = await getUsers();
       setClients(users);
+      reset();
       modal.close();
       modal.setSpiner(false);
     } catch (err) {
@@ -169,37 +163,41 @@ const ClientForm = ({ data, setClients }) => {
       >
         <Input
           className={style["my-input"]}
-          label="First Name"
+          label={t("firstName")}
           name="first_name"
           control={control}
           error={errors?.first_name?.message}
+          disabled={disabled}
         />
         <Input
           className={style["my-input"]}
-          label="Last Name"
+          label={t("lastName")}
           name="last_name"
           control={control}
           error={errors?.last_name?.message}
+          disabled={disabled}
         />
         <Select
-          label="Select Country"
+          label={t("selectCountry")}
           options={countries}
           name="country_id"
           control={control}
           error={errors?.country_id?.message}
           className={style["my-input"]}
+          disabled={disabled}
         />
 
         <Input
           className={style["my-input"]}
-          label="Phone Number"
+          label={t("phoneNumber")}
           name="phone_number"
           control={control}
           error={errors?.phone_number?.message}
+          disabled={disabled}
         />
         <Input
           className={style["my-input"]}
-          label="Email"
+          label={t("email")}
           name="email"
           control={control}
           error={errors?.email?.message}
@@ -207,7 +205,7 @@ const ClientForm = ({ data, setClients }) => {
         />
         <Input
           className={style["my-input"]}
-          label="Passport Number"
+          label={t("passportNumber")}
           name="passport_number"
           control={control}
           error={errors?.passport_number?.message}
@@ -215,13 +213,18 @@ const ClientForm = ({ data, setClients }) => {
         />
         <TextArea
           className={style["my-input"]}
-          label="Notes"
+          label={t("note")}
           name="note"
           control={control}
           error={errors?.note?.message}
+          disabled={disabled}
         />
 
-        <SubmitButton label="Submit" className={style["my-input"]} />
+        <SubmitButton
+          label={t("submit")}
+          className={style["my-input"]}
+          disabled={disabled}
+        />
       </form>
     </div>
   );

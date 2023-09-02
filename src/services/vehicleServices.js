@@ -3,36 +3,39 @@ import axios from "axios";
 import { requestInstance } from "../config/requestInstance";
 import { addVehicleModel, getAllVehiclesModel } from "./models/vehicleModels";
 
-const apiAddVehisle = "/vehicles";
-const apiGetAllVehicles = "/vehicles?search=";
+const apiAddVehicle = "/vehicles";
+const apiGetVehicles = "/vehicles?search=";
 const apiUpdateVehicle = "/vehicles";
 const apiDeleteVehicle = "/vehicles";
 
-export const getAllVehicles = async () => {
+export const getVehicles = async (query = "") => {
   try {
-    const res = await requestInstance.get(apiGetAllVehicles);
+    const res = await requestInstance.get(`${apiGetVehicles}${query}`);
     console.log(res);
-    return getAllVehiclesModel(res.data);
+    //Sa apija dobijam razlicitu strukturu podataka ako imam query i  ako nemam...
+    return query
+      ? getAllVehiclesModel(res.data.data)
+      : getAllVehiclesModel(res.data);
   } catch (err) {
     throw err;
   }
 };
 
-export const addNewUser = async (clientData) => {
+export const addNewVehicle = async (vehicleData) => {
   try {
-    const res = await requestInstance.post(apiAddUser, clientData);
+    const res = await requestInstance.post(apiAddVehicle, vehicleData);
     console.log(res);
-    return addUserModel(res.data);
+    return addVehicleModel(res.data);
   } catch (err) {
     throw err;
   }
 };
 
-export const editUser = async (clientData, clientId) => {
+export const editVehicle = async (vehicleData, vehicleId) => {
   try {
     const res = await requestInstance.put(
-      `${apiUpdateUser}/${clientId}`,
-      clientData
+      `${apiUpdateVehicle}/${vehicleId}`,
+      vehicleData
     );
 
     return res.data;
@@ -41,9 +44,11 @@ export const editUser = async (clientData, clientId) => {
   }
 };
 
-export const deleteUser = async (clientId) => {
+export const deleteVehicle = async (vehicleId) => {
   try {
-    const res = await requestInstance.delete(`${apiDeleteUser}/${clientId}`);
+    const res = await requestInstance.delete(
+      `${apiDeleteVehicle}/${vehicleId}`
+    );
     return res.data;
   } catch (err) {
     throw err;

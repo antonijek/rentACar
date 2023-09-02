@@ -8,26 +8,56 @@ import { generateVehicleHeaders } from "../../tableHeaders/vehicleHeaders";
 import ActionButtons from "../../components/ActionButtons";
 import SearchAndAdd from "../../components/searchAndAdd/SearchAndAdd";
 import AuthHoc from "../authHOC/AuthHoc";
-import { getAllVehicles } from "../../services/vehicleServices";
+import { deleteVehicle, getVehicles } from "../../services/vehicleServices";
+import Spiner from "../../components/spiner/Spiner";
+import VehicleForm from "../../components/forms/VehicleForm";
 
 const Vehicles = () => {
   const [vehicles, setVehicles] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
   const modal = useModal();
 
-  const getVehicles = async () => {
+  const getAllVehicles = async () => {
+    setIsLoading(true);
     try {
-      const res = await getAllVehicles();
-      console.log(res);
+      const res = await getVehicles();
       setVehicles(res);
+      setIsLoading(false);
     } catch (err) {
       console.log(err);
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    getVehicles();
+    getAllVehicles();
   }, []);
+
+  const searchVehicle = async (query) => {
+    setIsLoading(true);
+    try {
+      const res = await getVehicles(query);
+      console.log(res);
+      setVehicles(res);
+      setIsLoading(false);
+    } catch (err) {
+      console.log(err);
+      setIsLoading(false);
+    }
+  };
+  const handleRowClick = (client) => {
+    const disabled = true;
+    modal.open(
+      t("vehicleInformation"),
+      <VehicleForm
+        data={client}
+        setVehicles={setVehicles}
+        disabled={disabled}
+      />,
+      { showFooter: false }
+    );
+  };
 
   const headers = generateVehicleHeaders(t);
 
@@ -35,8 +65,18 @@ const Vehicles = () => {
     <div className={classes["vehicle-container"]}>
       <h2 className={classes["title"]}>{t("vehicles")}</h2>
       <SearchAndAdd
+        search={searchVehicle}
         placeholder={t("searchByLicensePlate")}
         text={t("addVehicle")}
+        onClick={() =>
+          modal.open(
+            t("addVehicle"),
+            <VehicleForm setVehicles={setVehicles} />,
+            {
+              showFooter: false,
+            }
+          )
+        }
       />
       <Table
         columns={[
@@ -44,11 +84,25 @@ const Vehicles = () => {
           {
             title: t("actions"),
             dataIndex: null,
-            render: (data) => <ActionButtons t={t} />,
+            render: (data) => (
+              <ActionButtons
+                t={t}
+                data={data}
+                setItems={setVehicles}
+                FormComponent={VehicleForm}
+                formProps={{ data, setVehicles }}
+                getItems={getVehicles}
+                deleteItem={deleteVehicle}
+              />
+            ),
           },
         ]}
         dataSource={vehicles}
+        onRow={(vehicle) => ({
+          onClick: () => handleRowClick(vehicle),
+        })}
       />
+      {isLoading && <Spiner />}
     </div>
   );
 };

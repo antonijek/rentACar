@@ -12,11 +12,12 @@ const Modal = ({
   spiner,
   showFooter,
   onOk,
+  className,
 }) => {
   const { t } = useTranslation();
   return (
     <AntdModal
-      title={title}
+      title={<span className={className}>{title}</span>}
       className={classes["__modal-container"]}
       open={open}
       onOk={onOk}
@@ -25,7 +26,7 @@ const Modal = ({
         showFooter && (
           <div>
             <Button onClick={close}>{t("cancel")}</Button>
-            <Button type="primary" onClick={onOk}>
+            <Button type="primary" danger onClick={onOk}>
               {t("ok")}
             </Button>
           </div>

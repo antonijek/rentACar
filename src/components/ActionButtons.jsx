@@ -2,13 +2,19 @@ import React, { useState } from "react";
 import Button from "../components/buttons/button/Button";
 import classes from "../components/table/table.module.scss";
 import Message from "./message/Message";
-import ClientForm from "./form/ClientForm"; // Assuming this is the correct import
 import { useModal } from "../context/ModalContext";
 import Modal from "./modal/Modal";
 import { deleteUser } from "../services/userServices";
-import { getAllUsers } from "../services/userServices";
 
-const ActionButtons = ({ t, data, setClients }) => {
+const ActionButtons = ({
+  t,
+  data,
+  setItems,
+  FormComponent,
+  formProps,
+  getItems,
+  deleteItem,
+}) => {
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const modal = useModal();
@@ -20,11 +26,11 @@ const ActionButtons = ({ t, data, setClients }) => {
   const handleConfirmDelete = async (id) => {
     setIsOpen(true);
     try {
-      const res = await deleteUser(id);
+      const res = await deleteItem(id);
       console.log(res);
       Message({ type: "success", content: t("successDelete") });
-      const users = await getAllUsers();
-      setClients(users);
+      const items = await getItems();
+      setItems(items);
       setDeleteModalVisible(false);
       setIsOpen(false);
     } catch (err) {
@@ -39,15 +45,16 @@ const ActionButtons = ({ t, data, setClients }) => {
   };
 
   return (
-    <div className={classes["action-buttons"]}>
+    <div
+      onClick={(event) => event.stopPropagation()}
+      className={classes["action-buttons"]}
+    >
       <Button
         className={classes["blue-button"]}
         onClick={() => {
-          modal.open(
-            t("edit"),
-            <ClientForm data={data} setClients={setClients} />,
-            { showFooter: false }
-          );
+          modal.open(t("edit"), <FormComponent {...formProps} />, {
+            showFooter: false,
+          });
         }}
         text={t("edit")}
       />
@@ -64,7 +71,8 @@ const ActionButtons = ({ t, data, setClients }) => {
         close={handleCancelDelete}
         content={t("doYouWantDelete")}
         spiner={isOpen}
-        //showFooter={true}
+        showFooter={true}
+        className={classes["custom-modal-title"]}
       />
     </div>
   );
