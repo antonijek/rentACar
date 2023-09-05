@@ -19,3 +19,8 @@ export const addUserModel = (data) => {
 export const getAllUsersModel = (data) => {
   return data;
 };
+export const getUsersForSelectModel = (data) => {
+  return data.map((item) => {
+    return { label: `${item.first_name} ${item.last_name}`, value: item.id };
+  });
+};

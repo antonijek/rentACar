@@ -59,3 +59,25 @@
   justify-content: center;
   color: rgba(56, 133, 89, 0.668);
 }
+
+.vehicle-and-client-data {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 5%;
+  padding-right: 5%;
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--primary-color);
+  border-top: 2px solid var(--primary-color);
+}
+.vehicle-data {
+  text-align: center;
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--primary-color);
+  border-top: 2px solid var(--primary-color);
+}
+/* .vehicle-title {
+  border-bottom: 2px solid var(--primary-color);
+}
+.client-title {
+  border-bottom: 2px solid var(--primary-color);
+} */

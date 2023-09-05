@@ -15,7 +15,7 @@ import {
   showErrorsMessage,
   showSuccessMessage,
 } from "../../services/models/showMessagesModels";
-import classes from "./clientForm.module.scss";
+import classes from "./form.module.scss";
 import style from "../input/input.module.scss";
 
 const ClientForm = ({ data, setClients, disabled = "" }) => {

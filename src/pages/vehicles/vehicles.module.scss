@@ -8,3 +8,24 @@
   margin-bottom: 0;
   font-size: 2vw;
 }
+.search-vehicle {
+  padding: 6px;
+  border: 2px solid var(--primary-color);
+  border-radius: 5px;
+  margin: 10px;
+  width: 20%;
+  min-width: 200px;
+  box-sizing: border-box;
+  font-size: 16px;
+  &::placeholder {
+    color: var(--primary-color);
+    font-size: 12px;
+  }
+}
+.search-vehicle-container {
+  display: flex;
+  align-items: center;
+}
+.modal-title {
+  color: var(--primary-color);
+}

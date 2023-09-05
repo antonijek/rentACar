@@ -1,30 +1,34 @@
 export const generateReservationHeaders = (t) => [
   {
-    title: t("clientName"),
-    dataIndex: "clientName",
+    title: t("firstName"),
+    dataIndex: "first_name",
+  },
+  {
+    title: t("lastName"),
+    dataIndex: "last_name",
   },
   {
     title: t("licensePlate"),
-    dataIndex: "licensePlate",
+    dataIndex: "plate_number",
   },
   {
     title: t("startDate"),
-    dataIndex: "startDate",
+    dataIndex: "start_date",
   },
   {
     title: t("endDate"),
-    dataIndex: "endDate",
+    dataIndex: "date_to",
   },
   {
     title: t("pickupLocation"),
-    dataIndex: "pickupLocation",
+    dataIndex: "pickup_location",
   },
   {
     title: t("returnLocation"),
-    dataIndex: "returnLocation",
+    dataIndex: "drop_off_location",
   },
   {
     title: t("totalCost"),
-    dataIndex: "totalCost",
+    dataIndex: "price",
   },
 ];

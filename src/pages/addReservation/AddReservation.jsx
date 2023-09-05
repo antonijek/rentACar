@@ -2,21 +2,26 @@ import React, { useEffect, useState } from "react";
 import wrapperHoc from "../wraper/wraperHoc";
 import { useModal } from "../../context/ModalContext";
 import Table from "../../components/table/Table";
-import classes from "./vehicles.module.scss";
+import classes from "../vehicles/vehicles.module.scss";
 import { useTranslation } from "react-i18next";
-import { generateVehicleHeaders } from "../../tableHeaders/vehicleHeaders";
+import { generateVehicleHeaders } from "../../tableHeaders/vehicleForReservationHeader";
 import ActionButtons from "../../components/ActionButtons";
-import SearchAndAdd from "../../components/searchAndAdd/SearchAndAdd";
+import Button from "../../components/buttons/button/Button";
 import AuthHoc from "../authHOC/AuthHoc";
 import { deleteVehicle, getVehicles } from "../../services/vehicleServices";
 import Spiner from "../../components/spiner/Spiner";
 import VehicleForm from "../../components/forms/VehicleForm";
+import AddReservationForm from "../../components/forms/AddReservationForm";
+import { useNavigate } from "react-router-dom";
+import DateRange from "../../components/dateRange/DateRange";
 
-const Vehicles = () => {
+const AddReservation = () => {
   const [vehicles, setVehicles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [query, setQuery] = useState("");
   const { t } = useTranslation();
   const modal = useModal();
+  const navigate = useNavigate();
 
   const getAllVehicles = async () => {
     setIsLoading(true);
@@ -35,6 +40,7 @@ const Vehicles = () => {
   }, []);
 
   const searchVehicle = async (query) => {
+    console.log(query);
     setIsLoading(true);
     try {
       const res = await getVehicles(query);
@@ -46,11 +52,20 @@ const Vehicles = () => {
       setIsLoading(false);
     }
   };
+
+  const navigatePage = () => {
+    navigate("/reservations");
+  };
+
   const handleRowClick = (vehicle) => {
-    const disabled = true;
+    const disabled = false;
     modal.open(
-      t("vehicleInformation"),
-      <VehicleForm
+      <span className={classes["modal-title"]}>
+        {t("reservationInformation")}
+      </span>,
+
+      <AddReservationForm
+        navigatePage={navigatePage}
         data={vehicle}
         setVehicles={setVehicles}
         disabled={disabled}
@@ -63,40 +78,21 @@ const Vehicles = () => {
 
   return (
     <div className={classes["vehicle-container"]}>
-      <h2 className={classes["title"]}>{t("vehicles")}</h2>
-      <SearchAndAdd
-        search={searchVehicle}
-        placeholder={t("searchByLicensePlate")}
-        text={t("addVehicle")}
-        onClick={() =>
-          modal.open(
-            t("addVehicle"),
-            <VehicleForm setVehicles={setVehicles} />,
-            {
-              showFooter: false,
-            }
-          )
-        }
-      />
+      <h2 className={classes["title"]}>{t("chooseVehicles")}</h2>
+      <div className={classes["search-vehicle-container"]}>
+        <input
+          onChange={(e) => setQuery(e.target.value)}
+          className={classes["search-vehicle"]}
+          placeholder={t("search")}
+        />
+        <Button
+          text={t("search")}
+          className={classes["btn-search"]}
+          onClick={() => searchVehicle(query)}
+        />
+      </div>
       <Table
-        columns={[
-          ...headers,
-          {
-            title: t("actions"),
-            dataIndex: null,
-            render: (data) => (
-              <ActionButtons
-                t={t}
-                data={data}
-                setItems={setVehicles}
-                FormComponent={VehicleForm}
-                formProps={{ data, setVehicles }}
-                getItems={getVehicles}
-                deleteItem={deleteVehicle}
-              />
-            ),
-          },
-        ]}
+        columns={headers}
         dataSource={vehicles}
         onRow={(vehicle) => ({
           onClick: () => handleRowClick(vehicle),
@@ -107,4 +103,4 @@ const Vehicles = () => {
   );
 };
 
-export default AuthHoc(wrapperHoc(Vehicles));
+export default AuthHoc(wrapperHoc(AddReservation));

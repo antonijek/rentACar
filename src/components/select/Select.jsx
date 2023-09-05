@@ -18,18 +18,21 @@ const Select = ({
           name={name}
           control={control}
           defaultValue=""
-          render={({ field }) => (
-            <select {...field} className={className} disabled={disabled}>
-              <option value="" disabled>
-                Select an option
-              </option>
-              {options.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
+          render={({ field }) => {
+            // console.log(field);
+            return (
+              <select {...field} className={className} disabled={disabled}>
+                <option value="" disabled>
+                  Select an option
                 </option>
-              ))}
-            </select>
-          )}
+                {options.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            );
+          }}
         />
       )}
       {error && error.length > 0 && <span>{error}</span>}

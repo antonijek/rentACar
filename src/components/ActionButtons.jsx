@@ -27,7 +27,6 @@ const ActionButtons = ({
     setIsOpen(true);
     try {
       const res = await deleteItem(id);
-      console.log(res);
       Message({ type: "success", content: t("successDelete") });
       const items = await getItems();
       setItems(items);
@@ -52,9 +51,13 @@ const ActionButtons = ({
       <Button
         className={classes["blue-button"]}
         onClick={() => {
-          modal.open(t("edit"), <FormComponent {...formProps} />, {
-            showFooter: false,
-          });
+          modal.open(
+            <span className={classes["modal-title"]}>{t("edit")} </span>,
+            <FormComponent {...formProps} />,
+            {
+              showFooter: false,
+            }
+          );
         }}
         text={t("edit")}
       />

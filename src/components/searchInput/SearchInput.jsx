@@ -8,7 +8,7 @@ const SearchInput = ({
   type = "text",
   onChange = () => {},
   name = "",
-  search,
+  search = () => {},
 }) => {
   const [searchValue, setSearchValue] = useState("");
   const debouncedSearchValue = useDebounce(searchValue, 500);

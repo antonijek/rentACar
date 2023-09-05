@@ -9,6 +9,7 @@ import Login from "./pages/login/Login";
 import Vehicles from "./pages/vehicles/Vehicles";
 import Reservations from "./pages/reservations/Reservations";
 import UserProvider from "./context/UserContext";
+import AddReservation from "./pages/addReservation/AddReservation";
 
 function App() {
   const router = createBrowserRouter([
@@ -31,6 +32,10 @@ function App() {
     {
       path: "/reservations",
       element: <Reservations />,
+    },
+    {
+      path: "/reservations/add-reservation",
+      element: <AddReservation />,
     },
   ]);
 

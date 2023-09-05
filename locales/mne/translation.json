@@ -25,7 +25,7 @@
   "numberOfSeats": "Broj sjedišta",
   "rentalPricePerDay": "Cijena po danu",
   "note": "Napomena",
-  "clientName": "Ime klijenta",
+  "clientName": "Ime",
   "startDate": "Datum od",
   "endDate": "Datum do",
   "pickupLocation": "Lokacija preuzimanja",
@@ -83,5 +83,14 @@
   "yearTypeError": "Godina mora biti broj.",
   "seatsTypeError": "Broj sjedišta mora biti broj.",
   "dailyRateTypeError": "Dnevna cijena mora biti broj.",
-  "fieldRequired": "Ovo polje je obavezno"
+  "fieldRequired": "Ovo polje je obavezno",
+  "chooseVehicles": "Izaberi vozilo",
+  "search": "Pretrazi",
+  "client": "Klijent",
+  "dropOffLocation": "Lokacija vracanja",
+  "endDateMin": "Pocetni datum pogresan",
+  "totalCostTypeError": "greska prilikom unosa ukupne cijene",
+  "submit": "Posalji",
+  "totalCostMinValue": "Pogresna minimalna vrednost troškova",
+  "vehicle": "Vozilo"
 }

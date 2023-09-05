@@ -1,10 +1,29 @@
 .reservations-container {
   padding: 1%;
   width: 100%;
+  margin-top: 2%;
 }
 .title {
   color: var(--primary-color);
   text-align: center;
   margin-bottom: 0;
   font-size: 2vw;
+}
+.modal-title {
+  color: var(--primary-color);
+}
+.search-reservation-container {
+  display: flex;
+  align-items: center;
+
+  margin-left: 1%;
+}
+.btn-search {
+  margin-left: 1%;
+}
+.btn-new-reservation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 1%;
 }

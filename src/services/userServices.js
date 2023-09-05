@@ -5,6 +5,7 @@ import {
   currentUserModel,
   addUserModel,
   getAllUsersModel,
+  getUsersForSelectModel,
 } from "./models/userModels";
 
 const apicurrentUser = "/account";
@@ -58,6 +59,16 @@ export const deleteUser = async (clientId) => {
   try {
     const res = await requestInstance.delete(`${apiDeleteUser}/${clientId}`);
     return res.data;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const getUsersForSelect = async (query = "") => {
+  try {
+    const res = await requestInstance.get(`${apiGetAllUsers}${query}`);
+
+    return getUsersForSelectModel(res.data.data);
   } catch (err) {
     throw err;
   }

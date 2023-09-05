@@ -1,6 +1,5 @@
 import React from "react";
 import { Controller } from "react-hook-form";
-import classes from "./input.module.scss";
 
 const Input = ({
   label = "",
@@ -13,6 +12,7 @@ const Input = ({
   onChange,
   disabled = false,
   labelColor = "",
+  min = "",
 }) => {
   return (
     <div>
@@ -28,6 +28,7 @@ const Input = ({
               disabled={disabled}
               type={type}
               placeholder={placeholder}
+              min={min}
               {...field}
               className={className}
               onChange={(e) => {

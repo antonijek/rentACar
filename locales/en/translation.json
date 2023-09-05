@@ -82,5 +82,13 @@
   "yearTypeError": "Year must be a number.",
   "seatsTypeError": "Number of seats must be a number.",
   "dailyRateTypeError": "Daily rate must be a number.",
-  "fieldRequired": "This field is required"
+  "fieldRequired": "This field is required",
+  "chooseVehicles": "Choose vehicle",
+  "search": "Search",
+  "client": "Client",
+  "dropOffLocation": "Return Location",
+  "endDateMin": "End date wrong",
+  "totalCostTypeError": "error for total cost",
+  "submit": "Submit",
+  "vehicle": "Vehicle"
 }
