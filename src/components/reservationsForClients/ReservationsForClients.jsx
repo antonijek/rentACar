@@ -18,6 +18,7 @@ const ReservationsForClients = () => {
     setIsLoading(true);
     try {
       const res = await getReservations();
+      console.log("Ovo je Reservations");
       setReservations(res);
       setIsLoading(false);
     } catch (err) {
@@ -26,7 +27,6 @@ const ReservationsForClients = () => {
     }
   };
 
-  console.log(reservations);
   useEffect(() => {
     getAllReservations();
   }, []);

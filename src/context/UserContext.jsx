@@ -14,6 +14,7 @@ const UserProvider = ({ children }) => {
     try {
       if (exists(storageKeys.USER)) {
         const res = await getCurrentUser();
+        console.log("iz Userkonteksta");
         setUser(res);
       } else {
         setUser(null);

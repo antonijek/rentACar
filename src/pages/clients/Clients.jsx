@@ -21,6 +21,7 @@ const Clients = () => {
   const getAllUsers = async () => {
     setIsLoading(true);
     try {
+      console.log("getAll");
       const res = await getUsers();
       setClients(res);
       setIsLoading(false);
@@ -37,6 +38,7 @@ const Clients = () => {
   const searchUser = async (query) => {
     setIsLoading(true);
     try {
+      console.log("seradh");
       const res = await getUsers(query);
       setClients(res);
       setIsLoading(false);
