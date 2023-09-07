@@ -7,7 +7,6 @@ import Select from "../select/Select";
 import SubmitButton from "../buttons/submitButton/SubmitButton";
 
 import {
-  addNewReservation,
   editReservation,
   getReservations,
 } from "../../services/reservationServices";
@@ -21,13 +20,6 @@ import classes from "./form.module.scss";
 import style from "../input/input.module.scss";
 import { getAllCities } from "../../services/cityServices";
 import { getUsersForSelect } from "../../services/userServices";
-
-const calculateMinEndDate = () => {
-  const today = new Date();
-  const minEndDate = new Date(today);
-  minEndDate.setDate(today.getDate() + 7);
-  return minEndDate.toISOString().split("T")[0];
-};
 
 const EditReservationForm = ({ data, setReservations, disabled = "" }) => {
   const [cities, setCities] = useState([]);
@@ -78,7 +70,7 @@ const EditReservationForm = ({ data, setReservations, disabled = "" }) => {
       console.log(err);
     }
   };
-  /*  const getClients = async () => {
+  const getClients = async () => {
     try {
       const res = await getUsersForSelect();
 
@@ -86,15 +78,12 @@ const EditReservationForm = ({ data, setReservations, disabled = "" }) => {
     } catch (err) {
       console.log(err);
     }
-  }; */
+  };
 
   useEffect(() => {
     if (data.id) {
-      const dateFrom = data.start_date ? new Date(data.start_date) : null;
-      let dateTo = "";
-      if (data.date_to) {
-        dateTo = new Date(data.date_to);
-      }
+      const dateFrom = data.date_from ? new Date(data.date_from) : null;
+      const dateTo = data.date_to ? new Date(data.date_to) : null;
       const formatDate = (date) => {
         if (!date) return "";
         const year = date.getFullYear();
@@ -102,17 +91,18 @@ const EditReservationForm = ({ data, setReservations, disabled = "" }) => {
         const day = String(date.getDate()).padStart(2, "0");
         return `${year}-${month}-${day}`;
       };
-
-      reset({
-        pickup_location_id: data?.pickup_location_id,
-        date_from: formatDate(dateFrom),
-        date_to: formatDate(dateTo),
-        drop_off_location_id: data?.drop_off_location_id,
-        price: data?.price,
-      });
-
-      getCities();
-      //getClients();
+      setValue(
+        "pickup_location_id",
+        data?.pickup_location_id || data?.pickup_location.id
+      ),
+        setValue(
+          "drop_off_location_id",
+          data?.drop_off_location_id || data?.drop_off_location.id
+        ),
+        setValue("date_from", formatDate(dateFrom)),
+        setValue("date_to", formatDate(dateTo)),
+        getCities();
+      getClients();
     }
   }, [data]);
 
@@ -132,14 +122,15 @@ const EditReservationForm = ({ data, setReservations, disabled = "" }) => {
     }
   };
 
+  console.log(data);
   const onSubmit = async (formData) => {
-    /* formData.date_from = new Date(formData.date_from)
+    formData.date_from = new Date(formData.date_from)
       .toISOString()
       .split("T")[0];
     formData.date_to = new Date(formData.date_to).toISOString().split("T")[0];
     formData.pickup_location_id = Number(formData.pickup_location_id);
-    formData.drop_off_location_id = Number(formData.drop_off_location_id); */
-    formData = { drop_off_location: 2 };
+    formData.drop_off_location_id = Number(formData.drop_off_location_id);
+
     edit(formData, data.id);
   };
   const dateFrom = watch("date_from");
@@ -154,6 +145,14 @@ const EditReservationForm = ({ data, setReservations, disabled = "" }) => {
       setValue("price", numberOfDays * data.vehicle.daily_rate);
     }
   }, [dateFrom, dateTo]);
+
+  useEffect(() => {
+    if (!dateTo || new Date(dateTo) < new Date(dateFrom)) {
+      const nextDay = new Date(dateFrom);
+      nextDay.setDate(nextDay.getDate() + 1); // Add one day to dateFrom
+      setValue("date_to", nextDay.toISOString().split("T")[0]);
+    }
+  }, [dateFrom, dateTo, setValue]);
 
   return (
     <div>
@@ -199,7 +198,7 @@ const EditReservationForm = ({ data, setReservations, disabled = "" }) => {
           error={errors.date_to?.message}
           type="date"
           disabled={disabled}
-          min={calculateMinEndDate()}
+          min={dateFrom}
         />
         <Select
           className={style["my-input"]}

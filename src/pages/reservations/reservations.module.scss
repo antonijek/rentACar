@@ -6,7 +6,7 @@
 .title {
   color: var(--primary-color);
   text-align: center;
-  margin-bottom: 0;
+  margin-bottom: 5%;
   font-size: 2vw;
 }
 .modal-title {
@@ -21,7 +21,7 @@
 .btn-search {
   margin-left: 1%;
 }
-.btn-new-reservation {
+.new-reservation {
   display: flex;
   justify-content: space-between;
   align-items: center;

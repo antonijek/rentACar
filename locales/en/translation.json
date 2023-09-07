@@ -1,5 +1,5 @@
 {
-  "welcome": "Welcome to my app!",
+  "welcome": "Welcome",
   "logout": "Logout",
   "newUser": "New client",
   "newVehicle": "New vehicle",
@@ -90,5 +90,11 @@
   "endDateMin": "End date wrong",
   "totalCostTypeError": "error for total cost",
   "submit": "Submit",
-  "vehicle": "Vehicle"
+  "vehicle": "Vehicle",
+  "price": "Price",
+  "confirmed": "Confirmed",
+  "fast": "-FAST",
+  "safe": "-SAFE",
+  "reliable": "-RELIABLE",
+  "happyCustomers": "Let's make customers happy!"
 }

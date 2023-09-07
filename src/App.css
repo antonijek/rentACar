@@ -1,4 +1,10 @@
 :root {
+  --main-font-family: "Inconsolata", monospace;
+
   --primary-color: #007bff;
   --secondary-color: rgb(189, 221, 245);
+}
+
+body {
+  font-family: var(--main-font-family) !important;
 }

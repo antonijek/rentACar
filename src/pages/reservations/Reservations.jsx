@@ -16,6 +16,7 @@ import Spiner from "../../components/spiner/Spiner";
 import EditReservationForm from "../../components/forms/EditReservationForm";
 import Button from "../../components/buttons/button/Button";
 import DateRange from "../../components/dateRange/DateRange";
+import { formattingReservations } from "../../utils/utils";
 
 const Reservations = () => {
   const [reservations, setReservations] = useState([]);
@@ -78,7 +79,7 @@ const Reservations = () => {
   return (
     <div className={classes["reservations-container"]}>
       <h2 className={classes["title"]}>{t("reservations")}</h2>
-      <div className={classes["btn-new-reservation"]}>
+      <div className={classes["new-reservation"]}>
         <div className={classes["search-reservation-container"]}>
           <DateRange onChange={onChange} />
           <Button
@@ -112,7 +113,7 @@ const Reservations = () => {
             ),
           },
         ]}
-        dataSource={reservations}
+        dataSource={formattingReservations(reservations)}
         onRow={(reservation) => ({
           onClick: () => handleRowClick(reservation),
         })}

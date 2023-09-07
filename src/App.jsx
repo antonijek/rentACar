@@ -10,12 +10,17 @@ import Vehicles from "./pages/vehicles/Vehicles";
 import Reservations from "./pages/reservations/Reservations";
 import UserProvider from "./context/UserContext";
 import AddReservation from "./pages/addReservation/AddReservation";
+import ReservationsForClients from "./components/reservationsForClients/ReservationsForClients";
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
       element: <Home />,
+    },
+    {
+      path: "/my-reservations",
+      element: <ReservationsForClients />,
     },
     {
       path: "/login",

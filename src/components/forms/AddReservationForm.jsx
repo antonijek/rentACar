@@ -17,13 +17,6 @@ import style from "../input/input.module.scss";
 import { getAllCities } from "../../services/cityServices";
 import { getUsersForSelect } from "../../services/userServices";
 
-const calculateMinEndDate = () => {
-  const today = new Date();
-  const minEndDate = new Date(today);
-  minEndDate.setDate(today.getDate() + 7);
-  return minEndDate.toISOString().split("T")[0];
-};
-
 const AddReservationForm = ({ data, navigatePage, disabled = "" }) => {
   const [cities, setCities] = useState([]);
   const [clients, setClients] = useState([]);
@@ -119,6 +112,12 @@ const AddReservationForm = ({ data, navigatePage, disabled = "" }) => {
     }
   }, [dateFrom, dateTo]);
 
+  useEffect(() => {
+    if (dateFrom && dateTo && new Date(dateTo) < new Date(dateFrom)) {
+      setValue("date_to", dateFrom);
+    }
+  }, [dateFrom, dateTo, setValue]);
+
   const onSubmit = async (formData) => {
     formData.vehicle_id = data.id;
     formData.date_from = new Date(formData.date_from)
@@ -171,7 +170,7 @@ const AddReservationForm = ({ data, navigatePage, disabled = "" }) => {
           error={errors.date_to?.message}
           type="date"
           disabled={disabled}
-          min={calculateMinEndDate()}
+          min={dateFrom}
         />
         <Select
           className={style["my-input"]}

@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: var(--secondary-color);
+  width: 100%;
+}
+
+.card {
+  background-color: #1b293c;
+
+  border-radius: 4px;
+
+  padding: 20px;
+  margin: 8px;
+  width: 300px;
+  flex: 1;
+  min-width: 300px;
+  max-width: 350px;
+
+  cursor: pointer;
+  :hover {
+    background-color: #f0f4fa;
+    border-radius: 10px;
+  }
+}
+.title {
+  color: var(--primary-color);
+  margin-bottom: 10%;
+  text-align: center;
+}

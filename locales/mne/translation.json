@@ -1,5 +1,5 @@
 {
-  "welcome": "Dobrodošli na moju aplikaciju!",
+  "welcome": "Dobrodošli",
   "logout": "Izloguj se",
   "newUser": "Novi klijent",
   "newVehicle": "Novo vozilo",
@@ -92,5 +92,11 @@
   "totalCostTypeError": "greska prilikom unosa ukupne cijene",
   "submit": "Posalji",
   "totalCostMinValue": "Pogresna minimalna vrednost troškova",
-  "vehicle": "Vozilo"
+  "vehicle": "Vozilo",
+  "price": "Cijena",
+  "confirmed": "Potvrdjeno",
+  "fast": "-BRZO",
+  "safe": "-SIGURNO",
+  "reliable": "-POUZDANO",
+  "happyCustomers": "Ucinimo klijente srecnim!"
 }

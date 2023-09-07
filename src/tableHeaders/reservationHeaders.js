@@ -13,7 +13,7 @@ export const generateReservationHeaders = (t) => [
   },
   {
     title: t("startDate"),
-    dataIndex: "start_date",
+    dataIndex: "date_from",
   },
   {
     title: t("endDate"),
