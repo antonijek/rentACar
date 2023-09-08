@@ -13,8 +13,8 @@ const ReservationsForClients = ({ activeItem }) => {
   const { isLoading, reservations } = useReservations(activeItem);
 
   return (
-    <div>
-      <h1 className={classes["title"]}>My reservations</h1>
+    <div className={classes["reservationsWrapper"]}>
+      <h1 className={classes["title"]}>{t("myReservations")}</h1>
       <div className={classes["container"]}>
         {reservations
           ?.sort((a, b) => new Date(a.date_from) - new Date(b.date_from))
@@ -27,7 +27,11 @@ const ReservationsForClients = ({ activeItem }) => {
                   <span className={classes["modal-title"]}>
                     {t("reservationInformation")}
                   </span>,
-                  <EditReservationForm data={card} disabled={true} />,
+                  <EditReservationForm
+                    data={card}
+                    disabled={true}
+                    customer={false}
+                  />,
                   { showFooter: false }
                 )
               }

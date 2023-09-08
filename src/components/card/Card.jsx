@@ -9,6 +9,7 @@ import {
   CarryOutTwoTone,
   PushpinTwoTone,
   EuroCircleTwoTone,
+  BoxPlotTwoTone,
 } from "@ant-design/icons";
 import classes from "./card.module.scss";
 
@@ -49,77 +50,92 @@ const Card = ({
         style={{ color: "#63a0d9" }}
       >
         <p>
-          {`${t("vehicle")} : ${type}`}{" "}
           <span>
             <CarOutlined
               style={{
                 color: "var(--primary-color)",
-                fontSize: "24px",
-                marginLeft: "10px",
+                fontSize: "20px",
+                marginRight: "10px",
               }}
             />
           </span>
+          {`${t("vehicle")} : ${type}`}
         </p>
-        <p>{`${t("licensePlate")} : ${plate}`}</p>
         <p>
-          {`${t("startDate")} : ${dateFrom}`}
+          {" "}
+          <span>
+            <BoxPlotTwoTone
+              style={{
+                color: "var(--primary-color)",
+                fontSize: "24px",
+                marginRight: "10px",
+              }}
+            />
+          </span>
+          {`${t("licensePlate")} : ${plate}`}
+        </p>
+        <p>
+          {" "}
           <span>
             <ScheduleTwoTone
               style={{
                 color: "var(--primary-color)",
                 fontSize: "24px",
-                marginLeft: "10px",
+                marginRight: "10px",
               }}
             />
           </span>
+          {`${t("startDate")} : ${dateFrom}`}
         </p>
         <p>
-          {`${t("endDate")} : ${dateTo}`}
           <span>
             <CarryOutTwoTone
               style={{
                 color: "var(--primary-color)",
-                fontSize: "24px",
-                marginLeft: "10px",
+                fontSize: "20px",
+                marginRight: "10px",
               }}
             />
           </span>
+          {`${t("endDate")} : ${dateTo}`}
         </p>
         <p>
+          {" "}
+          <span>
+            <PushpinTwoTone
+              style={{
+                color: "var(--primary-color)",
+                fontSize: "24px",
+                marginRight: "10px",
+              }}
+            />
+          </span>
           {`${t("pickupLocation")} : ${location1}`}
+        </p>
+        <p>
           <span>
             <PushpinTwoTone
               style={{
                 color: "var(--primary-color)",
                 fontSize: "24px",
-                marginLeft: "10px",
+                marginRight: "10px",
               }}
             />
           </span>
-        </p>
-        <p>
           {`${t("returnLocation")} : ${location2}`}
-          <span>
-            <PushpinTwoTone
-              style={{
-                color: "var(--primary-color)",
-                fontSize: "24px",
-                marginLeft: "10px",
-              }}
-            />
-          </span>
         </p>
         <p>
-          {`${t("price")} : ${price}`}
+          {" "}
           <span>
             <EuroCircleTwoTone
               style={{
                 color: "var(--primary-color)",
-                fontSize: "24px",
-                marginLeft: "10px",
+                fontSize: "20px",
+                marginRight: "10px",
               }}
             />
           </span>
+          {`${t("price")} : ${price}`}
         </p>
       </AntdCard>
     </div>

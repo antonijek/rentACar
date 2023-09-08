@@ -9,10 +9,8 @@
 
 .card {
   background-color: #1b293c;
-
   border-radius: 4px;
-
-  padding: 20px;
+  padding: 10px;
   margin: 8px;
   width: 300px;
   flex: 1;
@@ -29,4 +27,8 @@
   color: var(--primary-color);
   margin-bottom: 10%;
   text-align: center;
+  width: 100%;
+}
+.reservationsWrapper {
+  width: 100%;
 }

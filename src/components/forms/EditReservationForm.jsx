@@ -21,7 +21,12 @@ import style from "../input/input.module.scss";
 import { getAllCities } from "../../services/cityServices";
 import { getUsersForSelect } from "../../services/userServices";
 
-const EditReservationForm = ({ data, setReservations, disabled = "" }) => {
+const EditReservationForm = ({
+  data,
+  setReservations,
+  disabled = "",
+  customer = true,
+}) => {
   const [cities, setCities] = useState([]);
   const [clients, setClients] = useState([]);
   const modal = useModal();
@@ -166,14 +171,16 @@ const EditReservationForm = ({ data, setReservations, disabled = "" }) => {
           <p>{`${t("rentalPricePerDay")}: ${data.vehicle.daily_rate}`} </p>
           <p>{` ${t("yearOfManufacture")}: ${data.vehicle.production_year}`}</p>
         </div>
-        <div>
-          <h3 className={classes["client-title"]}>{t("client")}</h3>
-          <p>{`${t("firstName")}: ${data.customer.first_name}`}</p>
-          <p>{` ${t("lastName")}: ${data.customer.last_name}`}</p>
-          <p>{` ${t("passportNumber")}: ${data.customer.passport_number}`}</p>
-          <p>{`${t("phoneNumber")}: ${data.customer.phone_number}`} </p>
-          <p>{` ${t("email")}: ${data.customer.email}`}</p>
-        </div>
+        {customer && (
+          <div>
+            <h3 className={classes["client-title"]}>{t("client")}</h3>
+            <p>{`${t("firstName")}: ${data.customer.first_name}`}</p>
+            <p>{` ${t("lastName")}: ${data.customer.last_name}`}</p>
+            <p>{` ${t("passportNumber")}: ${data.customer.passport_number}`}</p>
+            <p>{`${t("phoneNumber")}: ${data.customer.phone_number}`} </p>
+            <p>{` ${t("email")}: ${data.customer.email}`}</p>
+          </div>
+        )}
       </div>
 
       <form

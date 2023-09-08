@@ -99,5 +99,6 @@
   "happyCustomers": "Let's make customers happy!",
   "passedReservations": "Passed reservations",
   "currentReservations": "Current reservations",
-  "futureReservations": "Future reservations"
+  "futureReservations": "Future reservations",
+  "myReservations": "My reservations"
 }
