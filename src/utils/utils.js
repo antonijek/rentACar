@@ -14,6 +14,7 @@ export const formattingReservations = (state) => {
       id: item.id,
       vehicle: item.vehicle,
       customer: item.customer,
+      key: item.id,
     };
   });
   return formattedState;

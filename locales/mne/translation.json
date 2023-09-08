@@ -98,5 +98,8 @@
   "fast": "-BRZO",
   "safe": "-SIGURNO",
   "reliable": "-POUZDANO",
-  "happyCustomers": "Ucinimo klijente srecnim!"
+  "happyCustomers": "Ucinimo klijente srecnim!",
+  "passedReservations": "Prosle rezervacije",
+  "currentReservations": "Trenutne rezervacije",
+  "futureReservations": "Buduce rezervacije"
 }

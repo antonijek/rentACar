@@ -96,5 +96,8 @@
   "fast": "-FAST",
   "safe": "-SAFE",
   "reliable": "-RELIABLE",
-  "happyCustomers": "Let's make customers happy!"
+  "happyCustomers": "Let's make customers happy!",
+  "passedReservations": "Passed reservations",
+  "currentReservations": "Current reservations",
+  "futureReservations": "Future reservations"
 }

@@ -5,6 +5,8 @@ import AuthHoc from "../authHOC/AuthHoc";
 import map from "../../../public/mapCg.png";
 import { userData } from "../../context/UserContext";
 
+import logo from "../../../public/logo.png";
+
 function Home() {
   const { user } = userData();
   const { t } = useTranslation();
@@ -14,11 +16,9 @@ function Home() {
         user.first_name
       }`}</h2>
       <h2 className={classes["happy-customers"]}>{`${t("happyCustomers")}`}</h2>
-      <h2 className={classes["fast"]}>{`${t("fast")}`}</h2>
-      <h2 className={classes["safe"]}>{`${t("safe")} `}</h2>
-      <h2 className={classes["reliable"]}>{`${t("reliable")}`}</h2>
-      <div className={classes["red-dot"]}></div>
-      <img src={map} alt="" />
+
+      <img src={logo} alt="" width="10%" className={classes["car"]} />
+      <img src={map} alt="" width="70%" style={{ marginTop: "10%" }} />
     </div>
   );
 }

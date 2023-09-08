@@ -97,7 +97,10 @@ const Vehicles = () => {
             ),
           },
         ]}
-        dataSource={vehicles}
+        dataSource={vehicles.map((vehicle) => ({
+          ...vehicle,
+          key: vehicle.id,
+        }))}
         onRow={(vehicle) => ({
           onClick: () => handleRowClick(vehicle),
         })}

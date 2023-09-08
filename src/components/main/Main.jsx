@@ -1,5 +1,5 @@
-import React, { Children, useState, useEffect } from "react";
-import { Layout, Menu } from "antd";
+import React, { useState, useEffect, useReducer } from "react";
+import { Layout } from "antd";
 import Sidebar from "../sideBar/SideBar";
 import { adminItems } from "../../sideBarItems/adminItems";
 import { clientItems } from "../../sideBarItems/clienItems";
@@ -10,13 +10,17 @@ import Spiner from "../spiner/Spiner";
 export const Main = ({ children }) => {
   const { user } = userData();
   const [isLoading, setIsLoading] = useState(true);
+  const [activeItem, setActiveItem] = useState();
 
   useEffect(() => {
-    // Simulate loading user data (replace with actual logic)
     setTimeout(() => {
       setIsLoading(false);
-    }, 1000); // Adjust the timeout duration as needed
+    }, 1000);
   }, []);
+
+  const pickData = (item) => {
+    setActiveItem(item);
+  };
 
   return (
     <Layout
@@ -27,16 +31,14 @@ export const Main = ({ children }) => {
       }}
     >
       {user?.role_id !== 1 ? (
-        <Sidebar items={clientItems} />
+        <Sidebar pickData={pickData} items={clientItems} />
       ) : (
         <Sidebar items={adminItems} />
       )}
 
-      {
-        !isLoading && user?.role_id !== 1 ? (
-          <ReservationsForClients />
-        ) : null /* or any other loading indicator */
-      }
+      {!isLoading && user?.role_id !== 1 ? (
+        <ReservationsForClients activeItem={activeItem} />
+      ) : null}
       {user?.role_id === 1 && children}
       {isLoading && <Spiner />}
     </Layout>

@@ -130,7 +130,8 @@ const EditReservationForm = ({ data, setReservations, disabled = "" }) => {
     formData.date_to = new Date(formData.date_to).toISOString().split("T")[0];
     formData.pickup_location_id = Number(formData.pickup_location_id);
     formData.drop_off_location_id = Number(formData.drop_off_location_id);
-
+    formData.vehicle_id = data.vehicle.id;
+    formData.customer_id = data.customer.id;
     edit(formData, data.id);
   };
   const dateFrom = watch("date_from");

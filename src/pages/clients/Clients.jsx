@@ -91,7 +91,10 @@ const Clients = () => {
             ),
           },
         ]}
-        dataSource={clients}
+        dataSource={clients.map((client) => ({
+          ...client,
+          key: client.id,
+        }))}
         onRow={(client) => ({
           onClick: () => handleRowClick(client),
         })}

@@ -3,14 +3,19 @@ import classes from "./sidebar.module.scss";
 import { Layout, Menu } from "antd";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
-import { adminItems } from "../../sideBarItems/adminItems";
+import { userData } from "../../context/UserContext";
+import useReservations from "../../hooks/useReservations";
+import { useNavigate } from "react-router-dom";
 
 const { Sider } = Layout;
 
-const Sidebar = ({ items }) => {
+const Sidebar = ({ items, pickData }) => {
   const [collapsed, setCollapsed] = useState(false);
   const { t } = useTranslation();
   const location = useLocation();
+  const { user } = userData();
+
+  const navigate = useNavigate();
 
   const activeKey = items.find((item) =>
     location.pathname.includes(item.label.toLowerCase())
@@ -22,12 +27,23 @@ const Sidebar = ({ items }) => {
       collapsed={collapsed}
       onCollapse={(value) => setCollapsed(value)}
       className={classes["sidebar"]}
+      items={items}
     >
       <div className="demo-logo-vertical" />
       <Menu theme="dark" defaultSelectedKeys={[activeKey]} mode="inline">
         {items.map((item) => (
           <Menu.Item key={item.key} icon={item.icon}>
-            <Link to={`/${item.label.toLowerCase()}`}>{t(item.label)}</Link>
+            {user?.role_id === 1 ? (
+              <Link to={`/${item.label.toLowerCase()}`}>{t(item.label)}</Link>
+            ) : (
+              <span
+                onClick={() => {
+                  pickData(item);
+                }}
+              >
+                {t(item.label)}
+              </span>
+            )}
           </Menu.Item>
         ))}
       </Menu>
