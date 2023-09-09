@@ -68,7 +68,7 @@
   "passportNumberMinLength": "Passport number must be at least 6 characters long",
   "passportNumberMaxLength": "Passport number cannot be more than 20 characters long",
   "clientInformation": "Information about client",
-  "reservationInformation": "Information about reservation,",
+  "reservationInformation": "Information about reservation",
   "vehicleNotes": "Vehicle Notes",
   "successAddVehicle": "Vehicle successfully added!",
   "successEditVehicle": "Vehicle successfully edited",

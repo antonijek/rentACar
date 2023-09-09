@@ -49,7 +49,8 @@ const Vehicles = () => {
   const handleRowClick = (vehicle) => {
     const disabled = true;
     modal.open(
-      t("vehicleInformation"),
+      <span className={classes["modal-title"]}>{t("vehicleInformation")}</span>,
+
       <VehicleForm
         data={vehicle}
         setVehicles={setVehicles}
@@ -70,7 +71,7 @@ const Vehicles = () => {
         text={t("addVehicle")}
         onClick={() =>
           modal.open(
-            t("addVehicle"),
+            <span className={classes["modal-title"]}>{t("addVehicle")}</span>,
             <VehicleForm setVehicles={setVehicles} />,
             {
               showFooter: false,

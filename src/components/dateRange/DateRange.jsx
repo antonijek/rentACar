@@ -2,15 +2,13 @@ import React from "react";
 import { DatePicker, Space } from "antd";
 
 const { RangePicker } = DatePicker;
-const DateRange = ({ onChange }) => {
+const DateRange = ({ onChange, defaultValue }) => {
   return (
     <Space>
       <RangePicker
-        showTime={{
-          format: "HH:mm",
-        }}
         format="YYYY-MM-DD"
         onChange={onChange}
+        defaultValue={defaultValue}
       />
     </Space>
   );

@@ -87,7 +87,13 @@ const Reservations = () => {
             className={classes["btn-search"]}
             onClick={() => searchReservation(dateString)}
           />
+          <Button
+            text={t("Reset")}
+            className={classes["btn-search"]}
+            onClick={() => searchReservation()}
+          />
         </div>
+
         <Button
           text={t("addReservation")}
           onClick={() => navigate("/reservations/add-reservation")}

@@ -60,9 +60,7 @@ const AddReservation = () => {
   const handleRowClick = (vehicle) => {
     const disabled = false;
     modal.open(
-      <span className={classes["modal-title"]}>
-        {t("reservationInformation")}
-      </span>,
+      <span className={classes["modal-title"]}>{t("addReservation")}</span>,
 
       <AddReservationForm
         navigatePage={navigatePage}

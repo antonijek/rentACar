@@ -51,7 +51,7 @@ const Clients = () => {
   const handleRowClick = (client) => {
     const disabled = true;
     modal.open(
-      t("clientInformation"),
+      <span className={classes["modal-title"]}>{t("clientInformation")}</span>,
       <ClientForm data={client} setClients={setClients} disabled={disabled} />,
       { showFooter: false }
     );
@@ -67,9 +67,13 @@ const Clients = () => {
         placeholder={t("searchByNameAndMail")}
         text={t("addClient")}
         onClick={() =>
-          modal.open(t("addClient"), <ClientForm setClients={setClients} />, {
-            showFooter: false,
-          })
+          modal.open(
+            <span className={classes["modal-title"]}>{t("addClient")}</span>,
+            <ClientForm setClients={setClients} />,
+            {
+              showFooter: false,
+            }
+          )
         }
       />
       <Table

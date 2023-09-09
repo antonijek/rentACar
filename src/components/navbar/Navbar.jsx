@@ -22,7 +22,7 @@ function Navbar({ items, changeLanguage }) {
     <div className={classes["navbar"]}>
       <img src={logo} className={classes["logo"]} />
       <img src={logo1} className={classes["logo1"]} />
-      <h3 className={classes["user-name"]}>{user?.first_name}</h3>
+
       <div className={classes["nav"]}>
         <DropdownTabs changeLanguage={changeLanguage} items={items} />
         <h3 className={classes["logout"]} onClick={() => logoutUser()}>
