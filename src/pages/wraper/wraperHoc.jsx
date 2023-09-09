@@ -7,6 +7,7 @@ import { generateClientItems } from "../../dropdownItems/clientItems";
 import { useTranslation } from "react-i18next";
 import { userData } from "../../context/UserContext";
 import { set } from "../../services/storageServices";
+import Footer from "../../components/footer/Footer";
 
 const wrapperHoc = (Component) => {
   return (props) => {
@@ -18,6 +19,7 @@ const wrapperHoc = (Component) => {
       set("lan", lng);
     };
     const dropdownAdminItems = generateAdminItems(classes, t, changeLanguage);
+
     const dropdownClientItems = generateClientItems(classes, t, changeLanguage);
 
     return (
@@ -27,10 +29,10 @@ const wrapperHoc = (Component) => {
         ) : (
           <Navbar items={dropdownClientItems} changeLanguage={changeLanguage} />
         )}
-
         <Main>
           <Component />
         </Main>
+        <Footer />
       </div>
     );
   };

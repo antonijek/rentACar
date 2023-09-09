@@ -102,5 +102,7 @@
   "passedReservations": "Prosle rezervacije",
   "currentReservations": "Trenutne rezervacije",
   "futureReservations": "Buduce rezervacije",
-  "myReservations": "Moje rezervacije"
+  "myReservations": "Moje rezervacije",
+  "allRightsReserved": "Sva prava su zadrzana",
+  "contactUs": "Kontaktirajte nas"
 }

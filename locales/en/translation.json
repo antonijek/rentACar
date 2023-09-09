@@ -100,5 +100,7 @@
   "passedReservations": "Passed reservations",
   "currentReservations": "Current reservations",
   "futureReservations": "Future reservations",
-  "myReservations": "My reservations"
+  "myReservations": "My reservations",
+  "allRightsReserved": "All rights reserved",
+  "contactUs": "Contact us"
 }

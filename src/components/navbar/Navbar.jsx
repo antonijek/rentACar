@@ -6,6 +6,9 @@ import classes from "./navbar.module.scss";
 import DropdownTabs from "../dropdown/DropDown";
 import { set, get } from "../../services/storageServices";
 import { userData } from "../../context/UserContext";
+import ClientForm from "../forms/ClientForm";
+import { useModal } from "../../context/ModalContext";
+import { useNavigate } from "react-router-dom";
 
 function Navbar({ items, changeLanguage }) {
   const { i18n, t } = useTranslation();
@@ -24,7 +27,19 @@ function Navbar({ items, changeLanguage }) {
       <img src={logo1} className={classes["logo1"]} />
 
       <div className={classes["nav"]}>
-        <DropdownTabs changeLanguage={changeLanguage} items={items} />
+        <DropdownTabs
+          changeLanguage={changeLanguage}
+          items={items}
+          onItemClick={(item) => {
+            modal.open(
+              <span className={classes["modal-title"]}>{t("addClient")}</span>,
+              <ClientForm setClients={() => {}} />,
+              {
+                showFooter: false,
+              }
+            );
+          }}
+        />
         <h3 className={classes["logout"]} onClick={() => logoutUser()}>
           {t("logout")}
         </h3>

@@ -1,0 +1,43 @@
+/* footer.module.scss */
+
+.footer {
+  background-color: #002140;
+  color: #8c9aa6;
+  padding: 2rem 0;
+  font-family: "Inconsolata", monospace;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 15vh;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.copyright {
+  margin-bottom: 1rem;
+}
+
+.contact-info {
+  margin-bottom: 1rem;
+}
+
+.social-media {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+}
+
+.social-media a {
+  color: var(--primary-color);
+  margin: 0 0.5rem;
+  transition: color 0.3s;
+}
+
+.social-media a:hover {
+  color: #fff;
+}

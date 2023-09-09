@@ -1,3 +1,6 @@
+import flagMne from "../../public/mne-flag.png";
+import flagEn from "../../public/en-flag.png";
+
 export const generateAdminItems = (classes, t, changeLanguage) => [
   {
     key: "1",
@@ -19,8 +22,18 @@ export const generateAdminItems = (classes, t, changeLanguage) => [
     key: "4",
     label: (
       <div>
-        <button onClick={() => changeLanguage("en")}>En</button>
-        <button onClick={() => changeLanguage("mne")}>Sr</button>
+        <img
+          src={flagEn}
+          width="20px"
+          height="16px"
+          onClick={() => changeLanguage("en")}
+        />
+        <img
+          src={flagMne}
+          width="20px"
+          height="16px"
+          onClick={() => changeLanguage("mne")}
+        />
       </div>
     ),
   },

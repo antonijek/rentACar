@@ -4,8 +4,6 @@ import { Layout, Menu } from "antd";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
 import { userData } from "../../context/UserContext";
-import useReservations from "../../hooks/useReservations";
-import { useNavigate } from "react-router-dom";
 
 const { Sider } = Layout;
 
@@ -14,8 +12,6 @@ const Sidebar = ({ items, pickData }) => {
   const { t } = useTranslation();
   const location = useLocation();
   const { user } = userData();
-
-  const navigate = useNavigate();
 
   const activeKey = items.find((item) =>
     location.pathname.includes(item.label.toLowerCase())

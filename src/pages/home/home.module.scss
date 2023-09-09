@@ -2,13 +2,14 @@
   display: flex;
   width: 100%;
   height: 85vh;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   background-color: var(--secondary-color);
   position: relative;
   color: var(--primary-color);
 
   .welcome-msg {
+    font-size: 3vw;
     position: absolute;
     left: 70%;
     top: 10%;
@@ -21,31 +22,40 @@
     animation: from-outside-happy-customers 1s alternate ease-in-out;
   }
 }
+.map-container {
+  position: relative;
+  margin-left: 10%;
+}
+
+.map {
+  width: 50vw;
+}
+
 .car {
-  width: 50px;
-  height: 50px;
+  width: 8%;
   position: absolute;
-  left: 35%;
+  left: 30%;
   top: 5%;
   transform: rotate(10deg);
   animation: move 20s infinite alternate ease-in-out;
 }
+
 @keyframes move {
   0% {
     top: 10%;
   }
   30% {
-    top: 40%;
-    left: 30%;
+    top: 35%;
+    left: 20%;
   }
   80% {
-    top: 70%;
-    left: 28%;
+    top: 58%;
+    left: 18%;
     transform: rotate(0deg);
   }
   100% {
-    top: 60%;
-    left: 35%;
+    top: 50%;
+    left: 30%;
     transform: rotate(90deg);
   }
 }

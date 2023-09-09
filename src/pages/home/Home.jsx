@@ -11,13 +11,21 @@ function Home() {
   const { t } = useTranslation();
   return (
     <div className={classes["home"]}>
-      <h2 className={classes["welcome-msg"]}>{`${t("welcome")} ${
-        user.first_name
-      }`}</h2>
-      <h2 className={classes["happy-customers"]}>{`${t("happyCustomers")}`}</h2>
+      <div>
+        <h2 className={classes["welcome-msg"]}>{`${t("welcome")} ${
+          user.first_name
+        }`}</h2>
+        <h2 className={classes["happy-customers"]}>{`${t(
+          "happyCustomers"
+        )}`}</h2>
+      </div>
 
-      <img src={car} alt="" width="10%" className={classes["car"]} />
-      <img src={map} alt="" width="70%" style={{ marginTop: "10%" }} />
+      <div className={classes["map-container"]}>
+        <img src={map} alt="" className={classes["map"]} />
+        <div>
+          <img src={car} alt="" className={classes["car"]} />
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,3 +1,6 @@
+import flagMne from "../../public/mne-flag.png";
+import flagEn from "../../public/en-flag.png";
+
 export const generateClientItems = (classes, t, changeLanguage, logoutUser) => [
   {
     key: "3",
@@ -5,13 +8,22 @@ export const generateClientItems = (classes, t, changeLanguage, logoutUser) => [
       <h3 className={classes["custom-dropdown-item"]}>{t("newReservation")}</h3>
     ),
   },
-
   {
     key: "4",
     label: (
       <div>
-        <button onClick={() => changeLanguage("en")}>En</button>
-        <button onClick={() => changeLanguage("mne")}>Sr</button>
+        <img
+          src={flagEn}
+          width="20px"
+          height="16px"
+          onClick={() => changeLanguage("en")}
+        />
+        <img
+          src={flagMne}
+          width="20px"
+          height="16px"
+          onClick={() => changeLanguage("mne")}
+        />
       </div>
     ),
   },
