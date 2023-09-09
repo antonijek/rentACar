@@ -13,8 +13,10 @@
   min-width: 200px;
   box-sizing: border-box;
   font-size: 1.2vw;
+  height: 30px;
   &::placeholder {
     color: var(--primary-color);
-    font-size: 1vw;
+    font-size: 14px;
+    font-family: var(--main-font-family);
   }
 }
