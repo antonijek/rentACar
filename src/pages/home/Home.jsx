@@ -5,10 +5,12 @@ import AuthHoc from "../authHOC/AuthHoc";
 import map from "../../../public/mapCg.png";
 import { userData } from "../../context/UserContext";
 import car from "../../../public/car.png";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const { user } = userData();
   const { t } = useTranslation();
+  const navigate = useNavigate();
   return (
     <div className={classes["home"]}>
       <div>
@@ -26,6 +28,7 @@ function Home() {
           <img src={car} alt="" className={classes["car"]} />
         </div>
       </div>
+      <button onClick={() => navigate("/test")}>test</button>
     </div>
   );
 }

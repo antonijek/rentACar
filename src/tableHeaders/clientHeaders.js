@@ -1,9 +1,5 @@
 export const generateClientHeaders = (t) => [
   {
-    title: t("id"),
-    dataIndex: "id",
-  },
-  {
     title: t("firstName"),
     dataIndex: "first_name",
   },

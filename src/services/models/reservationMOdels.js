@@ -10,7 +10,7 @@ export const getAllReservationsModel = (data) => {
       vehicle: item.vehicle,
       pickup_location: item.pickup_location,
       date_from: item.date_from.slice(0, 10),
-      date_to: item.date_to,
+      date_to: item.date_to.slice(0, 10),
       drop_off_location: item.drop_off_location,
       price: item.price,
     };

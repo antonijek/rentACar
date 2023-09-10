@@ -11,6 +11,9 @@ import Reservations from "./pages/reservations/Reservations";
 import UserProvider from "./context/UserContext";
 import AddReservation from "./pages/addReservation/AddReservation";
 import ReservationsForClients from "./components/reservationsForClients/ReservationsForClients";
+//import Test from "./components/Test";
+import ClientProvider from "./context/ClientContext";
+//import TestForm from "./components/forms/TestForm";
 
 function App() {
   const router = createBrowserRouter([
@@ -18,6 +21,11 @@ function App() {
       path: "/",
       element: <Home />,
     },
+    /*  {
+      path: "/test",
+      element: <Test />,
+    }, */
+
     {
       path: "/my-reservations",
       element: <ReservationsForClients />,
@@ -48,7 +56,9 @@ function App() {
     <I18nextProvider i18n={i18n}>
       <UserProvider>
         <ModalProvider>
-          <RouterProvider router={router} />
+          <ClientProvider>
+            <RouterProvider router={router} />
+          </ClientProvider>
         </ModalProvider>
       </UserProvider>
     </I18nextProvider>

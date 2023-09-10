@@ -34,6 +34,7 @@ const ActionButtons = ({
       setIsOpen(false);
     } catch (err) {
       console.log(err);
+      Message({ type: "error", content: t(err.response.data.message) });
       setDeleteModalVisible(false);
       setIsOpen(false);
     }

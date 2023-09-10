@@ -1,64 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import wrapperHoc from "../wraper/wraperHoc";
 import { useModal } from "../../context/ModalContext";
 import Table from "../../components/table/Table";
 import classes from "./clients.module.scss";
 import { useTranslation } from "react-i18next";
-import { generateClientHeaders } from "../../tableHeaders/clientHeaders";
 import ActionButtons from "../../components/ActionButtons";
 import SearchAndAdd from "../../components/searchAndAdd/SearchAndAdd";
 import AuthHoc from "../authHOC/AuthHoc";
 import { deleteUser, getUsers } from "../../services/userServices";
-import ClientForm from "../../components/forms/ClientForm";
 import Spiner from "../../components/spiner/Spiner";
+import { clientData } from "../../context/ClientContext";
+import ClientForm from "../../components/forms/ClientForm";
 
 const Clients = () => {
-  const [clients, setClients] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
+  const {
+    isLoading,
+    clients,
+    headers,
+    searchUser,
+    setClients,
+    handleRowClick,
+    addNew,
+    edit,
+    countries,
+  } = clientData();
   const modal = useModal();
 
-  const getAllUsers = async () => {
-    setIsLoading(true);
-    try {
-      console.log("getAll");
-      const res = await getUsers();
-      setClients(res);
-      setIsLoading(false);
-    } catch (err) {
-      console.log(err);
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getAllUsers();
-  }, []);
-
-  const searchUser = async (query) => {
-    setIsLoading(true);
-    try {
-      console.log("seradh");
-      const res = await getUsers(query);
-      setClients(res);
-      setIsLoading(false);
-    } catch (err) {
-      console.log(err);
-      setIsLoading(false);
-    }
-  };
-
-  const handleRowClick = (client) => {
-    const disabled = true;
-    modal.open(
-      <span className={classes["modal-title"]}>{t("clientInformation")}</span>,
-      <ClientForm data={client} setClients={setClients} disabled={disabled} />,
-      { showFooter: false }
-    );
-  };
-
-  const headers = generateClientHeaders(t);
-
+  console.log(countries);
   return (
     <div className={classes["clients-container"]}>
       <h2 className={classes["title"]}>{t("clients")}</h2>
@@ -66,15 +35,16 @@ const Clients = () => {
         search={searchUser}
         placeholder={t("searchByNameAndMail")}
         text={t("addClient")}
-        onClick={() =>
+        onClick={() => {
+          console.log("ovoj je addclijent klik");
           modal.open(
             <span className={classes["modal-title"]}>{t("addClient")}</span>,
-            <ClientForm setClients={setClients} />,
+            <ClientForm countries={countries} addNew={addNew} />,
             {
               showFooter: false,
             }
-          )
-        }
+          );
+        }}
       />
       <Table
         columns={[
@@ -88,7 +58,7 @@ const Clients = () => {
                 data={data}
                 setItems={setClients}
                 FormComponent={ClientForm}
-                formProps={{ data, setClients }}
+                formProps={{ data, countries, edit }}
                 getItems={getUsers}
                 deleteItem={deleteUser}
               />
@@ -100,7 +70,18 @@ const Clients = () => {
           key: client.id,
         }))}
         onRow={(client) => ({
-          onClick: () => handleRowClick(client),
+          onClick: () =>
+            handleRowClick(
+              <span className={classes["modal-title"]}>
+                {t("clientInformation")}
+              </span>,
+              <ClientForm
+                setClients={setClients}
+                data={client}
+                disabled={true}
+                countries={countries}
+              />
+            ),
         })}
       />
       {isLoading && <Spiner />}

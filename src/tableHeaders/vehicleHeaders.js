@@ -1,9 +1,5 @@
 export const generateVehicleHeaders = (t) => [
   {
-    title: t("id"),
-    dataIndex: "id",
-  },
-  {
     title: t("licensePlate"),
     dataIndex: "plate_number",
   },

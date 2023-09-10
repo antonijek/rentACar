@@ -1,26 +1,21 @@
-import React, { useEffect, useState } from "react";
+/* import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Input from "../input/Input";
-import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import SubmitButton from "../buttons/submitButton/SubmitButton";
 import Select from "../select/Select";
-import { addNewUser, editUser, getUsers } from "../../services/userServices";
-import { getAllCountries } from "../../services/countryServices";
-import TextArea from "../TextArea";
+import useClients from "../../hooks/useClients";
+import { clientData } from "../../context/ClientContext";
 import { useModal } from "../../context/ModalContext";
-import { useTranslation } from "react-i18next";
-import {
-  showErrorsMessage,
-  showSuccessMessage,
-} from "../../services/models/showMessagesModels";
+
+import TextArea from "../TextArea";
+
 import classes from "./form.module.scss";
 import style from "../input/input.module.scss";
 
-const ClientForm = ({ data, setClients, disabled = "" }) => {
-  const [countries, setCountries] = useState([]);
-  const modal = useModal();
+const TestForm = ({ data, disabled = "", countries, addNew, edit }) => {
   const { t } = useTranslation();
 
   const schema = yup.object({
@@ -53,19 +48,6 @@ const ClientForm = ({ data, setClients, disabled = "" }) => {
       .max(20, t("passportNumberMaxLength")),
   });
 
-  const getCountriesData = async () => {
-    try {
-      const res = await getAllCountries();
-      setCountries(res);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    getCountriesData();
-  }, []);
-
   const {
     reset,
     setValue,
@@ -97,38 +79,6 @@ const ClientForm = ({ data, setClients, disabled = "" }) => {
       setValue("passport_number", data.passport_number);
     }
   }, [data]);
-
-  const addNew = async (data) => {
-    modal.setSpiner(true);
-    try {
-      const res = await addNewUser(data);
-      showSuccessMessage(t("successAdd", 3));
-      const users = await getUsers();
-      setClients(users);
-      reset();
-      modal.close();
-      modal.setSpiner(false);
-    } catch (err) {
-      modal.setSpiner(false);
-      showErrorsMessage(err.response.data.errors, 5);
-    }
-  };
-
-  const edit = async (data, id) => {
-    modal.setSpiner(true);
-    try {
-      const res = await editUser(data, id);
-      showSuccessMessage(t("successEdit"), 3);
-      const users = await getUsers();
-      setClients(users);
-      reset();
-      modal.close();
-      modal.setSpiner(false);
-    } catch (err) {
-      showErrorsMessage(err.response.data.errors, 5);
-      modal.setSpiner(false);
-    }
-  };
 
   const onSubmit = async (formData) => {
     const payload = {};
@@ -230,4 +180,4 @@ const ClientForm = ({ data, setClients, disabled = "" }) => {
   );
 };
 
-export default ClientForm;
+export default TestForm; */

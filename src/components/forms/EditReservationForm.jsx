@@ -38,8 +38,8 @@ const EditReservationForm = ({
       .date()
       .required(t("fieldRequired"))
       .min(yup.ref("date_from"), t("endDateMin")),
-    pickup_location_id: yup.string().required(t("fieldRequired")),
-    drop_off_location_id: yup.string().required(t("fieldRequired")),
+    pickup_location: yup.string().required(t("fieldRequired")),
+    drop_off_location: yup.string().required(t("fieldRequired")),
     price: yup
       .number()
       .required(t("fieldRequired"))
@@ -61,8 +61,8 @@ const EditReservationForm = ({
       date_to: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000)
         .toISOString()
         .split("T")[0],
-      pickup_location_id: "",
-      drop_off_location_id: "",
+      pickup_location: "",
+      drop_off_location: "",
       price: "",
     },
   });
@@ -96,14 +96,8 @@ const EditReservationForm = ({
         const day = String(date.getDate()).padStart(2, "0");
         return `${year}-${month}-${day}`;
       };
-      setValue(
-        "pickup_location_id",
-        data?.pickup_location_id || data?.pickup_location.id
-      ),
-        setValue(
-          "drop_off_location_id",
-          data?.drop_off_location_id || data?.drop_off_location.id
-        ),
+      setValue("pickup_location", data?.pickup_location_id),
+        setValue("drop_off_location", data?.drop_off_location_id),
         setValue("date_from", formatDate(dateFrom)),
         setValue("date_to", formatDate(dateTo)),
         getCities();
@@ -129,12 +123,10 @@ const EditReservationForm = ({
 
   console.log(data);
   const onSubmit = async (formData) => {
-    formData.date_from = new Date(formData.date_from)
-      .toISOString()
-      .split("T")[0];
-    formData.date_to = new Date(formData.date_to).toISOString().split("T")[0];
-    formData.pickup_location_id = Number(formData.pickup_location_id);
-    formData.drop_off_location_id = Number(formData.drop_off_location_id);
+    formData.date_from = new Date(formData.date_from).toISOString();
+    formData.date_to = new Date(formData.date_to).toISOString();
+    formData.pickup_location = Number(formData.pickup_location);
+    formData.drop_off_location = Number(formData.drop_off_location);
     formData.vehicle_id = data.vehicle.id;
     formData.customer_id = data.customer.id;
     edit(formData, data.id);
@@ -211,7 +203,7 @@ const EditReservationForm = ({
         <Select
           className={style["my-input"]}
           label={t("pickupLocation")}
-          name="pickup_location_id"
+          name="pickup_location"
           control={control}
           error={errors.pickup_location?.message}
           disabled={disabled}
@@ -220,7 +212,7 @@ const EditReservationForm = ({
         <Select
           className={style["my-input"]}
           label={t("dropOffLocation")}
-          name="drop_off_location_id"
+          name="drop_off_location"
           control={control}
           error={errors.drop_off_location?.message}
           disabled={disabled}
