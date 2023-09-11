@@ -7,12 +7,46 @@ import DropdownTabs from "../dropdown/DropDown";
 import { set, get } from "../../services/storageServices";
 import { userData } from "../../context/UserContext";
 import ClientForm from "../forms/ClientForm";
+import VehicleForm from "../forms/VehicleForm";
+import AddReservationForm from "../forms/AddReservationForm";
 import { useModal } from "../../context/ModalContext";
 import { useNavigate } from "react-router-dom";
+import { clientData } from "../../context/ClientContext";
+import { vehicleData } from "../../context/VehicleContext";
 
 function Navbar({ items, changeLanguage }) {
   const { i18n, t } = useTranslation();
   const { user, logoutUser } = userData();
+  const modal = useModal();
+  const { countries, addNew } = clientData();
+  const { addVehicle } = vehicleData();
+  const navigate = useNavigate();
+
+  const test = (item) => {
+    console.log(item.label.props.children);
+    if (item.label.props.children === "New client") {
+      modal.open(
+        <span className={classes["modal-title"]}>{t("addClient")}</span>,
+        <ClientForm countries={countries} addNew={addNew} />,
+        {
+          showFooter: false,
+        }
+      );
+    }
+
+    if (item.label.props.children === "New vehicle") {
+      modal.open(
+        <span className={classes["modal-title"]}>{t("addvehicle")}</span>,
+        <VehicleForm addVehicle={addVehicle} />,
+        {
+          showFooter: false,
+        }
+      );
+    }
+    if (item.label.props.children === "New reservation") {
+      navigate("/reservations/add-reservation");
+    }
+  };
 
   useEffect(() => {
     const preferredLanguage = get("lan");
@@ -30,15 +64,7 @@ function Navbar({ items, changeLanguage }) {
         <DropdownTabs
           changeLanguage={changeLanguage}
           items={items}
-          onItemClick={(item) => {
-            modal.open(
-              <span className={classes["modal-title"]}>{t("addClient")}</span>,
-              <ClientForm setClients={() => {}} />,
-              {
-                showFooter: false,
-              }
-            );
-          }}
+          onItemClick={(item) => test(item)}
         />
         <h3 className={classes["logout"]} onClick={() => logoutUser()}>
           {t("logout")}

@@ -18,9 +18,15 @@ import {
 } from "../../services/models/showMessagesModels";
 import classes from "./form.module.scss";
 import style from "../input/input.module.scss";
+import { vehicleData } from "../../context/VehicleContext";
 
-const VehicleForm = ({ data, setVehicles, disabled = "" }) => {
-  const modal = useModal();
+const VehicleForm = ({
+  data,
+  setVehicles,
+  disabled = "",
+  edit,
+  addVehicle,
+}) => {
   const { t } = useTranslation();
 
   const schema = yup.object({
@@ -88,38 +94,6 @@ const VehicleForm = ({ data, setVehicles, disabled = "" }) => {
     }
   }, [data]);
 
-  const addNew = async (formData) => {
-    modal.setSpiner(true);
-    try {
-      const res = await addNewVehicle(formData);
-      showSuccessMessage(t("successAdd", 3));
-      const vehicles = await getVehicles();
-      setVehicles(vehicles);
-      reset();
-      modal.close();
-      modal.setSpiner(false);
-    } catch (err) {
-      modal.setSpiner(false);
-      showErrorsMessage(err.response.data.errors, 5);
-    }
-  };
-
-  const edit = async (formData, plate_number) => {
-    modal.setSpiner(true);
-    try {
-      const res = await editVehicle(formData, plate_number);
-      showSuccessMessage(t("successEdit"), 3);
-      const vehicles = await getVehicles();
-      setVehicles(vehicles);
-      reset();
-      modal.close();
-      modal.setSpiner(false);
-    } catch (err) {
-      showErrorsMessage(err.response.data.errors, 5);
-      modal.setSpiner(false);
-    }
-  };
-
   const onSubmit = async (formData) => {
     const payload = {};
 
@@ -132,7 +106,7 @@ const VehicleForm = ({ data, setVehicles, disabled = "" }) => {
 
       edit(payload, data.id);
     } else {
-      addNew(formData);
+      addVehicle(formData);
     }
   };
 

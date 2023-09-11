@@ -27,7 +27,6 @@ const Clients = () => {
   } = clientData();
   const modal = useModal();
 
-  console.log(countries);
   return (
     <div className={classes["clients-container"]}>
       <h2 className={classes["title"]}>{t("clients")}</h2>

@@ -13,7 +13,7 @@ import AddReservation from "./pages/addReservation/AddReservation";
 import ReservationsForClients from "./components/reservationsForClients/ReservationsForClients";
 //import Test from "./components/Test";
 import ClientProvider from "./context/ClientContext";
-//import TestForm from "./components/forms/TestForm";
+import VehicleProvider from "./context/VehicleContext";
 
 function App() {
   const router = createBrowserRouter([
@@ -57,7 +57,9 @@ function App() {
       <UserProvider>
         <ModalProvider>
           <ClientProvider>
-            <RouterProvider router={router} />
+            <VehicleProvider>
+              <RouterProvider router={router} />
+            </VehicleProvider>
           </ClientProvider>
         </ModalProvider>
       </UserProvider>

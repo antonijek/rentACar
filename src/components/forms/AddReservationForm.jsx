@@ -119,6 +119,7 @@ const AddReservationForm = ({ data, navigatePage, disabled = "" }) => {
   }, [dateFrom, dateTo, setValue]);
 
   const onSubmit = async (formData) => {
+    // console.log(dateFrom);
     formData.vehicle_id = data.id;
     formData.date_from = new Date(formData.date_from)
       .toISOString()

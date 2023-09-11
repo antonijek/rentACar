@@ -11,57 +11,21 @@ import AuthHoc from "../authHOC/AuthHoc";
 import { deleteVehicle, getVehicles } from "../../services/vehicleServices";
 import Spiner from "../../components/spiner/Spiner";
 import VehicleForm from "../../components/forms/VehicleForm";
+import { vehicleData } from "../../context/VehicleContext";
 
 const Vehicles = () => {
-  const [vehicles, setVehicles] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const { t } = useTranslation();
   const modal = useModal();
-
-  const getAllVehicles = async () => {
-    setIsLoading(true);
-    try {
-      const res = await getVehicles();
-      setVehicles(res);
-      setIsLoading(false);
-    } catch (err) {
-      console.log(err);
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getAllVehicles();
-  }, []);
-
-  const searchVehicle = async (query) => {
-    setIsLoading(true);
-    try {
-      const res = await getVehicles(query);
-      console.log(res);
-      setVehicles(res);
-      setIsLoading(false);
-    } catch (err) {
-      console.log(err);
-      setIsLoading(false);
-    }
-  };
-  const handleRowClick = (vehicle) => {
-    const disabled = true;
-    modal.open(
-      <span className={classes["modal-title"]}>{t("vehicleInformation")}</span>,
-
-      <VehicleForm
-        data={vehicle}
-        setVehicles={setVehicles}
-        disabled={disabled}
-      />,
-      { showFooter: false }
-    );
-  };
-
-  const headers = generateVehicleHeaders(t);
-
+  const { t } = useTranslation();
+  const {
+    vehicles,
+    setVehicles,
+    isLoading,
+    searchVehicle,
+    handleRowClick,
+    headers,
+    edit,
+    addVehicle,
+  } = vehicleData();
   return (
     <div className={classes["vehicle-container"]}>
       <h2 className={classes["title"]}>{t("vehicles")}</h2>
@@ -72,7 +36,7 @@ const Vehicles = () => {
         onClick={() =>
           modal.open(
             <span className={classes["modal-title"]}>{t("addVehicle")}</span>,
-            <VehicleForm setVehicles={setVehicles} />,
+            <VehicleForm setVehicles={setVehicles} addVehicle={addVehicle} />,
             {
               showFooter: false,
             }
@@ -91,7 +55,7 @@ const Vehicles = () => {
                 data={data}
                 setItems={setVehicles}
                 FormComponent={VehicleForm}
-                formProps={{ data, setVehicles }}
+                formProps={{ data, setVehicles, edit }}
                 getItems={getVehicles}
                 deleteItem={deleteVehicle}
               />
@@ -103,7 +67,17 @@ const Vehicles = () => {
           key: vehicle.id,
         }))}
         onRow={(vehicle) => ({
-          onClick: () => handleRowClick(vehicle),
+          onClick: () =>
+            handleRowClick(
+              <span className={classes["modal-title"]}>
+                {t("vehicleInformation")}
+              </span>,
+              <VehicleForm
+                setVehicles={setVehicles}
+                data={vehicle}
+                disabled={true}
+              />
+            ),
         })}
       />
       {isLoading && <Spiner />}
