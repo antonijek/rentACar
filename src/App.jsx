@@ -14,6 +14,7 @@ import ReservationsForClients from "./components/reservationsForClients/Reservat
 //import Test from "./components/Test";
 import ClientProvider from "./context/ClientContext";
 import VehicleProvider from "./context/VehicleContext";
+import MobileNavbar from "./components/navbar/MobileNavbar";
 
 function App() {
   const router = createBrowserRouter([
@@ -21,10 +22,10 @@ function App() {
       path: "/",
       element: <Home />,
     },
-    /*  {
-      path: "/test",
-      element: <Test />,
-    }, */
+    {
+      path: "/mobile",
+      element: <MobileNavbar />,
+    },
 
     {
       path: "/my-reservations",

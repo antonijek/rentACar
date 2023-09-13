@@ -5,6 +5,7 @@ import Message from "./message/Message";
 import { useModal } from "../context/ModalContext";
 import Modal from "./modal/Modal";
 import { deleteUser } from "../services/userServices";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
 const ActionButtons = ({
   t,
@@ -60,11 +61,11 @@ const ActionButtons = ({
             }
           );
         }}
-        text={t("edit")}
+        text={<EditOutlined />}
       />
       <Button
         className={classes["red-button"]}
-        text={t("delete")}
+        text={<DeleteOutlined />}
         onClick={handleDeleteClick}
       />
 

@@ -28,7 +28,6 @@ function Home() {
           <img src={car} alt="" className={classes["car"]} />
         </div>
       </div>
-      <button onClick={() => navigate("/test")}>test</button>
     </div>
   );
 }

@@ -1,0 +1,44 @@
+.navbar-mobile {
+  display: none;
+  justify-content: space-between;
+  background-color: #002140;
+  position: relative;
+  font-family: "Inconsolata", monospace;
+  color: var(--primary-color);
+  height: 15vh;
+  padding: 5% 5% 0 5%;
+}
+.logo {
+  width: 150px;
+  height: 50px;
+}
+
+.nav {
+  display: block;
+  position: absolute;
+  width: 40%;
+  height: auto;
+  background-color: white;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+  min-width: 200px;
+  border: 1px solid var(--primary-color);
+  padding-bottom: 5%;
+  font-size: 3vw;
+}
+.menu-item {
+  margin-left: 5%;
+}
+.menu-icon {
+}
+.nav a {
+  text-decoration: none;
+  color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+  .navbar-mobile {
+    display: flex;
+  }
+}

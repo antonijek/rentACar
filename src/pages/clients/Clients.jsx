@@ -11,13 +11,13 @@ import { deleteUser, getUsers } from "../../services/userServices";
 import Spiner from "../../components/spiner/Spiner";
 import { clientData } from "../../context/ClientContext";
 import ClientForm from "../../components/forms/ClientForm";
+import { generateClientHeaders } from "../../tableHeaders/clientHeaders";
 
 const Clients = () => {
   const { t } = useTranslation();
   const {
     isLoading,
     clients,
-    headers,
     searchUser,
     setClients,
     handleRowClick,
@@ -27,6 +27,8 @@ const Clients = () => {
   } = clientData();
   const modal = useModal();
 
+  const headers = generateClientHeaders(t);
+
   return (
     <div className={classes["clients-container"]}>
       <h2 className={classes["title"]}>{t("clients")}</h2>
@@ -35,7 +37,6 @@ const Clients = () => {
         placeholder={t("searchByNameAndMail")}
         text={t("addClient")}
         onClick={() => {
-          console.log("ovoj je addclijent klik");
           modal.open(
             <span className={classes["modal-title"]}>{t("addClient")}</span>,
             <ClientForm countries={countries} addNew={addNew} />,
@@ -52,17 +53,20 @@ const Clients = () => {
             title: t("actions"),
             dataIndex: null,
             render: (data) => (
-              <ActionButtons
-                t={t}
-                data={data}
-                setItems={setClients}
-                FormComponent={ClientForm}
-                formProps={{ data, countries, edit }}
-                getItems={getUsers}
-                deleteItem={deleteUser}
-              />
+              <div className="action-column">
+                <ActionButtons
+                  t={t}
+                  data={data}
+                  setItems={setClients}
+                  FormComponent={ClientForm}
+                  formProps={{ data, countries, edit }}
+                  getItems={getUsers}
+                  deleteItem={deleteUser}
+                />
+              </div>
             ),
           },
+          ,
         ]}
         dataSource={clients.map((client) => ({
           ...client,

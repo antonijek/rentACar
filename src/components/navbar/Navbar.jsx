@@ -22,9 +22,9 @@ function Navbar({ items, changeLanguage }) {
   const { addVehicle } = vehicleData();
   const navigate = useNavigate();
 
-  const test = (item) => {
-    console.log(item.label.props.children);
-    if (item.label.props.children === "New client") {
+  const checkDropdownItems = (item) => {
+    console.log(item);
+    if (item.label.props.children === t("newUser")) {
       modal.open(
         <span className={classes["modal-title"]}>{t("addClient")}</span>,
         <ClientForm countries={countries} addNew={addNew} />,
@@ -34,7 +34,7 @@ function Navbar({ items, changeLanguage }) {
       );
     }
 
-    if (item.label.props.children === "New vehicle") {
+    if (item.label.props.children === t("newVehicle")) {
       modal.open(
         <span className={classes["modal-title"]}>{t("addvehicle")}</span>,
         <VehicleForm addVehicle={addVehicle} />,
@@ -43,7 +43,7 @@ function Navbar({ items, changeLanguage }) {
         }
       );
     }
-    if (item.label.props.children === "New reservation") {
+    if (item.label.props.children === t("newReservation")) {
       navigate("/reservations/add-reservation");
     }
   };
@@ -64,9 +64,9 @@ function Navbar({ items, changeLanguage }) {
         <DropdownTabs
           changeLanguage={changeLanguage}
           items={items}
-          onItemClick={(item) => test(item)}
+          onItemClick={(item) => checkDropdownItems(item)}
         />
-        <h3 className={classes["logout"]} onClick={() => logoutUser()}>
+        <h3 className={classes["logout"]} onClick={() => navigate("/login")}>
           {t("logout")}
         </h3>
       </div>

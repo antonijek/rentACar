@@ -4,10 +4,10 @@
   margin-top: 2%;
 }
 .title {
-  color: var(--primary-color);
+  color: #0a0a79;
   text-align: center;
-  margin-bottom: 5%;
-  font-size: 2vw;
+  margin-bottom: 10%;
+  font-size: 3vw;
 }
 .modal-title {
   color: var(--primary-color);
@@ -26,4 +26,10 @@
   justify-content: space-between;
   align-items: center;
   margin-right: 1%;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 5vw;
+  }
 }

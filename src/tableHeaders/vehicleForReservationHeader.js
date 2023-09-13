@@ -11,6 +11,7 @@ export const generateVehicleHeaders = (t) => [
   {
     title: t("numberOfSeats"),
     dataIndex: "number_of_seats",
+    responsive: ["md"],
   },
   {
     title: t("rentalPricePerDay"),

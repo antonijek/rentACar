@@ -8,6 +8,7 @@ import SubmitButton from "../buttons/submitButton/SubmitButton";
 import { addNewReservation } from "../../services/reservationServices";
 import { useModal } from "../../context/ModalContext";
 import { useTranslation } from "react-i18next";
+import moment from "moment";
 import {
   showErrorsMessage,
   showSuccessMessage,
@@ -119,12 +120,10 @@ const AddReservationForm = ({ data, navigatePage, disabled = "" }) => {
   }, [dateFrom, dateTo, setValue]);
 
   const onSubmit = async (formData) => {
-    // console.log(dateFrom);
+    console.log(dateFrom);
     formData.vehicle_id = data.id;
-    formData.date_from = new Date(formData.date_from)
-      .toISOString()
-      .split("T")[0];
-    formData.date_to = new Date(formData.date_to).toISOString().split("T")[0];
+    formData.date_from = moment(formData.date_from).format("YYYY-MM-DD");
+    formData.date_to = moment(formData.date_to).format("YYYY-MM-DD");
     addNew(formData);
   };
 

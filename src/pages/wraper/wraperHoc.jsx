@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import classes from "../../components/navbar/navbar.module.scss";
 import { Main } from "../../components/main/Main";
 import Navbar from "../../components/navbar/Navbar";
+import MobileNavbar from "../../components/navbar/MobileNavbar";
 import { generateAdminItems } from "../../dropdownItems/adminItems";
 import { generateClientItems } from "../../dropdownItems/clientItems";
 import { useTranslation } from "react-i18next";
@@ -25,9 +26,21 @@ const wrapperHoc = (Component) => {
     return (
       <div>
         {user?.role_id === 1 ? (
-          <Navbar items={dropdownAdminItems} changeLanguage={changeLanguage} />
+          <div>
+            <Navbar
+              items={dropdownAdminItems}
+              changeLanguage={changeLanguage}
+            />
+            <MobileNavbar changeLanguage={changeLanguage} />
+          </div>
         ) : (
-          <Navbar items={dropdownClientItems} changeLanguage={changeLanguage} />
+          <div>
+            <Navbar
+              items={dropdownClientItems}
+              changeLanguage={changeLanguage}
+            />
+            <MobileNavbar changeLanguage={changeLanguage} />
+          </div>
         )}
         <Main>
           <Component />

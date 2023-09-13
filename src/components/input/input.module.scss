@@ -7,14 +7,16 @@
   width: 100%;
   min-width: 200px;
   box-sizing: border-box;
-  font-size: 1vw;
+  font-size: 1.5vw;
   font-family: var(--main-font-family);
+  color: var(--primary-color);
+  font-weight: 600;
   &::placeholder {
-    color: var(--secondary-color);
+    color: var(--primary-color);
     font-size: 1.2vw;
     font-family: var(--main-font-family);
   }
   &:hover {
-    background-color: var(--secondary-color);
+    background-color: var(--placeholder-color);
   }
 }

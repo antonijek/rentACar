@@ -15,7 +15,7 @@
 }
 .select {
   padding: 10px;
-  border: 2px solid rgba(56, 133, 89, 0.668);
+  border: 2px solid var(--primary-color);
   border-radius: 5px;
   margin-top: 20px;
   margin-bottom: 5px;
@@ -24,7 +24,7 @@
   box-sizing: border-box;
   font-size: 1.5vw;
   &::placeholder {
-    color: var(--secondary-color);
+    color: var(--placeholder-color);
     font-size: 1.5vw;
   }
   &:hover {

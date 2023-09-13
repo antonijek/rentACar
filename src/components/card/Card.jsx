@@ -47,7 +47,7 @@ const Card = ({
           </h3>
         }
         bordered={true}
-        style={{ color: "#63a0d9" }}
+        style={{ color: "#63a0d9", backgroundColor: "#d3eaf2" }}
       >
         <p>
           <span>
@@ -59,7 +59,7 @@ const Card = ({
               }}
             />
           </span>
-          {`${t("vehicle")} : ${type}`}
+          {`${t("vehicle")}: ${type}`}
         </p>
         <p>
           {" "}
@@ -72,7 +72,7 @@ const Card = ({
               }}
             />
           </span>
-          {`${t("licensePlate")} : ${plate}`}
+          {`${t("licensePlate")}: ${plate}`}
         </p>
         <p>
           {" "}
@@ -85,7 +85,7 @@ const Card = ({
               }}
             />
           </span>
-          {`${t("startDate")} : ${dateFrom}`}
+          {`${t("startDate")}: ${dateFrom}`}
         </p>
         <p>
           <span>
@@ -97,7 +97,7 @@ const Card = ({
               }}
             />
           </span>
-          {`${t("endDate")} : ${dateTo}`}
+          {`${t("endDate")}: ${dateTo}`}
         </p>
         <p>
           {" "}
@@ -110,7 +110,7 @@ const Card = ({
               }}
             />
           </span>
-          {`${t("pickupLocation")} : ${location1}`}
+          {`${t("pickupLocation")}: ${location1}`}
         </p>
         <p>
           <span>
@@ -122,7 +122,7 @@ const Card = ({
               }}
             />
           </span>
-          {`${t("returnLocation")} : ${location2}`}
+          {`${t("returnLocation")}: ${location2}`}
         </p>
         <p>
           {" "}
@@ -135,7 +135,7 @@ const Card = ({
               }}
             />
           </span>
-          {`${t("price")} : ${price}`}
+          {`${t("price")}: ${price} EUR`}
         </p>
       </AntdCard>
     </div>

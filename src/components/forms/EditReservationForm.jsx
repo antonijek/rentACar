@@ -5,6 +5,7 @@ import * as yup from "yup";
 import Input from "../input/Input";
 import Select from "../select/Select";
 import SubmitButton from "../buttons/submitButton/SubmitButton";
+import moment from "moment";
 
 import {
   editReservation,
@@ -57,10 +58,9 @@ const EditReservationForm = ({
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      date_from: new Date().toISOString().split("T")[0],
-      date_to: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000)
-        .toISOString()
-        .split("T")[0],
+      date_from: moment().format("YYYY-MM-DD"),
+      date_to: moment() + 7 * 24 * 60 * 60 * 1000,
+
       pickup_location: "",
       drop_off_location: "",
       price: "",
@@ -91,9 +91,9 @@ const EditReservationForm = ({
       const dateTo = data.date_to ? new Date(data.date_to) : null;
       const formatDate = (date) => {
         if (!date) return "";
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, "0");
-        const day = String(date.getDate()).padStart(2, "0");
+        const year = date.getUTCFullYear();
+        const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+        const day = String(date.getUTCDate()).padStart(2, "0");
         return `${year}-${month}-${day}`;
       };
       setValue("pickup_location", data?.pickup_location_id),
@@ -123,8 +123,11 @@ const EditReservationForm = ({
 
   console.log(data);
   const onSubmit = async (formData) => {
-    formData.date_from = new Date(formData.date_from).toISOString();
-    formData.date_to = new Date(formData.date_to).toISOString();
+    formData.date_from = moment(formData.date_from).format("YYYY-MM-DD");
+    formData.date_to = moment(formData.date_to).format("YYYY-MM-DD");
+
+    //formData.date_from = new Date(formData.date_from).toISOString();
+    //formData.date_to = new Date(formData.date_to).toISOString();
     formData.pickup_location = Number(formData.pickup_location);
     formData.drop_off_location = Number(formData.drop_off_location);
     formData.vehicle_id = data.vehicle.id;
@@ -147,7 +150,7 @@ const EditReservationForm = ({
   useEffect(() => {
     if (!dateTo || new Date(dateTo) < new Date(dateFrom)) {
       const nextDay = new Date(dateFrom);
-      nextDay.setDate(nextDay.getDate() + 1); // Add one day to dateFrom
+      nextDay.setDate(nextDay.getDate() + 1);
       setValue("date_to", nextDay.toISOString().split("T")[0]);
     }
   }, [dateFrom, dateTo, setValue]);
