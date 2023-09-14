@@ -66,7 +66,6 @@ const Clients = () => {
               </div>
             ),
           },
-          ,
         ]}
         dataSource={clients.map((client) => ({
           ...client,

@@ -20,3 +20,28 @@
     background-color: var(--placeholder-color);
   }
 }
+
+@media (max-width: 768px) {
+  .my-input {
+    padding: 5px 10px;
+    border: 2px solid var(--primary-color);
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    width: 100%;
+    min-width: 200px;
+    box-sizing: border-box;
+    font-size: 3.5vw;
+    font-family: var(--main-font-family);
+    color: var(--primary-color);
+    font-weight: 600;
+    &::placeholder {
+      color: var(--primary-color);
+      font-size: 3.2vw;
+      font-family: var(--main-font-family);
+    }
+    &:hover {
+      background-color: var(--placeholder-color);
+    }
+  }
+}

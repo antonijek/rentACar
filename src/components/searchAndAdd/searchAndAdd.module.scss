@@ -20,3 +20,8 @@
     font-family: var(--main-font-family);
   }
 }
+@media (max-width: 768px) {
+  .search-input {
+    font-size: 3.2vw;
+  }
+}

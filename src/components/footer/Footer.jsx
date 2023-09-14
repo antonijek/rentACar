@@ -24,10 +24,10 @@ function Footer() {
     <div className={classes["footer"]}>
       <div className={classes["footer-content"]}>
         <div className={classes["copyright"]}>
-          &copy; 2023 Your Company. {t("allRightsReserved")}
+          &copy; 2023 Rent A Car. {t("allRightsReserved")}
         </div>
         <div className={classes["contact-info"]}>
-          {t("contactUs")}: contact@yourcompany.com
+          {t("contactUs")}: contact@rentacar.com
         </div>
         <div className={classes["social-media"]}>
           <a

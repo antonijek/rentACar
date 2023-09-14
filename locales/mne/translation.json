@@ -114,5 +114,6 @@
   "seatsMinValue": "Broj sedišta ne sme biti manji od {{minValue}}",
   "seatsMaxValue": "Broj sedišta ne sme biti veći od {{maxValue}}",
   "rentalPriceMinValue": "Cena najma ne sme biti manja od {{minValue}}",
-  "rentalPriceMaxValue": "Cena najma ne sme biti veća od {{maxValue}}"
+  "rentalPriceMaxValue": "Cena najma ne sme biti veća od {{maxValue}}",
+  "allRightsReserved": "Sva prava su zadrzana"
 }

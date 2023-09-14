@@ -47,7 +47,7 @@ const Card = ({
           </h3>
         }
         bordered={true}
-        style={{ color: "#63a0d9", backgroundColor: "#d3eaf2" }}
+        style={{ color: "#63a0d9" }}
       >
         <p>
           <span>

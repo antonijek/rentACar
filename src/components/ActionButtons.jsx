@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Button from "../components/buttons/button/Button";
+import Button from "./buttons/button/Button";
 import classes from "../components/table/table.module.scss";
 import Message from "./message/Message";
 import { useModal } from "../context/ModalContext";

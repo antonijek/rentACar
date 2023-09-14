@@ -83,13 +83,19 @@ function Navbar({ items, changeLanguage }) {
               src={flagEn}
               width="20px"
               height="16px"
-              onClick={() => changeLanguage("en")}
+              onClick={() => {
+                changeLanguage("en");
+                setOpenMenu(false);
+              }}
             />
             <img
               src={flagMne}
               width="20px"
               height="16px"
-              onClick={() => changeLanguage("mne")}
+              onClick={() => {
+                changeLanguage("mne");
+                setOpenMenu(false);
+              }}
             />
           </div>
         </div>

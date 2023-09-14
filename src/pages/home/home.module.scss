@@ -84,15 +84,13 @@
   }
   .home {
     display: block;
-    width: 100%;
     height: auto;
-    background-color: var(--secondary-color);
     position: static;
-    color: var(--primary-color);
+    color: var(--title-color);
     overflow: hidden;
 
     .welcome-msg {
-      font-size: 5vw;
+      font-size: 10vw;
       position: static;
       left: auto;
       top: auto;
@@ -102,7 +100,7 @@
     }
 
     .happy-customers {
-      font-size: 3vw;
+      font-size: 6vw;
       position: static;
       left: auto;
       top: auto;
@@ -118,6 +116,9 @@
     top: 5%;
     transform: rotate(10deg);
     animation: move 20s infinite alternate ease-in-out;
+  }
+  .map-container {
+    overflow: hidden;
   }
   @keyframes move {
     0% {

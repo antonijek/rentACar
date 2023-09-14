@@ -17,20 +17,23 @@
   display: block;
   position: absolute;
   width: 40%;
-  height: auto;
-  background-color: white;
+  height: fit-content;
+  background-color: var(--placeholder-color);
   top: 100%;
   left: 0;
   z-index: 1;
   min-width: 200px;
   border: 1px solid var(--primary-color);
   padding-bottom: 5%;
-  font-size: 3vw;
+  font-size: 2vw;
 }
 .menu-item {
   margin-left: 5%;
+  cursor: pointer;
+  margin-top: 10%;
 }
 .menu-icon {
+  cursor: pointer;
 }
 .nav a {
   text-decoration: none;
@@ -40,5 +43,12 @@
 @media (max-width: 768px) {
   .navbar-mobile {
     display: flex;
+    padding: 0 5% 0 5%;
+    align-items: center;
+  }
+}
+@media (max-width: 576px) {
+  .nav {
+    font-size: 3vw;
   }
 }
