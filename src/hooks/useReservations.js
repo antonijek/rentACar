@@ -43,7 +43,7 @@ const useReservations = (activeItem) => {
     dispatch({ ...state, isLoading: true });
     try {
       const res = await getReservations();
-      console.log("Ovo je Reservations");
+
       initialState = { ...initialState, reservations: res };
       dispatch({ type: "initialize", data: res });
       dispatch({ ...state, isLoading: false });

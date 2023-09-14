@@ -30,7 +30,7 @@
 
 .custom-table td {
   position: relative;
-  color: var(--title-color);
-
+  color: var(--secondary-color);
+  font-weight: 600;
   transition: background 0.2s ease;
 }

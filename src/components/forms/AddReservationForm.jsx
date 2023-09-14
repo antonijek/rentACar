@@ -144,7 +144,7 @@ const AddReservationForm = ({ data, navigatePage, disabled = "" }) => {
         style={{ display: "flex", flexDirection: "column", gap: "16px" }}
       >
         <Select
-          className={style["my-input"]}
+          className={classes["select"]}
           label={t("client")}
           name="customer_id"
           control={control}
