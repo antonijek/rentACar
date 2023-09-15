@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -17,9 +17,8 @@ const EditReservationForm = ({
   cities,
   editingReservation,
 }) => {
-  console.log(cities);
   const { t } = useTranslation();
-  console.log(data);
+
   const schema = yup.object({
     date_from: yup.date().required(t("fieldRequired")),
     date_to: yup

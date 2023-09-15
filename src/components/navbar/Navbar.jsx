@@ -4,11 +4,10 @@ import logo from "../../../public/logo2.png";
 import logo1 from "../../../public/logo.png";
 import classes from "./navbar.module.scss";
 import DropdownTabs from "../dropdown/DropDown";
-import { set, get } from "../../services/storageServices";
+import { get } from "../../services/storageServices";
 import { userData } from "../../context/UserContext";
 import ClientForm from "../forms/ClientForm";
 import VehicleForm from "../forms/VehicleForm";
-import AddReservationForm from "../forms/AddReservationForm";
 import { useModal } from "../../context/ModalContext";
 import { useNavigate } from "react-router-dom";
 import { clientData } from "../../context/ClientContext";
@@ -16,7 +15,7 @@ import { vehicleData } from "../../context/VehicleContext";
 
 function NavbarAdmin({ items, changeLanguage }) {
   const { i18n, t } = useTranslation();
-  const { user, logoutUser } = userData();
+  const { logoutUser } = userData();
   const modal = useModal();
   const { countries, addNew } = clientData();
   const { addVehicle } = vehicleData();
@@ -82,10 +81,7 @@ function NavbarAdmin({ items, changeLanguage }) {
 function NavbarClient({ items, changeLanguage }) {
   console.log("navbarClient", changeLanguage);
   const { i18n, t } = useTranslation();
-  const { user, logoutUser } = userData();
-  const modal = useModal();
-
-  const navigate = useNavigate();
+  const { logoutUser } = userData();
 
   useEffect(() => {
     const preferredLanguage = get("lan");
@@ -114,7 +110,6 @@ function NavbarClient({ items, changeLanguage }) {
   );
 }
 const Navbar = ({ items, changeLanguage }) => {
-  console.log("bilo sta");
   const { user } = userData();
 
   return (

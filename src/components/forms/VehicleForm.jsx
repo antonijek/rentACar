@@ -1,32 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Input from "../input/Input";
 import SubmitButton from "../buttons/submitButton/SubmitButton";
 import TextArea from "../TextArea";
-import {
-  addNewVehicle,
-  editVehicle,
-  getVehicles,
-} from "../../services/vehicleServices";
-import { useModal } from "../../context/ModalContext";
 import { useTranslation } from "react-i18next";
-import {
-  showErrorsMessage,
-  showSuccessMessage,
-} from "../../services/models/showMessagesModels";
 import classes from "./form.module.scss";
 import style from "../input/input.module.scss";
-import { vehicleData } from "../../context/VehicleContext";
 
-const VehicleForm = ({
-  data,
-  setVehicles,
-  disabled = "",
-  edit,
-  addVehicle,
-}) => {
+const VehicleForm = ({ data, disabled = "", edit, addVehicle }) => {
   const { t } = useTranslation();
 
   const schema = yup.object({

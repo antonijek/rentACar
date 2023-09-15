@@ -1,5 +1,4 @@
 import React from "react";
-import classes from "./button.module.scss";
 import { Button as AntdButton } from "antd";
 
 const Button = ({ text, onClick, className }) => {

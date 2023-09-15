@@ -14,8 +14,10 @@ import ClientProvider from "../context/ClientContext";
 import VehicleProvider from "../context/VehicleContext";
 import MobileNavbar from "./navbar/MobileNavbar";
 import ReservationProvider from "../context/ReservationContext";
+import AuthGuard from "./AuthGuard";
+import { Page404 } from "./page404/Page404";
 
-function Test() {
+function MainApp() {
   const { user } = userData();
 
   const router = createBrowserRouter([
@@ -52,6 +54,10 @@ function Test() {
       path: "/reservations/add-reservation",
       element: <AddReservation />,
     },
+    {
+      path: "*",
+      element: <Page404 />,
+    },
   ]);
 
   return (
@@ -71,4 +77,4 @@ function Test() {
   );
 }
 
-export default Test;
+export default MainApp;

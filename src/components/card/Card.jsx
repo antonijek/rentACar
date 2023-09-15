@@ -11,7 +11,6 @@ import {
   EuroCircleTwoTone,
   BoxPlotTwoTone,
 } from "@ant-design/icons";
-import classes from "./card.module.scss";
 
 const Card = ({
   type,

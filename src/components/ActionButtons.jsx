@@ -4,7 +4,6 @@ import classes from "../components/table/table.module.scss";
 import Message from "./message/Message";
 import { useModal } from "../context/ModalContext";
 import Modal from "./modal/Modal";
-import { deleteUser } from "../services/userServices";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
 const ActionButtons = ({
@@ -27,7 +26,7 @@ const ActionButtons = ({
   const handleConfirmDelete = async (id) => {
     setIsOpen(true);
     try {
-      const res = await deleteItem(id);
+      await deleteItem(id);
       Message({ type: "success", content: t("successDelete") });
       const items = await getItems();
       setItems(items);

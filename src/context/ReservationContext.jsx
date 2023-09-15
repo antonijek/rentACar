@@ -29,7 +29,7 @@ const ReservationProvider = ({ children }) => {
     setIsLoading(true);
     try {
       const res = await getReservations();
-      console.log(res);
+
       setReservations(res);
       setIsLoading(false);
     } catch (err) {

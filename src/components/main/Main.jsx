@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import { Layout } from "antd";
 import Sidebar from "../sideBar/SideBar";
 import { adminItems } from "../../sideBarItems/adminItems";
@@ -20,7 +20,9 @@ export const Main = ({ children }) => {
     }, 1000);
   }, []);
 
-  const sidebarItems = user?.role_id !== 1 ? clientItems : adminItems;
+  const pickData = (item) => {
+    setActiveItem(item);
+  };
 
   return (
     <Layout
@@ -30,7 +32,12 @@ export const Main = ({ children }) => {
         fontFamily: "Inconsolata",
       }}
     >
-      <Sidebar pickData={setActiveItem} items={sidebarItems} />
+      {user?.role_id !== 1 ? (
+        <Sidebar pickData={pickData} items={clientItems} />
+      ) : (
+        <Sidebar items={adminItems} />
+      )}
+
       {!isLoading && user?.role_id !== 1 ? (
         <ReservationsForClients activeItem={activeItem} />
       ) : null}

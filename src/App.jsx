@@ -17,14 +17,14 @@ import VehicleProvider from "./context/VehicleContext";
 import MobileNavbar from "./components/navbar/MobileNavbar";
 import ReservationProvider from "./context/ReservationContext";
 import AuthHoc from "./pages/authHOC/AuthHoc";
-import Test from "./components/Test";
+import MainApp from "./components/MainApp";
 
 function App() {
   return (
     <I18nextProvider i18n={i18n}>
       <UserProvider>
         <ModalProvider>
-          <Test />
+          <MainApp />
         </ModalProvider>
       </UserProvider>
     </I18nextProvider>

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import classes from "./footer.module.scss";
-import { set, get } from "../../services/storageServices";
+import { get } from "../../services/storageServices";
 import { userData } from "../../context/UserContext";
 import {
   TwitterOutlined,
@@ -11,7 +11,6 @@ import {
 
 function Footer() {
   const { i18n, t } = useTranslation();
-  const { user, logoutUser } = userData();
 
   useEffect(() => {
     const preferredLanguage = get("lan");

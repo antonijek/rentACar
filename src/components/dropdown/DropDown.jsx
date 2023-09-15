@@ -1,12 +1,10 @@
 import React from "react";
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Space, Menu } from "antd";
-import { useTranslation } from "react-i18next";
 import classes from "./dropdown.module.scss";
 import { userData } from "../../context/UserContext";
 
-const DropdownTabs = ({ items, onItemClick, changeLanguage }) => {
-  const { t } = useTranslation();
+const DropdownTabs = ({ items, onItemClick }) => {
   const { user } = userData();
 
   return (

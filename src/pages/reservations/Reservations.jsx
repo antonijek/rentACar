@@ -3,7 +3,7 @@ import wrapperHoc from "../wraper/wraperHoc";
 import Table from "../../components/table/Table";
 import classes from "./reservations.module.scss";
 import { useTranslation } from "react-i18next";
-
+import AuthGuard from "../../components/AuthGuard";
 import ActionButtons from "../../components/ActionButtons";
 import AuthHoc from "../authHOC/AuthHoc";
 import { useNavigate } from "react-router-dom";
