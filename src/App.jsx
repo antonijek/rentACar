@@ -15,53 +15,16 @@ import ReservationsForClients from "./components/reservationsForClients/Reservat
 import ClientProvider from "./context/ClientContext";
 import VehicleProvider from "./context/VehicleContext";
 import MobileNavbar from "./components/navbar/MobileNavbar";
+import ReservationProvider from "./context/ReservationContext";
+import AuthHoc from "./pages/authHOC/AuthHoc";
+import Test from "./components/Test";
 
 function App() {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Home />,
-    },
-    {
-      path: "/mobile",
-      element: <MobileNavbar />,
-    },
-
-    {
-      path: "/my-reservations",
-      element: <ReservationsForClients />,
-    },
-    {
-      path: "/login",
-      element: <Login />,
-    },
-    {
-      path: "/clients",
-      element: <Clients />,
-    },
-    {
-      path: "/vehicles",
-      element: <Vehicles />,
-    },
-    {
-      path: "/reservations",
-      element: <Reservations />,
-    },
-    {
-      path: "/reservations/add-reservation",
-      element: <AddReservation />,
-    },
-  ]);
-
   return (
     <I18nextProvider i18n={i18n}>
       <UserProvider>
         <ModalProvider>
-          <ClientProvider>
-            <VehicleProvider>
-              <RouterProvider router={router} />
-            </VehicleProvider>
-          </ClientProvider>
+          <Test />
         </ModalProvider>
       </UserProvider>
     </I18nextProvider>

@@ -1,7 +1,8 @@
 import { useReducer, useEffect } from "react";
 import { getReservations } from "../services/reservationServices";
+import { getAllCities } from "../services/cityServices";
 
-let initialState = { isLoading: false, reservations: [] };
+let initialState = { isLoading: false, reservations: [], cities: [] };
 
 const reservationsReducer = (state, action) => {
   switch (action.type) {
@@ -43,8 +44,8 @@ const useReservations = (activeItem) => {
     dispatch({ ...state, isLoading: true });
     try {
       const res = await getReservations();
-
-      initialState = { ...initialState, reservations: res };
+      const cities = await getAllCities();
+      initialState = { ...initialState, reservations: res, cities: cities };
       dispatch({ type: "initialize", data: res });
       dispatch({ ...state, isLoading: false });
     } catch (err) {

@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import SubmitButton from "../../components/buttons/submitButton/SubmitButton";
-import { useModal } from "../../context/ModalContext";
 import classes from "./login.module.scss";
 import Input from "../../components/input/Input";
 import { login } from "../../services/authServices";
@@ -78,6 +77,7 @@ const Login = () => {
           error={errors?.email?.message}
           labelColor={classes["label-color"]}
         />
+
         <Input
           className={classes["my-input"]}
           label="Password"

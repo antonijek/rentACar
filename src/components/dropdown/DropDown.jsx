@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import classes from "./dropdown.module.scss";
 import { userData } from "../../context/UserContext";
 
-const DropdownTabs = ({ items, onItemClick }) => {
+const DropdownTabs = ({ items, onItemClick, changeLanguage }) => {
   const { t } = useTranslation();
   const { user } = userData();
 
@@ -14,7 +14,7 @@ const DropdownTabs = ({ items, onItemClick }) => {
       overlay={
         <Menu>
           {items.map((item) => (
-            <Menu.Item key={item.key} onClick={() => onItemClick(item)}>
+            <Menu.Item key={item.key} onClick={() => onItemClick?.(item)}>
               {item.label}
             </Menu.Item>
           ))}

@@ -106,7 +106,7 @@
   "licensePlateInvalid": "Invalid license plate",
   "licensePlateMinLength": "License plate should be at least {{minLength}} characters long",
   "licensePlateMaxLength": "License plate should not exceed {{maxLength}} characters",
-  "yearMinValue": "Year should not be less than {{minValue}}",
+  "yearMinValue": "Year should not be less than 1900",
   "yearMaxValue": "Year should not exceed {{maxValue}}",
   "vehicleTypeMaxLength": "Vehicle type should not exceed {{maxLength}} characters",
   "seatsMinValue": "Number of seats should not be less than {{minValue}}",

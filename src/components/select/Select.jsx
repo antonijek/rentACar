@@ -1,5 +1,6 @@
 import React from "react";
 import { Controller } from "react-hook-form";
+import classes from "./select.module.scss";
 
 const Select = ({
   label = "",
@@ -35,7 +36,9 @@ const Select = ({
           }}
         />
       )}
-      {error && error.length > 0 && <span>{error}</span>}
+      {error && error.length > 0 && (
+        <span className={classes["error"]}>{error}</span>
+      )}
     </div>
   );
 };

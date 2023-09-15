@@ -29,7 +29,9 @@ const TextArea = ({
           )}
         />
       )}
-      {error && error?.length > 0 && <span>{error}</span>}
+      {error && error?.length > 0 && (
+        <span style={{ color: "red" }}>{error}</span>
+      )}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect } from "react";
 import { Layout } from "antd";
 import Sidebar from "../sideBar/SideBar";
 import { adminItems } from "../../sideBarItems/adminItems";
@@ -6,11 +6,13 @@ import { clientItems } from "../../sideBarItems/clienItems";
 import { userData } from "../../context/UserContext";
 import ReservationsForClients from "../reservationsForClients/ReservationsForClients";
 import Spiner from "../spiner/Spiner";
+import { useNavigate } from "react-router-dom";
 
 export const Main = ({ children }) => {
   const { user } = userData();
   const [isLoading, setIsLoading] = useState(true);
   const [activeItem, setActiveItem] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setTimeout(() => {
@@ -18,9 +20,7 @@ export const Main = ({ children }) => {
     }, 1000);
   }, []);
 
-  const pickData = (item) => {
-    setActiveItem(item);
-  };
+  const sidebarItems = user?.role_id !== 1 ? clientItems : adminItems;
 
   return (
     <Layout
@@ -30,12 +30,7 @@ export const Main = ({ children }) => {
         fontFamily: "Inconsolata",
       }}
     >
-      {user?.role_id !== 1 ? (
-        <Sidebar pickData={pickData} items={clientItems} />
-      ) : (
-        <Sidebar items={adminItems} />
-      )}
-
+      <Sidebar pickData={setActiveItem} items={sidebarItems} />
       {!isLoading && user?.role_id !== 1 ? (
         <ReservationsForClients activeItem={activeItem} />
       ) : null}

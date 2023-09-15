@@ -6,11 +6,12 @@ import EditReservationForm from "../forms/EditReservationForm";
 import { useTranslation } from "react-i18next";
 import Spiner from "../../components/spiner/Spiner";
 import useReservations from "../../hooks/useReservations";
+import wrapperHoc from "../../pages/wraper/wraperHoc";
 
 const ReservationsForClients = ({ activeItem }) => {
   const modal = useModal();
   const { t } = useTranslation();
-  const { isLoading, reservations } = useReservations(activeItem);
+  const { isLoading, reservations, cities } = useReservations(activeItem);
 
   return (
     <div className={classes["reservationsWrapper"]}>
@@ -28,9 +29,16 @@ const ReservationsForClients = ({ activeItem }) => {
                     {t("reservationInformation")}
                   </span>,
                   <EditReservationForm
-                    data={card}
+                    data={{
+                      ...card,
+                      pickup_location_id: card.pickup_location.id,
+                      pickup_location: card.pickup_location.name,
+                      drop_off_location_id: card.drop_off_location.id,
+                      drop_off_location: card.drop_off_location.name,
+                    }}
                     disabled={true}
                     customer={false}
+                    cities={cities}
                   />,
                   { showFooter: false }
                 )

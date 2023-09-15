@@ -5,8 +5,6 @@ import { exists } from "../../services/storageServices";
 
 const AuthHoc = (Component) => {
   return (props) => {
-    const { user } = userData();
-
     return exists("access_token") ? (
       <Component {...props} />
     ) : (

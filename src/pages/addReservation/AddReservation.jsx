@@ -14,6 +14,8 @@ import VehicleForm from "../../components/forms/VehicleForm";
 import AddReservationForm from "../../components/forms/AddReservationForm";
 import { useNavigate } from "react-router-dom";
 import DateRange from "../../components/dateRange/DateRange";
+import { reservationData } from "../../context/ReservationContext";
+import { vehicleData } from "../../context/VehicleContext";
 
 const AddReservation = () => {
   const [vehicles, setVehicles] = useState([]);
@@ -22,6 +24,7 @@ const AddReservation = () => {
   const { t } = useTranslation();
   const modal = useModal();
   const navigate = useNavigate();
+  const { clients, cities, addReservation } = reservationData();
 
   const getAllVehicles = async () => {
     setIsLoading(true);
@@ -63,6 +66,9 @@ const AddReservation = () => {
       <span className={classes["modal-title"]}>{t("addReservation")}</span>,
 
       <AddReservationForm
+        clients={clients}
+        addReservation={addReservation}
+        cities={cities}
         navigatePage={navigatePage}
         data={vehicle}
         setVehicles={setVehicles}

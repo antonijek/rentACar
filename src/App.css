@@ -1,7 +1,7 @@
 :root {
   --main-font-family: "Inconsolata", monospace;
   --primary-color: #007bff;
-  --secondary-color: rgba(105, 119, 127, 0.747);
+  --secondary-color: rgba(150, 167, 176, 0.747);
   --title-color: #0a0a79;
   --placeholder-color: #d4ecf2;
 }

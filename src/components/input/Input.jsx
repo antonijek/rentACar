@@ -1,4 +1,5 @@
 import React from "react";
+import classes from "./input.module.scss";
 import { Controller } from "react-hook-form";
 
 const Input = ({
@@ -41,7 +42,9 @@ const Input = ({
           )}
         />
       )}
-      {error && error?.length > 0 && <span>{error}</span>}
+      {error && error?.length > 0 && (
+        <span className={classes["error"]}>{error}</span>
+      )}
     </div>
   );
 };

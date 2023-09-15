@@ -1,27 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Input from "../input/Input";
 import Select from "../select/Select";
 import SubmitButton from "../buttons/submitButton/SubmitButton";
-import { addNewReservation } from "../../services/reservationServices";
-import { useModal } from "../../context/ModalContext";
-import { useTranslation } from "react-i18next";
 import moment from "moment";
-import {
-  showErrorsMessage,
-  showSuccessMessage,
-} from "../../services/models/showMessagesModels";
+import { useTranslation } from "react-i18next";
 import classes from "./form.module.scss";
 import style from "../input/input.module.scss";
-import { getAllCities } from "../../services/cityServices";
-import { getUsersForSelect } from "../../services/userServices";
 
-const AddReservationForm = ({ data, navigatePage, disabled = "" }) => {
-  const [cities, setCities] = useState([]);
-  const [clients, setClients] = useState([]);
-  const modal = useModal();
+const AddReservationForm = ({
+  data,
+  navigatePage,
+  disabled = "",
+  clients,
+  cities,
+  addReservation,
+}) => {
   const { t } = useTranslation();
 
   const schema = yup.object({
@@ -51,80 +47,38 @@ const AddReservationForm = ({ data, navigatePage, disabled = "" }) => {
     resolver: yupResolver(schema),
     defaultValues: {
       customer_id: "",
-      date_from: new Date().toISOString().split("T")[0],
-      date_to: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000)
-        .toISOString()
-        .split("T")[0],
+      date_from: moment().format("YYYY-MM-DD"),
+      date_to: moment().add(7, "days").format("YYYY-MM-DD"),
       pickup_location: "",
       drop_off_location: "",
       price: "",
     },
   });
 
-  const getCities = async () => {
-    try {
-      const res = await getAllCities();
-      setCities(res);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  const getClients = async () => {
-    try {
-      const res = await getUsersForSelect();
-
-      setClients(res);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    getCities();
-    getClients();
-    reset();
-  }, []);
-
-  const addNew = async (formData) => {
-    modal.setSpiner(true);
-    try {
-      const res = await addNewReservation(formData);
-      showSuccessMessage(t("successAdd", 3));
-      modal.setSpiner(false);
-      modal.close();
-      reset();
-      navigatePage();
-    } catch (err) {
-      console.log(err);
-      showErrorsMessage(err.response.data.errors, 5);
-      modal.setSpiner(false);
-    }
-  };
   const dateFrom = watch("date_from");
   const dateTo = watch("date_to");
+
   useEffect(() => {
     if (dateFrom && dateTo) {
-      const startDate = new Date(dateFrom);
-      const endDate = new Date(dateTo);
-      const timeDifference = endDate.getTime() - startDate.getTime();
-      const numberOfDays = Math.ceil(timeDifference / (1000 * 3600 * 24));
-
-      setValue("price", numberOfDays * data.daily_rate);
+      const startDate = moment(dateFrom);
+      const endDate = moment(dateTo);
+      const timeDifference = endDate.diff(startDate, "days");
+      setValue("price", timeDifference * data.daily_rate);
     }
   }, [dateFrom, dateTo]);
 
   useEffect(() => {
-    if (dateFrom && dateTo && new Date(dateTo) < new Date(dateFrom)) {
+    if (dateFrom && dateTo && moment(dateTo).isBefore(dateFrom)) {
       setValue("date_to", dateFrom);
     }
-  }, [dateFrom, dateTo, setValue]);
+  }, [dateFrom, dateTo]);
 
-  const onSubmit = async (formData) => {
-    console.log(dateFrom);
+  const onSubmit = (formData) => {
     formData.vehicle_id = data.id;
     formData.date_from = moment(formData.date_from).format("YYYY-MM-DD");
     formData.date_to = moment(formData.date_to).format("YYYY-MM-DD");
-    addNew(formData);
+    addReservation(formData);
+    navigatePage();
   };
 
   return (
@@ -160,7 +114,7 @@ const AddReservationForm = ({ data, navigatePage, disabled = "" }) => {
           error={errors.date_from?.message}
           type="date"
           disabled={disabled}
-          min={new Date().toISOString().split("T")[0]}
+          min={moment().format("YYYY-MM-DD")}
         />
         <Input
           className={style["my-input"]}

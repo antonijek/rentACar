@@ -46,6 +46,11 @@
 .label-color {
   font-weight: bold;
 }
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 4px;
+}
 
 @media (max-width: 768px) {
   .my-form {

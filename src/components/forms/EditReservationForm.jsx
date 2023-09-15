@@ -6,33 +6,20 @@ import Input from "../input/Input";
 import Select from "../select/Select";
 import SubmitButton from "../buttons/submitButton/SubmitButton";
 import moment from "moment";
-
-import {
-  editReservation,
-  getReservations,
-} from "../../services/reservationServices";
-import { useModal } from "../../context/ModalContext";
 import { useTranslation } from "react-i18next";
-import {
-  showErrorsMessage,
-  showSuccessMessage,
-} from "../../services/models/showMessagesModels";
 import classes from "./form.module.scss";
 import style from "../input/input.module.scss";
-import { getAllCities } from "../../services/cityServices";
-import { getUsersForSelect } from "../../services/userServices";
 
 const EditReservationForm = ({
   data,
-  setReservations,
   disabled = "",
   customer = true,
+  cities,
+  editingReservation,
 }) => {
-  const [cities, setCities] = useState([]);
-  const [clients, setClients] = useState([]);
-  const modal = useModal();
+  console.log(cities);
   const { t } = useTranslation();
-
+  console.log(data);
   const schema = yup.object({
     date_from: yup.date().required(t("fieldRequired")),
     date_to: yup
@@ -60,98 +47,57 @@ const EditReservationForm = ({
     defaultValues: {
       date_from: moment().format("YYYY-MM-DD"),
       date_to: moment() + 7 * 24 * 60 * 60 * 1000,
-
       pickup_location: "",
       drop_off_location: "",
       price: "",
     },
   });
 
-  const getCities = async () => {
-    try {
-      const res = await getAllCities();
-      setCities(res);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  const getClients = async () => {
-    try {
-      const res = await getUsersForSelect();
-
-      setClients(res);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const initialDateFrom = data.date_from ? moment(data.date_from) : null;
+  const initialDateTo = data.date_to ? moment(data.date_to) : null;
 
   useEffect(() => {
     if (data.id) {
-      const dateFrom = data.date_from ? new Date(data.date_from) : null;
-      const dateTo = data.date_to ? new Date(data.date_to) : null;
-      const formatDate = (date) => {
-        if (!date) return "";
-        const year = date.getUTCFullYear();
-        const month = String(date.getUTCMonth() + 1).padStart(2, "0");
-        const day = String(date.getUTCDate()).padStart(2, "0");
-        return `${year}-${month}-${day}`;
-      };
-      setValue("pickup_location", data?.pickup_location_id),
-        setValue("drop_off_location", data?.drop_off_location_id),
-        setValue("date_from", formatDate(dateFrom)),
-        setValue("date_to", formatDate(dateTo)),
-        getCities();
-      getClients();
+      console.log(data);
+      setValue("pickup_location", data?.pickup_location_id);
+      setValue("drop_off_location", data?.drop_off_location_id);
+      setValue(
+        "date_from",
+        initialDateFrom ? initialDateFrom.format("YYYY-MM-DD") : ""
+      );
+      setValue(
+        "date_to",
+        initialDateTo ? initialDateTo.format("YYYY-MM-DD") : ""
+      );
     }
   }, [data]);
 
-  const edit = async (formData, id) => {
-    modal.setSpiner(true);
-    try {
-      const res = await editReservation(formData, id);
-      showSuccessMessage(t("successEdit"), 3);
-      const reservations = await getReservations();
-      setReservations(reservations);
-      reset();
-      modal.close();
-      modal.setSpiner(false);
-    } catch (err) {
-      showErrorsMessage(err.response.data.errors, 5);
-      modal.setSpiner(false);
-    }
-  };
-
-  console.log(data);
   const onSubmit = async (formData) => {
     formData.date_from = moment(formData.date_from).format("YYYY-MM-DD");
     formData.date_to = moment(formData.date_to).format("YYYY-MM-DD");
-
-    //formData.date_from = new Date(formData.date_from).toISOString();
-    //formData.date_to = new Date(formData.date_to).toISOString();
     formData.pickup_location = Number(formData.pickup_location);
     formData.drop_off_location = Number(formData.drop_off_location);
     formData.vehicle_id = data.vehicle.id;
     formData.customer_id = data.customer.id;
-    edit(formData, data.id);
+    editingReservation(formData, data.id);
   };
+
   const dateFrom = watch("date_from");
   const dateTo = watch("date_to");
   useEffect(() => {
     if (dateFrom && dateTo) {
-      const startDate = new Date(dateFrom);
-      const endDate = new Date(dateTo);
-      const timeDifference = endDate.getTime() - startDate.getTime();
-      const numberOfDays = Math.ceil(timeDifference / (1000 * 3600 * 24));
+      const startDate = moment(dateFrom);
+      const endDate = moment(dateTo);
+      const timeDifference = endDate.diff(startDate, "days");
 
-      setValue("price", numberOfDays * data.vehicle.daily_rate);
+      setValue("price", timeDifference * data.vehicle.daily_rate);
     }
   }, [dateFrom, dateTo]);
 
   useEffect(() => {
-    if (!dateTo || new Date(dateTo) < new Date(dateFrom)) {
-      const nextDay = new Date(dateFrom);
-      nextDay.setDate(nextDay.getDate() + 1);
-      setValue("date_to", nextDay.toISOString().split("T")[0]);
+    if (!dateTo || moment(dateTo).isBefore(dateFrom)) {
+      const nextDay = moment(dateFrom).add(1, "day");
+      setValue("date_to", nextDay.format("YYYY-MM-DD"));
     }
   }, [dateFrom, dateTo, setValue]);
 
@@ -191,7 +137,7 @@ const EditReservationForm = ({
           error={errors.date_from?.message}
           type="date"
           disabled={disabled}
-          min={new Date().toISOString().split("T")[0]}
+          min={moment().format("YYYY-MM-DD")}
         />
         <Input
           className={style["my-input"]}
@@ -201,7 +147,7 @@ const EditReservationForm = ({
           error={errors.date_to?.message}
           type="date"
           disabled={disabled}
-          min={dateFrom}
+          min={initialDateFrom?.format("YYYY-MM-DD")}
         />
         <Select
           className={style["my-input"]}

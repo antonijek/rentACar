@@ -50,7 +50,7 @@ const VehicleForm = ({
       .number()
       .required(t("seatsRequired"))
       .typeError(t("seatsTypeError"))
-      .min(1, t("seatsMinValue"))
+      .min(2, t("seatsMinValue"))
       .max(10, t("seatsMaxValue")),
     daily_rate: yup
       .number()

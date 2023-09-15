@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { clientData } from "../../context/ClientContext";
 import { vehicleData } from "../../context/VehicleContext";
 
-function Navbar({ items, changeLanguage }) {
+function NavbarAdmin({ items, changeLanguage }) {
   const { i18n, t } = useTranslation();
   const { user, logoutUser } = userData();
   const modal = useModal();
@@ -66,7 +66,12 @@ function Navbar({ items, changeLanguage }) {
           items={items}
           onItemClick={(item) => checkDropdownItems(item)}
         />
-        <h3 className={classes["logout"]} onClick={() => navigate("/login")}>
+        <h3
+          className={classes["logout"]}
+          onClick={() => {
+            logoutUser();
+          }}
+        >
           {t("logout")}
         </h3>
       </div>
@@ -74,4 +79,52 @@ function Navbar({ items, changeLanguage }) {
   );
 }
 
+function NavbarClient({ items, changeLanguage }) {
+  console.log("navbarClient", changeLanguage);
+  const { i18n, t } = useTranslation();
+  const { user, logoutUser } = userData();
+  const modal = useModal();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const preferredLanguage = get("lan");
+    if (preferredLanguage) {
+      i18n.changeLanguage(preferredLanguage);
+    }
+  }, []);
+
+  return (
+    <div className={classes["navbar"]}>
+      <img src={logo} className={classes["logo"]} />
+      <img src={logo1} className={classes["logo1"]} />
+
+      <div className={classes["nav"]}>
+        <DropdownTabs changeLanguage={changeLanguage} items={items} />
+        <h3
+          className={classes["logout"]}
+          onClick={() => {
+            logoutUser();
+          }}
+        >
+          {t("logout")}
+        </h3>
+      </div>
+    </div>
+  );
+}
+const Navbar = ({ items, changeLanguage }) => {
+  console.log("bilo sta");
+  const { user } = userData();
+
+  return (
+    <div>
+      {user?.role_id === 1 ? (
+        <NavbarAdmin items={items} changeLanguage={changeLanguage} />
+      ) : (
+        <NavbarClient items={items} changeLanguage={changeLanguage} />
+      )}
+    </div>
+  );
+};
 export default Navbar;

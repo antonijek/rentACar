@@ -24,10 +24,9 @@ const Clients = () => {
     addNew,
     edit,
     countries,
+    headers,
   } = clientData();
   const modal = useModal();
-
-  const headers = generateClientHeaders(t);
 
   return (
     <div className={classes["clients-container"]}>

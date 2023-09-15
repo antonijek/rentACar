@@ -71,10 +71,7 @@ function Navbar({ items, changeLanguage }) {
                 </div>
               ))
             : null}
-          <h2
-            className={classes["menu-item"]}
-            onClick={() => navigate("/login")}
-          >
+          <h2 className={classes["menu-item"]} onClick={() => logoutUser()}>
             {<LogoutOutlined />} {t("logout")}
           </h2>
           <div className={classes["menu-item"]}>

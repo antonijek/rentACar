@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import wrapperHoc from "../wraper/wraperHoc";
-import { useModal } from "../../context/ModalContext";
 import Table from "../../components/table/Table";
 import classes from "./reservations.module.scss";
 import { useTranslation } from "react-i18next";
-import { generateReservationHeaders } from "../../tableHeaders/reservationHeaders";
+
 import ActionButtons from "../../components/ActionButtons";
 import AuthHoc from "../authHOC/AuthHoc";
 import { useNavigate } from "react-router-dom";
@@ -17,64 +16,36 @@ import EditReservationForm from "../../components/forms/EditReservationForm";
 import Button from "../../components/buttons/button/Button";
 import DateRange from "../../components/dateRange/DateRange";
 import { formattingReservations } from "../../utils/utils";
+import { reservationData } from "../../context/ReservationContext";
 
 const Reservations = () => {
-  const [reservations, setReservations] = useState([]);
+  const {
+    headers,
+    searchReservation,
+    setReservations,
+    reservations,
+    handleRowClick,
+    isLoading,
+    clients,
+    cities,
+    editingReservation,
+    getAllReservations,
+    getCities,
+    getClients,
+  } = reservationData();
   const [dateString, setDateString] = useState("");
-
-  const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
-  const modal = useModal();
   const navigate = useNavigate();
 
-  const getAllReservations = async () => {
-    setIsLoading(true);
-    try {
-      const res = await getReservations();
-      console.log(res);
-      setReservations(res);
-      setIsLoading(false);
-    } catch (err) {
-      console.log(err);
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
+    getCities();
+    getClients();
     getAllReservations();
   }, []);
 
-  const searchReservation = async (query) => {
-    setIsLoading(true);
-    try {
-      const res = await getReservations(query);
-
-      setReservations(res);
-      setIsLoading(false);
-    } catch (err) {
-      console.log(err);
-      setIsLoading(false);
-    }
-  };
-  const handleRowClick = (reservation) => {
-    const disabled = true;
-    modal.open(
-      <span className={classes["modal-title"]}>
-        {t("reservationInformation")}
-      </span>,
-      <EditReservationForm
-        data={reservation}
-        setReservations={setReservations}
-        disabled={disabled}
-      />,
-      { showFooter: false }
-    );
-  };
   const onChange = (value, dateString) => {
     setDateString(`date_from=${dateString[0]}&date_to=${dateString[1]}`);
   };
-
-  const headers = generateReservationHeaders(t);
 
   return (
     <div className={classes["reservations-container"]}>
@@ -107,7 +78,13 @@ const Reservations = () => {
                 data={data}
                 setItems={setReservations}
                 FormComponent={EditReservationForm}
-                formProps={{ data, setReservations }}
+                formProps={{
+                  data,
+                  setReservations,
+                  cities,
+                  editingReservation,
+                  clients,
+                }}
                 getItems={getReservations}
                 deleteItem={deleteReservation}
               />
@@ -116,7 +93,18 @@ const Reservations = () => {
         ]}
         dataSource={formattingReservations(reservations)}
         onRow={(reservation) => ({
-          onClick: () => handleRowClick(reservation),
+          onClick: () =>
+            handleRowClick(
+              <span className={classes["modal-title"]}>
+                {t("reservationInformation")}
+              </span>,
+              <EditReservationForm
+                setReservations={setReservations}
+                data={reservation}
+                disabled={true}
+                cities={cities}
+              />
+            ),
         })}
       />
       {isLoading && <Spiner />}
