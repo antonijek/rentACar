@@ -34,34 +34,39 @@ const VehicleForm = ({
       .string()
       .required(t("licensePlateRequired"))
       .matches(/^[A-Za-z0-9\s-]+$/, t("licensePlateInvalid"))
-      .min(5, t("licensePlateMinLength"))
-      .max(15, t("licensePlateMaxLength")),
+      .min(5, t("licensePlateMinLength", { minLength: 5 }))
+      .max(15, t("licensePlateMaxLength", { maxLength: 15 })),
     production_year: yup
       .number()
       .required(t("yearRequired"))
       .typeError(t("yearTypeError"))
-      .min(1900, t("yearMinValue"))
-      .max(new Date().getFullYear(), t("yearMaxValue")),
+      .min(1900, t("yearMinValue", { minValue: 1900 }))
+      .max(
+        new Date().getFullYear(),
+        t("yearMaxValue", { maxValue: new Date().getFullYear() })
+      ),
     type: yup
       .string()
       .required(t("vehicleTypeRequired"))
-      .max(50, t("vehicleTypeMaxLength")),
+      .min(3, t("vehicleTypeMinLength", { minLength: 3 }))
+      .max(50, t("vehicleTypeMaxLength", { maxLength: 50 })),
     number_of_seats: yup
       .number()
       .required(t("seatsRequired"))
       .typeError(t("seatsTypeError"))
-      .min(2, t("seatsMinValue"))
-      .max(10, t("seatsMaxValue")),
+      .min(2, t("seatsMinValue", { minValue: 2 }))
+      .max(10, t("seatsMaxValue", { maxValue: 10 })),
     daily_rate: yup
       .number()
       .required(t("rentalPriceRequired"))
       .typeError(t("dailyRateTypeError"))
-      .min(0, t("rentalPriceMinValue"))
-      .max(1000, t("rentalPriceMaxValue")),
+      .min(0, t("rentalPriceMinValue", { minValue: 0 }))
+      .max(1000, t("rentalPriceMaxValue", { maxValue: 1000 })),
     note: yup
       .string()
       .required(t("fieldRequired"))
-      .max(100, t("noteMaxLength")),
+      .min(10, t("noteMinLength", { minLength: 10 }))
+      .max(100, t("noteMaxLength", { maxLength: 100 })),
   });
 
   const {

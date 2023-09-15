@@ -112,5 +112,6 @@
   "seatsMaxValue": "Number of seats should not exceed {{maxValue}}",
   "rentalPriceMinValue": "Rental price should not be less than {{minValue}}",
   "rentalPriceMaxValue": "Rental price should not exceed {{maxValue}}",
-  "allRightsReserved": "All rights reserved"
+  "allRightsReserved": "All rights reserved",
+  "vehicleTypeMinLength": "Vehicle type should be at least {{minLength}} characters long"
 }

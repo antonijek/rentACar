@@ -77,3 +77,28 @@
     }
   }
 }
+@media (max-width: 768px) {
+  .my-form {
+    box-sizing: border-box;
+    width: 80%;
+    padding-bottom: 20%;
+    .my-form input {
+      display: inline-block;
+    }
+  }
+  .title {
+    font-size: 10vw;
+    margin-bottom: 10%;
+  }
+  .my-input {
+    padding: 10px 10px;
+    color: var(--title-color);
+    border: 2px solid var(--primary-color);
+    font-size: 5vw;
+    border-radius: 10px;
+
+    &:hover {
+      background-color: rgb(194, 214, 240);
+    }
+  }
+}

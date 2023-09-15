@@ -107,13 +107,14 @@
   "contactUs": "Kontaktirajte nas",
   "licensePlateInvalid": "Nevažeći broj registarske tablice",
   "licensePlateMinLength": "Registarska tablica treba da ima najmanje {{minLength}} znakova",
-  "licensePlateMaxLength": "Registarska tablica ne sme da sadrži više od {{maxLength}} znakova",
-  "yearMinValue": "Godina ne sme biti manja od {{minValue}}",
-  "yearMaxValue": "Godina ne sme biti veća od {{maxValue}}",
-  "vehicleTypeMaxLength": "Tip vozila ne sme da sadrži više od {{maxLength}} znakova",
-  "seatsMinValue": "Broj sedišta ne sme biti manji od {{minValue}}",
-  "seatsMaxValue": "Broj sedišta ne sme biti veći od {{maxValue}}",
-  "rentalPriceMinValue": "Cena najma ne sme biti manja od {{minValue}}",
-  "rentalPriceMaxValue": "Cena najma ne sme biti veća od {{maxValue}}",
-  "allRightsReserved": "Sva prava su zadrzana"
+  "licensePlateMaxLength": "Registarska tablica ne smije da sadrži više od {{maxLength}} znakova",
+  "yearMinValue": "Godina ne smije biti manja od {{minValue}}",
+  "yearMaxValue": "Godina ne smije biti veća od {{maxValue}}",
+  "vehicleTypeMaxLength": "Tip vozila ne smije da sadrži više od {{maxLength}} znakova",
+  "seatsMinValue": "Broj sjedišta ne sme biti manji od {{minValue}}",
+  "seatsMaxValue": "Broj sjedišta ne sme biti veći od {{maxValue}}",
+  "rentalPriceMinValue": "Cijena najma ne sme biti manja od {{minValue}}",
+  "rentalPriceMaxValue": "Cijena najma ne sme biti veća od {{maxValue}}",
+  "allRightsReserved": "Sva prava su zadrzana",
+  "vehicleTypeMinLength": "Tip vozila treba da ima najmanje {{minLength}} karaktera"
 }
