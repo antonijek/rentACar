@@ -103,6 +103,7 @@
     border: 2px solid var(--primary-color);
     font-size: 4vw;
     border-radius: 10px;
+    min-width: 200px;
 
     &:hover {
       background-color: rgb(194, 214, 240);
