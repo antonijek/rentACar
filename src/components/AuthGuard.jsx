@@ -1,16 +1,24 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 import { userData } from "../context/UserContext";
-import { Page404 } from "./page404/Page404";
+import { get } from "../services/storageServices";
 
-const AuthGuard = (Component) => {
-  console.log("ovo je guard");
-
+const AuthGuard = ({ allowedRoles, children }) => {
   const { user } = userData();
   const navigate = useNavigate();
-  return (props) => {
-    return user.role_id === 1 ? <Component {...props} /> : <Page404 />;
-  };
+
+  useEffect(() => {
+    if (get("access_token")) {
+      if (!user) {
+        return;
+      }
+      if (!allowedRoles.includes(user.role_id)) {
+        navigate("/restricted-area");
+      }
+    }
+  }, [user, allowedRoles, navigate]);
+
+  return children;
 };
 
 export default AuthGuard;

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { createContext, useContext } from "react";
-import { set, get, clear, exists } from "../services/storageServices";
+import { clear, exists } from "../services/storageServices";
 import { getCurrentUser } from "../services/userServices";
 import { storageKeys } from "../config/config";
 import { logout } from "../services/authServices";

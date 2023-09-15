@@ -16,6 +16,7 @@ import MobileNavbar from "./navbar/MobileNavbar";
 import ReservationProvider from "../context/ReservationContext";
 import AuthGuard from "./AuthGuard";
 import { Page404 } from "./page404/Page404";
+import { RestrictedArea } from "./restrictedArea/RestrictedArea";
 
 function MainApp() {
   const { user } = userData();
@@ -24,6 +25,10 @@ function MainApp() {
     {
       path: "/",
       element: <Home />,
+    },
+    {
+      path: "/restricted-area",
+      element: <RestrictedArea />,
     },
     {
       path: "/mobile",
@@ -40,19 +45,35 @@ function MainApp() {
     },
     {
       path: "/clients",
-      element: <Clients />,
+      element: (
+        <AuthGuard allowedRoles={[1]}>
+          <Clients />
+        </AuthGuard>
+      ),
     },
     {
       path: "/vehicles",
-      element: <Vehicles />,
+      element: (
+        <AuthGuard allowedRoles={[1]}>
+          <Vehicles />
+        </AuthGuard>
+      ),
     },
     {
       path: "/reservations",
-      element: <Reservations />,
+      element: (
+        <AuthGuard allowedRoles={[1]}>
+          <Reservations />
+        </AuthGuard>
+      ),
     },
     {
       path: "/reservations/add-reservation",
-      element: <AddReservation />,
+      element: (
+        <AuthGuard allowedRoles={[1]}>
+          <AddReservation />
+        </AuthGuard>
+      ),
     },
     {
       path: "*",

@@ -10,7 +10,14 @@ import { useTranslation } from "react-i18next";
 import classes from "./form.module.scss";
 import style from "../input/input.module.scss";
 
-const ClientForm = ({ data, disabled = "", countries, addNew, edit }) => {
+const ClientForm = ({
+  data,
+  disabled = "",
+  countries,
+  addNew,
+  edit,
+  navigateToPage = () => {},
+}) => {
   const { t } = useTranslation();
 
   const schema = yup.object({
@@ -95,7 +102,8 @@ const ClientForm = ({ data, disabled = "", countries, addNew, edit }) => {
         formData.country_id = Number(formData.country_id);
       }
 
-      addNew(formData);
+      await addNew(formData);
+      navigateToPage("clients");
     }
   };
 

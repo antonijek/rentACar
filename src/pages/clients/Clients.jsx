@@ -11,7 +11,6 @@ import { deleteUser, getUsers } from "../../services/userServices";
 import Spiner from "../../components/spiner/Spiner";
 import { clientData } from "../../context/ClientContext";
 import ClientForm from "../../components/forms/ClientForm";
-import { generateClientHeaders } from "../../tableHeaders/clientHeaders";
 
 const Clients = () => {
   const { t } = useTranslation();

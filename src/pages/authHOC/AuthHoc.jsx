@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { Navigate } from "react-router-dom";
-import { userData } from "../../context/UserContext";
 import { exists } from "../../services/storageServices";
 
 const AuthHoc = (Component) => {

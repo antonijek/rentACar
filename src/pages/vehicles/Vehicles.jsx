@@ -4,7 +4,6 @@ import { useModal } from "../../context/ModalContext";
 import Table from "../../components/table/Table";
 import classes from "./vehicles.module.scss";
 import { useTranslation } from "react-i18next";
-import { generateVehicleHeaders } from "../../tableHeaders/vehicleHeaders";
 import ActionButtons from "../../components/ActionButtons";
 import SearchAndAdd from "../../components/searchAndAdd/SearchAndAdd";
 import AuthHoc from "../authHOC/AuthHoc";

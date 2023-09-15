@@ -6,7 +6,6 @@ import EditReservationForm from "../forms/EditReservationForm";
 import { useTranslation } from "react-i18next";
 import Spiner from "../../components/spiner/Spiner";
 import useReservations from "../../hooks/useReservations";
-import wrapperHoc from "../../pages/wraper/wraperHoc";
 
 const ReservationsForClients = ({ activeItem }) => {
   const modal = useModal();

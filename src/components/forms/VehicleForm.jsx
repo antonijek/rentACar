@@ -9,7 +9,13 @@ import { useTranslation } from "react-i18next";
 import classes from "./form.module.scss";
 import style from "../input/input.module.scss";
 
-const VehicleForm = ({ data, disabled = "", edit, addVehicle }) => {
+const VehicleForm = ({
+  data,
+  disabled = "",
+  edit,
+  addVehicle,
+  navigateToPage = () => {},
+}) => {
   const { t } = useTranslation();
 
   const schema = yup.object({
@@ -94,7 +100,8 @@ const VehicleForm = ({ data, disabled = "", edit, addVehicle }) => {
 
       edit(payload, data.id);
     } else {
-      addVehicle(formData);
+      await addVehicle(formData);
+      navigateToPage("vehicles");
     }
   };
 

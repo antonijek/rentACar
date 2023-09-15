@@ -21,12 +21,20 @@ function NavbarAdmin({ items, changeLanguage }) {
   const { addVehicle } = vehicleData();
   const navigate = useNavigate();
 
+  const navigateToPage = (page) => {
+    navigate(`/${page}`);
+  };
+
   const checkDropdownItems = (item) => {
     console.log(item);
     if (item.label.props.children === t("newUser")) {
       modal.open(
         <span className={classes["modal-title"]}>{t("addClient")}</span>,
-        <ClientForm countries={countries} addNew={addNew} />,
+        <ClientForm
+          countries={countries}
+          addNew={addNew}
+          navigateToPage={navigateToPage}
+        />,
         {
           showFooter: false,
         }
@@ -36,7 +44,7 @@ function NavbarAdmin({ items, changeLanguage }) {
     if (item.label.props.children === t("newVehicle")) {
       modal.open(
         <span className={classes["modal-title"]}>{t("addvehicle")}</span>,
-        <VehicleForm addVehicle={addVehicle} />,
+        <VehicleForm addVehicle={addVehicle} navigateToPage={navigateToPage} />,
         {
           showFooter: false,
         }
