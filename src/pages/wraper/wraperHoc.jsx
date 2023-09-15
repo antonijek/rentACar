@@ -29,7 +29,7 @@ const wrapperHoc = (Component) => {
       <div>
         <Navbar items={dropdownItems} changeLanguage={changeLanguage} />
 
-        {/*     <MobileNavbar changeLanguage={changeLanguage} /> */}
+        <MobileNavbar changeLanguage={changeLanguage} />
         <Main>
           <Component />
         </Main>

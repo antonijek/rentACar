@@ -3,16 +3,11 @@ import { useTranslation } from "react-i18next";
 import logo from "../../../public/logo2.png";
 import { adminItems } from "../../sideBarItems/adminItems";
 import classes from "./mobileNavbar.module.scss";
-import DropdownTabs from "../dropdown/DropDown";
-import { set, get } from "../../services/storageServices";
+import { get } from "../../services/storageServices";
 import { userData } from "../../context/UserContext";
 import flagMne from "../../../public/mne-flag.png";
 import flagEn from "../../../public/en-flag.png";
 
-import { useModal } from "../../context/ModalContext";
-import { useNavigate } from "react-router-dom";
-import { clientData } from "../../context/ClientContext";
-import { vehicleData } from "../../context/VehicleContext";
 import {
   MenuFoldOutlined,
   UserOutlined,
@@ -23,15 +18,11 @@ import {
 
 import { Link } from "react-router-dom";
 
-function Navbar({ items, changeLanguage }) {
+function Navbar({ changeLanguage }) {
   const [openMenu, setOpenMenu] = useState(false);
 
   const { i18n, t } = useTranslation();
   const { user, logoutUser } = userData();
-  const modal = useModal();
-  const { countries, addNew } = clientData();
-  const { addVehicle } = vehicleData();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const preferredLanguage = get("lan");
