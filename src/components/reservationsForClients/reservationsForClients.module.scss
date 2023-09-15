@@ -39,8 +39,17 @@
 .modal-title {
   color: var(--primary-color);
 }
+.no-reservations {
+  font-family: var(--main-font-family);
+  font-size: 4vw;
+  color: var(--primary-color);
+}
+
 @media (max-width: 768px) {
   .title {
     font-size: 10vw;
+  }
+  .no-reservations {
+    font-size: 6vw;
   }
 }

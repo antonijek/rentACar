@@ -26,7 +26,6 @@ function NavbarAdmin({ items, changeLanguage }) {
   };
 
   const checkDropdownItems = (item) => {
-    console.log(item);
     if (item.label.props.children === t("newUser")) {
       modal.open(
         <span className={classes["modal-title"]}>{t("addClient")}</span>,
@@ -87,7 +86,6 @@ function NavbarAdmin({ items, changeLanguage }) {
 }
 
 function NavbarClient({ items, changeLanguage }) {
-  console.log("navbarClient", changeLanguage);
   const { i18n, t } = useTranslation();
   const { logoutUser } = userData();
 

@@ -38,7 +38,7 @@ const VehicleProvider = ({ children }) => {
     setIsLoading(true);
     try {
       const res = await getVehicles(query);
-      console.log(res);
+
       setVehicles(res);
       setIsLoading(false);
     } catch (err) {

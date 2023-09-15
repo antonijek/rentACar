@@ -97,12 +97,14 @@ const ClientForm = ({
       }
 
       edit(payload, data.id);
+      reset();
     } else {
       if (formData.country_id) {
         formData.country_id = Number(formData.country_id);
       }
 
       await addNew(formData);
+      reset();
       navigateToPage("clients");
     }
   };

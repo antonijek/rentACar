@@ -47,7 +47,6 @@ const Login = () => {
     setIsLoading(true);
     try {
       const res = await login(formData.email, formData.password);
-      console.log(res);
       set(storageKeys.USER, res.access_token);
       await getUser();
       setIsLoading(false);

@@ -35,7 +35,7 @@ export const getUsers = async (query = "") => {
 export const addNewUser = async (clientData) => {
   try {
     const res = await requestInstance.post(apiAddUser, clientData);
-    console.log(res);
+
     return addUserModel(res.data);
   } catch (err) {
     throw err;

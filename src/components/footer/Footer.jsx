@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import classes from "./footer.module.scss";
 import { get } from "../../services/storageServices";
-import { userData } from "../../context/UserContext";
+
 import {
   TwitterOutlined,
   FacebookOutlined,

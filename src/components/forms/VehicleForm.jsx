@@ -99,8 +99,10 @@ const VehicleForm = ({
       }
 
       edit(payload, data.id);
+      reset();
     } else {
       await addVehicle(formData);
+      reset();
       navigateToPage("vehicles");
     }
   };

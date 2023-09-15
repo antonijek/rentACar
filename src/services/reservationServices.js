@@ -14,7 +14,7 @@ const apiDeleteReservation = "/reservations";
 export const getReservations = async (query = "") => {
   try {
     const res = await requestInstance.get(`${apiGetReservations}${query}`);
-    console.log(res);
+
     return getAllReservationsModel(res.data.data);
   } catch (err) {
     throw err;
@@ -24,7 +24,7 @@ export const getReservations = async (query = "") => {
 export const addNewReservation = async (reservationData) => {
   try {
     const res = await requestInstance.post(apiAddReservation, reservationData);
-    console.log(res);
+
     return addReservationModel(res.data);
   } catch (err) {
     throw err;

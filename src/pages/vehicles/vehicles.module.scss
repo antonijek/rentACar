@@ -5,7 +5,7 @@
 .title {
   color: var(--title-color);
   text-align: center;
-  margin-bottom: 10%;
+  margin-bottom: 5%;
   font-size: 3vw;
 }
 .search-vehicle {
@@ -32,6 +32,7 @@
 
 @media (max-width: 768px) {
   .title {
-    font-size: 5vw;
+    font-size: 6vw;
+    margin-bottom: 10%;
   }
 }

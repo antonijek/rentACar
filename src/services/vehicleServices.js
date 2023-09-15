@@ -11,7 +11,7 @@ const apiDeleteVehicle = "/vehicles";
 export const getVehicles = async (query = "") => {
   try {
     const res = await requestInstance.get(`${apiGetVehicles}${query}`);
-    console.log(res);
+
     //Sa apija dobijam razlicitu strukturu podataka ako imam query i  ako nemam...
     return query
       ? getAllVehiclesModel(res.data.data)
@@ -24,7 +24,7 @@ export const getVehicles = async (query = "") => {
 export const addNewVehicle = async (vehicleData) => {
   try {
     const res = await requestInstance.post(apiAddVehicle, vehicleData);
-    console.log(res);
+
     return addVehicleModel(res.data);
   } catch (err) {
     throw err;

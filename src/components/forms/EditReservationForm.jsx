@@ -57,7 +57,6 @@ const EditReservationForm = ({
 
   useEffect(() => {
     if (data.id) {
-      console.log(data);
       setValue("pickup_location", data?.pickup_location_id);
       setValue("drop_off_location", data?.drop_off_location_id);
       setValue(

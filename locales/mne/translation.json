@@ -116,5 +116,6 @@
   "rentalPriceMinValue": "Cijena najma ne sme biti manja od {{minValue}}",
   "rentalPriceMaxValue": "Cijena najma ne sme biti veća od {{maxValue}}",
   "allRightsReserved": "Sva prava su zadrzana",
-  "vehicleTypeMinLength": "Tip vozila treba da ima najmanje {{minLength}} karaktera"
+  "vehicleTypeMinLength": "Tip vozila treba da ima najmanje {{minLength}} karaktera",
+  "backToMainPage": "Povratak na glavnu stranu"
 }

@@ -16,3 +16,18 @@ h2 {
   width: 20%;
   height: 20%;
 }
+@media (max-width: 768px) {
+  .container {
+    display: block;
+    font-size: 5vw;
+    text-align: center;
+    padding-top: 30%;
+  }
+  h2 {
+    margin-bottom: 5%;
+  }
+  .logo {
+    width: 50%;
+    height: 20%;
+  }
+}
